@@ -7,8 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class DatabaseUtil {
-    private static String URL="" ;
-    private static String USER="";
+    private static String URL="jdbc:mysql://localhost:3307/projektiknk" ;
+    private static String USER="root";
     private static String PASSWORD="";
     private static Connection connection= null;
     public static Connection getConnection()throws SQLException {

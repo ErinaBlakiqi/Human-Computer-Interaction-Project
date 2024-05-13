@@ -5,8 +5,8 @@ import java.sql.*;
 public class Main {
     public static void main(String [] args) throws SQLException {
 
-        String url="";
-        String user="";
+        String url="jdbc:mysql://localhost:3307/projektiknk";
+        String user="root";
         String password="";
         Connection connection= DriverManager.getConnection(
                 url,user,password

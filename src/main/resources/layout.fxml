@@ -47,7 +47,7 @@
                     </Button>
                 </VBox>
             </VBox>
-            <Pane prefHeight="472.0" prefWidth="558.0" style="-fx-background-color: white;" />
+            <Pane prefHeight="495.0" prefWidth="650.0" style="-fx-background-color: white;" />
         </HBox>
     </left>
     <center>

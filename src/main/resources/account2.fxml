@@ -48,7 +48,7 @@
                 <padding>
                     <Insets bottom="10" left="10" right="10" top="10" />
                 </padding>
-                <Label fx:id="recentlyListedLabel" style="-fx-font-size: 16px;" text="Recently Listed Items" />
+                <Label fx:id="recentlyListedLabel" style="-fx-font-size: 16px;" text="Recently Liked Items" />
                 <ScrollPane fx:id="itemsScrollPane" fitToWidth="true" hbarPolicy="AS_NEEDED" vbarPolicy="NEVER">
                     <HBox fx:id="itemsContainer" spacing="10">
                         <!-- Example item, repeat this structure for each item -->
@@ -62,7 +62,7 @@
                         <!-- Additional items would be added here -->
                     </HBox>
                 </ScrollPane>
-                <Label fx:id="collectionsLabel" style="-fx-font-size: 16px;" text="Collections" />
+                <Label fx:id="collectionsLabel" style="-fx-font-size: 16px;" text="Items On Sale" />
                 <ScrollPane fx:id="collectionsScrollPane" fitToWidth="true" hbarPolicy="AS_NEEDED" vbarPolicy="NEVER">
                     <HBox fx:id="sellsContainer" spacing="10">
                         <!-- Example item, repeat this structure for each item -->

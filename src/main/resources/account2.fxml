@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AccountController">
     <BorderPane>
         <top>
             <VBox>
@@ -19,30 +19,27 @@
                     <padding>
                         <Insets bottom="10" left="10" right="10" top="10" />
                     </padding>
-                    <ImageView fitHeight="50" fitWidth="50" preserveRatio="true">
-                        <!-- Ensure a valid image URL is used -->
-                    </ImageView>
-                    <Label style="-fx-font-size: 24px;" text="Profile" />
+                    <Label fx:id="profileLabel" style="-fx-font-size: 24px;" text="Profile" />
                     <Pane HBox.hgrow="ALWAYS" />
-                    <Button text="Sell Item" />
-                    <Button text="Cart" />
+                    <Button fx:id="sellItemButton" onAction="#handleSellItem" text="Sell Item" />
+                    <Button fx:id="cartButton" onAction="#handleCart" text="Cart" />
                 </HBox>
                 <HBox alignment="CENTER_LEFT" spacing="10">
                     <padding>
                         <Insets bottom="10" left="10" right="10" top="10" />
                     </padding>
-                    <ImageView fitHeight="100" fitWidth="100" preserveRatio="true">
+                    <ImageView fx:id="userImageView" fitHeight="100" fitWidth="100" preserveRatio="true">
                         <!-- Ensure a valid image URL is used -->
                     </ImageView>
                     <VBox spacing="5">
-                        <Label style="-fx-font-weight: bold;" text="Username" />
-                        <Label text="London, UK" />
+                        <Label fx:id="usernameLabel" style="-fx-font-weight: bold;" text="Username" />
+                        <Label fx:id="locationLabel" text="London, UK" />
                         <HBox>
-                            <Label />
+                            <Label fx:id="bioLabel" />
                         </HBox>
                     </VBox>
                     <Pane HBox.hgrow="ALWAYS" />
-                    <Button text="Edit Account" />
+                    <Button fx:id="editAccountButton" onAction="#handleEditAccount" text="Edit Account" />
                 </HBox>
             </VBox>
         </top>
@@ -51,8 +48,8 @@
                 <padding>
                     <Insets bottom="10" left="10" right="10" top="10" />
                 </padding>
-                <Label style="-fx-font-size: 16px;" text="Recently Listed Items" />
-                <ScrollPane fitToWidth="true" hbarPolicy="AS_NEEDED" vbarPolicy="NEVER">
+                <Label fx:id="recentlyListedLabel" style="-fx-font-size: 16px;" text="Recently Liked Items" />
+                <ScrollPane fx:id="itemsScrollPane" fitToWidth="true" hbarPolicy="AS_NEEDED" vbarPolicy="NEVER">
                     <HBox fx:id="itemsContainer" spacing="10">
                         <!-- Example item, repeat this structure for each item -->
                         <VBox>
@@ -65,8 +62,8 @@
                         <!-- Additional items would be added here -->
                     </HBox>
                 </ScrollPane>
-                <Label style="-fx-font-size: 16px;" text="Collections" />
-                <ScrollPane fitToWidth="true" hbarPolicy="AS_NEEDED" vbarPolicy="NEVER">
+                <Label fx:id="collectionsLabel" style="-fx-font-size: 16px;" text="Items On Sale" />
+                <ScrollPane fx:id="collectionsScrollPane" fitToWidth="true" hbarPolicy="AS_NEEDED" vbarPolicy="NEVER">
                     <HBox fx:id="sellsContainer" spacing="10">
                         <!-- Example item, repeat this structure for each item -->
                         <VBox>
@@ -86,7 +83,6 @@
                 <padding>
                     <Insets bottom="10" left="10" right="10" top="10" />
                 </padding>
-                <Label text="Visit us at our bakery in the heart of the city" />
                 <Pane HBox.hgrow="ALWAYS" />
                 <Label text="Contact us: info@myexample.com" />
             </HBox>

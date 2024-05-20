@@ -13,7 +13,7 @@ import java.io.IOException;
 public class Navigator{
     public final static String HOME_PAGE="home.fxml";
     public final static String PRODUCTS_PAGE="products.fxml";
-    public final static String SELL_PAGE="sell.fxml";
+    public final static String SELL_PAGE="sellitem.fxml";
     public final static String USER_PAGE="account2.fxml";
     public final static String ADMIN_PAGE="admin.fxml";
     public final static String SIGNIN_PAGE="SignIn.fxml";

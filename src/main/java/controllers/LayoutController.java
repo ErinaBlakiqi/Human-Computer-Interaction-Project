@@ -11,7 +11,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 
-public class AccountController {
+public class LayoutController {
+
     @FXML
     private Button adminButton;
 
@@ -41,29 +42,6 @@ public class AccountController {
 
     @FXML
     private Label welcomeLabel;
-    // Buttons
-    @FXML private Button sellItemButton;
-    @FXML private Button cartButton;
-    @FXML private Button editAccountButton;
-
-    // Labels
-    @FXML private Label userLabel;
-    @FXML private Label usernameLabel;
-    @FXML private Label locationLabel;
-    @FXML private Label bioLabel;
-    @FXML private Label recentlyListedLabel;
-    @FXML private Label collectionsLabel;
-
-    // ImageViews
-    @FXML private ImageView userImageView;
-
-    // Containers
-    @FXML private HBox itemsContainer;
-    @FXML private HBox sellsContainer;
-
-    // ScrollPanes
-    @FXML private ScrollPane itemsScrollPane;
-    @FXML private ScrollPane collectionsScrollPane;
 
     @FXML
     void handleAdmin(MouseEvent event) {
@@ -94,12 +72,5 @@ public class AccountController {
     void handleUser(MouseEvent event) {
         Navigator.navigate(event, Navigator.USER_PAGE);
     }
-    // Event handlers for the UI interactions
-    @FXML private void handleSellItem() {
-    }
-    @FXML private void handleEditAccount() {
-    }
-    @FXML
-    private void initialize() {
-    }
+
 }

@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 
-<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.sellitemController">
+<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="your.package.Controller">
     <left>
         <HBox>
             <VBox prefWidth="200" style="-fx-background-color: #2F3A47;">
@@ -18,19 +18,26 @@
                         <!-- Add your profile image path here -->
                         <Image url="@../../Downloads/path/to/profile/image.png" />
                     </ImageView>
-                    <Label fx:id="welcomeLabel" style="-fx-text-fill: white; -fx-font-size: 14;" text="Welcome," />
-                    <Label fx:id="nameLabel" style="-fx-text-fill: white; -fx-font-size: 18;" text="Admin" />
-                    <Rectangle fx:id="rectId" height="2" style="-fx-fill: #A4A4A4;" width="160" />
+                    <Label style="-fx-text-fill: white; -fx-font-size: 14;" text="Welcome," />
+                    <Label style="-fx-text-fill: white; -fx-font-size: 18;" text="Admin" />
+                    <Rectangle height="2" style="-fx-fill: #A4A4A4;" width="160" />
                 </VBox>
                 <VBox style="-fx-padding: 20;">
-                    <Button fx:id="homeButton" contentDisplay="CENTER" onMouseClicked="#handleHome" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16;" text="Home" />
-                    <Button fx:id="productsButton" onMouseClicked="#handleProducts" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16;" text="Products" />
-                    <Button fx:id="sellButton" onMouseClicked="#handleSell" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16;" text="Sell" />
-                    <Button fx:id="userButton" onMouseClicked="#handleUser" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16;" text="User" />
-                    <Button fx:id="adminButton" onMouseClicked="#handleAdmin" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16;" text="Admin" />
+                    <Button contentDisplay="CENTER" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16;" text="Home">
+                        <graphic>
+                            <ImageView fitHeight="20" fitWidth="20">
+                                <!-- Add your home icon path here -->
+                                <Image url="@../../Downloads/path/to/home/icon.png" />
+                            </ImageView>
+                        </graphic>
+                    </Button>
+                    <Button style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16;" text="Products" />
+                    <Button style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16;" text="Sell" />
+                    <Button style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16;" text="User" />
+                    <Button style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16;" text="Admin" />
                 </VBox>
                 <VBox style="-fx-padding: 20; -fx-alignment: bottom-left;">
-                    <Button fx:id="signoutButton" onMouseClicked="#handleSignOut" prefHeight="33.0" prefWidth="118.0" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16;" text="Sign Out">
+                    <Button prefHeight="33.0" prefWidth="118.0" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16;" text="Sign Out">
                         <graphic>
                             <ImageView fitHeight="20" fitWidth="20">
                                 <!-- Add your sign-out icon path here -->

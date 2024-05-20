@@ -16,7 +16,7 @@ public class AccountController {
     @FXML private Button editAccountButton;
 
     // Labels
-    @FXML private Label profileLabel;
+    @FXML private Label userLabel;
     @FXML private Label usernameLabel;
     @FXML private Label locationLabel;
     @FXML private Label bioLabel;

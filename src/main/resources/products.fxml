@@ -10,12 +10,14 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 
-<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="your.package.Controller">
+<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ProductController">
     <left>
         <HBox>
             <VBox prefWidth="200" style="-fx-background-color: #2F3A47;">
@@ -38,7 +40,7 @@
                         </graphic>
                     </Button>
                     <Button style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16;" text="Products" />
-                    <Button style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16;" text="Sell" />
+                    <Button alignment="TOP_LEFT" minWidth="42.0" prefHeight="36.0" prefWidth="55.0" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16;" text="Sell" />
                     <Button style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16;" text="User" />
                     <Button style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16;" text="Admin" />
                 </VBox>
@@ -53,29 +55,35 @@
                     </Button>
                 </VBox>
             </VBox>
-            <Pane prefHeight="495.0" prefWidth="650.0" style="-fx-background-color: white;">
+            <Pane fx:id="pane_Products" prefHeight="495.0" prefWidth="650.0" style="-fx-background-color: white;">
             <children>
-               <AnchorPane layoutX="425.0" layoutY="3.0" prefHeight="489.0" prefWidth="222.0" style="-fx-border-color: #2F3A47;">
+               <AnchorPane layoutX="425.0" layoutY="3.0" prefHeight="489.0" prefWidth="222.0" style="-fx-border-color: #2F3A47; -fx-border-radius: 5;" stylesheets="@styles.css">
                   <children>
-                     <TableView layoutX="2.0" layoutY="3.0" prefHeight="285.0" prefWidth="217.0" style="-fx-border-color: #a3a1a1;">
+                     <TableView fx:id="tableView_Products" layoutX="2.0" layoutY="3.0" prefHeight="285.0" prefWidth="217.0" style="-fx-border-color: #a3a1a1; -fx-border-radius: 5;" styleClass="custom-table">
                        <columns>
-                         <TableColumn prefWidth="72.0" text="  Product" />
-                         <TableColumn prefWidth="72.0" text="  Quantity" />
-                           <TableColumn prefWidth="72.0" text="     Price" />
+                         <TableColumn fx:id="col_Product_Products" prefWidth="72.0" text="Product" />
+                         <TableColumn fx:id="col_Quantity_Products" prefWidth="72.0" text="Quantity" />
+                           <TableColumn fx:id="col_Price_Products" prefWidth="72.0" text="Price" />
                        </columns>
                      </TableView>
-                     <Label layoutX="133.0" layoutY="310.0" text="0.0$" />
-                     <Label layoutX="76.0" layoutY="310.0" style="-fx-text-fill: #2F3A47;" text="Total:" textFill="#a3a1a1" />
-                     <Label layoutX="61.0" layoutY="337.0" style="-fx-text-fill: #2F3A47 #2F3A47;" text="Amount:" />
-                     <Label layoutX="8.0" layoutY="366.0" style="-fx-text-fill: #2F3A47;" text="Payment Method:" />
-                     <TextField layoutX="128.0" layoutY="328.0" prefHeight="25.0" prefWidth="76.0" />
-                     <ChoiceBox layoutX="121.0" layoutY="361.0" prefHeight="27.0" prefWidth="92.0" />
+                     <Label fx:id="txtTotal_Products" layoutX="123.0" layoutY="306.0" text="0.0$" />
+                     <Label layoutX="78.0" layoutY="306.0" style="-fx-text-fill: #2F3A47;" text="Total:" textFill="#a3a1a1" />
+                     <Label layoutX="63.0" layoutY="334.0" style="-fx-text-fill: #2F3A47 #2F3A47;" text="Amount:" />
+                     <Label layoutX="14.0" layoutY="363.0" style="-fx-text-fill: #2F3A47;" text="Payment Method:" />
+                     <TextField fx:id="txtAmount_Products" layoutX="120.0" layoutY="327.0" prefHeight="25.0" prefWidth="76.0" />
+                     <ChoiceBox fx:id="listPayment_Products" layoutX="119.0" layoutY="358.0" prefHeight="27.0" prefWidth="92.0" />
+                     <Button fx:id="btnPay_Products" layoutX="24.0" layoutY="399.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="178.0" style="-fx-background-color: #2F3A47; -fx-border-radius: 5; -fx-text-fill: white;" text="Pay" />
+                     <Button fx:id="btnRemove_Products" layoutX="24.0" layoutY="440.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="177.0" style="-fx-background-color: #2F3A47; -fx-text-fill: white;" text="Remove" />
                   </children>
                </AnchorPane>
-               <ScrollPane layoutX="3.0" layoutY="3.0" prefHeight="489.0" prefWidth="419.0" style="-fx-border-color: #2F3A47;">
-                 <content>
-                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
-                 </content>
+               <ScrollPane fx:id="scrollPane_Products" layoutX="3.0" layoutY="3.0" prefHeight="489.0" prefWidth="419.0" style="-fx-border-color: #2F3A47; -fx-border-radius: 5;">
+                  <content>
+                     <GridPane fx:id="gridPane_Products" prefHeight="13.0" prefWidth="77.0">
+                       <columnConstraints>
+                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                       </columnConstraints>
+                     </GridPane>
+                  </content>
                </ScrollPane>
             </children></Pane>
         </HBox>

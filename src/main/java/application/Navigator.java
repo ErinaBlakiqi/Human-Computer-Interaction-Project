@@ -1,7 +1,6 @@
 package application;
 
 import javafx.event.Event;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -15,7 +14,7 @@ public class Navigator{
     public final static String PRODUCTS_PAGE="products.fxml";
     public final static String SELL_PAGE="sellitem.fxml";
     public final static String USER_PAGE="account2.fxml";
-    public final static String ADMIN_PAGE="admin.fxml";
+    public final static String ADMIN_PAGE= "AdminHome.fxml";
     public final static String SIGNIN_PAGE="SignIn.fxml";
     public static void navigate(Stage stage, String page) {
         FXMLLoader loader=new FXMLLoader(

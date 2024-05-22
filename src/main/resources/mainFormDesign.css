@@ -86,3 +86,11 @@ and open the template in the editor.
 .btn:hover{
     -fx-background-color: linear-gradient(to bottom right, #0fb565, #399a8f); 
 }
+
+.shadow{
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 5,0,0,0);
+}
+.white-bg{
+    -fx-background-color: #fff;
+}
+

@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.String?>
+<?import javafx.scene.chart.AreaChart?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
@@ -68,19 +72,39 @@
                      <String fx:value="shadow" />
                   </styleClass>
                   <children>
-                     <AnchorPane layoutX="14.0" layoutY="10.4" prefHeight="271.0" prefWidth="314.0" style="-fx-background-color: white;" stylesheets="@mainFormDesign.css" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="293.0" AnchorPane.topAnchor="10.0">
+                     <AnchorPane layoutX="14.0" layoutY="10.4" prefHeight="271.0" prefWidth="295.0" style="-fx-background-color: white;" stylesheets="@mainFormDesign.css" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="312.0" AnchorPane.topAnchor="10.0">
                         <styleClass>
                            <String fx:value="white-bg" />
                            <String fx:value="shadow" />
                            <String fx:value="radius" />
                         </styleClass>
+                        <children>
+                           <AreaChart layoutX="-101.0" layoutY="-78.0" prefHeight="271.0" prefWidth="262.0" title="Daily Income Chart" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="0.0">
+                             <xAxis>
+                               <CategoryAxis side="BOTTOM" />
+                             </xAxis>
+                             <yAxis>
+                               <NumberAxis side="LEFT" />
+                             </yAxis>
+                           </AreaChart>
+                        </children>
                      </AnchorPane>
-                     <AnchorPane layoutX="344.0" layoutY="10.0" prefHeight="270.0" prefWidth="262.0" style="-fx-background-color: white;" stylesheets="@mainFormDesign.css" AnchorPane.bottomAnchor="12.600000000000023" AnchorPane.leftAnchor="344.0" AnchorPane.rightAnchor="14.600000000000023" AnchorPane.topAnchor="9.800000000000011">
+                     <AnchorPane layoutX="320.0" layoutY="8.8" prefHeight="271.0" prefWidth="287.0" style="-fx-background-color: white;" stylesheets="@mainFormDesign.css" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="320.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="9.0">
                         <styleClass>
                            <String fx:value="white-bg" />
                            <String fx:value="shadow" />
                            <String fx:value="radius" />
                         </styleClass>
+                        <children>
+                           <BarChart layoutX="-153.0" layoutY="-104.0" prefHeight="296.0" prefWidth="347.0" title="Customer's Chart" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                             <xAxis>
+                               <CategoryAxis side="BOTTOM" />
+                             </xAxis>
+                             <yAxis>
+                               <NumberAxis side="LEFT" />
+                             </yAxis>
+                           </BarChart>
+                        </children>
                      </AnchorPane>
                   </children>
                </AnchorPane>

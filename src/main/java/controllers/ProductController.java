@@ -30,9 +30,6 @@ public class ProductController {
     private TableColumn<?, ?> col_Quantity_Products;
 
     @FXML
-    private GridPane gridPane_Products;
-
-    @FXML
     private ChoiceBox<?> listPayment_Products;
 
     @FXML
@@ -52,5 +49,7 @@ public class ProductController {
 
     @FXML
     private Label txtTotal_Products;
+
+
 
 }

@@ -59,11 +59,11 @@
     <BorderPane>
         <top>
             <VBox>
-                <HBox prefHeight="70.0" prefWidth="615.0" spacing="10"  style="-fx-background-color: #2F3A47;">
+                <HBox prefHeight="70.0" prefWidth="615.0" spacing="10" style="-fx-background-color: #2F3A47;">
                     <padding>
                         <Insets bottom="10" left="10" right="10" top="10" />
                     </padding>
-                    <Label fx:id="userLabel" style="-fx-font-size: 24px;" text="User" />
+                    <Label fx:id="userLabel" style="-fx-font-size: 24px;" text="User" textFill="WHITE" />
                     <Pane HBox.hgrow="ALWAYS" />
                     <Button fx:id="sellItemButton" onAction="#handleSellItem" text="Sell Item" />
                 </HBox>

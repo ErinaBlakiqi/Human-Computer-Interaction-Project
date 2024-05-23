@@ -32,7 +32,23 @@ public class SignInController {
     @FXML
     private TextField txtUsername;
 
+    @FXML
+    public void initialize() {
+        pwdPassword.setVisible(false);
 
+        // Bind the visibility of txtPassword and pwdPassword to the showpassword checkbox
+        showpassword.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) {
+                pwdPassword.setText(pwdPassword.getText());
+                pwdPassword.setVisible(true);
+                pwdPassword.setVisible(false);
+            } else {
+                pwdPassword.setText(pwdPassword.getText());
+                pwdPassword.setVisible(true);
+                pwdPassword.setVisible(false);
+            }
+        });
+    }
 
     @FXML
     public void handleCancelClick(ActionEvent event) {
@@ -49,12 +65,23 @@ public class SignInController {
     @FXML
     void handleLoginClick(ActionEvent event) {
 
-        loginMessageLabel.setText("blla blla");
-
+        if (txtUsername.getText().isBlank()==false && pwdPassword.getText().isBlank()==false) {
+            validateSignIn();
+        } else {
+            loginMessageLabel.setText("Please enter username and password");
+        }
     }
 
-    public void validateLogin(){
-        
+    void validateSignIn(){
+
+        String username = txtUsername.getText();
+        String password = pwdPassword.isVisible() ? pwdPassword.getText() : pwdPassword.getText();
+
+        if ("user".equals(username) && "password".equals(password)) {
+            loginMessageLabel.setText("Login successful.");
+        } else {
+            loginMessageLabel.setText("Invalid username or password.");
+        }
     }
 
 }

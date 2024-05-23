@@ -14,7 +14,7 @@ public class Navigator{
     public final static String PRODUCTS_PAGE= "views/products.fxml";
     public final static String SELL_PAGE= "views/sellitem.fxml";
     public final static String USER_PAGE= "views/account2.fxml";
-    public final static String ADMIN_PAGE= "views/AdminHome.fxml";
+    public final static String ADMIN_PAGE= "views/AdminDashboard.fxml";
     public final static String SIGNIN_PAGE="SignIn.fxml";
     public static void navigate(Stage stage, String page) {
         FXMLLoader loader=new FXMLLoader(

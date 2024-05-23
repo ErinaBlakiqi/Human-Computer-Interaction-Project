@@ -71,7 +71,7 @@ public class AdminProductsController {
 
     @FXML
     private void handleHome(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/AdminHome.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/AdminDashboard.fxml"));
         Parent root = loader.load();
         Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));

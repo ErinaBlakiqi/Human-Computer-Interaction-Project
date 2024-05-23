@@ -39,7 +39,7 @@
             </VBox>
             <Pane prefHeight="495.0" prefWidth="650.0" style="-fx-background-color: white;">
                 <children>
-                    <AnchorPane layoutX="14.0" layoutY="16.0" prefHeight="465.0" prefWidth="621.0" style="-fx-background-color: white;" stylesheets="@mainFormDesign.css">
+                    <AnchorPane layoutX="14.0" layoutY="16.0" prefHeight="465.0" prefWidth="621.0" style="-fx-background-color: white;" stylesheets="@../css/mainFormDesign.css">
                         <styleClass>
                             <String fx:value="white-bg" />
                             <String fx:value="radius" />

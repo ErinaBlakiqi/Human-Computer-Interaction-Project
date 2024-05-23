@@ -4,12 +4,19 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import model.Product;
 import services.ProductService;
 
+import java.io.IOException;
+
 public class AdminProductsController {
+
     @FXML
     private TableView<Product> productsTable;
     @FXML
@@ -63,8 +70,12 @@ public class AdminProductsController {
     }
 
     @FXML
-    private void handleHome(ActionEvent event) {
-        // Navigate to Home
+    private void handleHome(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/AdminHome.fxml"));
+        Parent root = loader.load();
+        Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 
     @FXML
@@ -73,8 +84,12 @@ public class AdminProductsController {
     }
 
     @FXML
-    private void handleOrders(ActionEvent event) {
-        // Navigate to Orders
+    private void handleOrders(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/AdminOrders.fxml"));
+        Parent root = loader.load();
+        Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 
     @FXML
@@ -136,4 +151,3 @@ public class AdminProductsController {
         // Import image logic
     }
 }
-

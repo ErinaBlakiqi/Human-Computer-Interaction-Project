@@ -10,11 +10,11 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class Navigator{
-    public final static String HOME_PAGE="home.fxml";
-    public final static String PRODUCTS_PAGE="products.fxml";
-    public final static String SELL_PAGE="sellitem.fxml";
-    public final static String USER_PAGE="account2.fxml";
-    public final static String ADMIN_PAGE= "AdminHome.fxml";
+    public final static String HOME_PAGE= "views/home.fxml";
+    public final static String PRODUCTS_PAGE= "views/products.fxml";
+    public final static String SELL_PAGE= "views/sellitem.fxml";
+    public final static String USER_PAGE= "views/account2.fxml";
+    public final static String ADMIN_PAGE= "views/AdminHome.fxml";
     public final static String SIGNIN_PAGE="SignIn.fxml";
     public static void navigate(Stage stage, String page) {
         FXMLLoader loader=new FXMLLoader(

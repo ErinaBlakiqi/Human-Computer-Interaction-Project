@@ -57,7 +57,7 @@
             </VBox>
             <Pane fx:id="pane_Products" prefHeight="495.0" prefWidth="650.0" style="-fx-background-color: white;">
             <children>
-               <AnchorPane layoutX="425.0" layoutY="3.0" prefHeight="489.0" prefWidth="222.0" style="-fx-border-color: #2F3A47; -fx-border-radius: 5;" stylesheets="@styles.css">
+               <AnchorPane layoutX="425.0" layoutY="3.0" prefHeight="489.0" prefWidth="222.0" style="-fx-border-color: #2F3A47; -fx-border-radius: 5;" stylesheets="@../css/styles.css">
                   <children>
                      <TableView fx:id="tableView_Products" layoutX="2.0" layoutY="3.0" prefHeight="285.0" prefWidth="217.0" style="-fx-border-color: #a3a1a1; -fx-border-radius: 5;" styleClass="custom-table">
                        <columns>

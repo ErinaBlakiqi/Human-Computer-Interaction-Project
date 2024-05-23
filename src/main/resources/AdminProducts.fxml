@@ -22,6 +22,7 @@
         <VBox prefHeight="343.0" prefWidth="200" style="-fx-background-color: #2F3A47;">
             <VBox alignment="CENTER" spacing="10" style="-fx-padding: 20;">
                 <ImageView fx:id="profileImage" fitHeight="79.0" fitWidth="93.0">
+                    <!-- Add your profile image path here -->
                     <Image url="@../../Downloads/path/to/profile/image.png" />
                 </ImageView>
                 <Label style="-fx-text-fill: white; -fx-font-size: 14;" text="Welcome," />
@@ -48,30 +49,48 @@
                                 <String fx:value="white-bg" />
                             </styleClass>
                             <children>
+                                <Label layoutX="19.0" layoutY="45.0" prefHeight="22.0" prefWidth="85.0" text="Product ID:">
+                                    <font>
+                                        <Font size="14.0" />
+                                    </font>
+                                </Label>
+                                <TextField fx:id="productIdField" layoutX="104.0" layoutY="45.0" prefHeight="26.0" prefWidth="158.0" />
                                 <Label layoutX="19.0" layoutY="75.0" prefHeight="22.0" prefWidth="85.0" text="Product name:">
                                     <font>
                                         <Font size="14.0" />
                                     </font>
                                 </Label>
                                 <TextField fx:id="productNameField" layoutX="104.0" layoutY="75.0" prefHeight="26.0" prefWidth="158.0" />
-                                <TextField fx:id="priceField" layoutX="104.0" layoutY="113.0" prefHeight="26.0" prefWidth="158.0" promptText="0.0" />
-                                <Label layoutX="47.0" layoutY="118.0" prefHeight="22.0" prefWidth="45.0" text="Price:">
+                                <Label layoutX="19.0" layoutY="105.0" prefHeight="22.0" prefWidth="85.0" text="Description:">
                                     <font>
                                         <Font size="14.0" />
                                     </font>
                                 </Label>
-                                <Label layoutX="50.0" layoutY="152.0" prefHeight="22.0" prefWidth="40.0" text="Type:">
+                                <TextField fx:id="descriptionField" layoutX="104.0" layoutY="105.0" prefHeight="26.0" prefWidth="158.0" />
+                                <Label layoutX="19.0" layoutY="135.0" prefHeight="22.0" prefWidth="85.0" text="Category:">
                                     <font>
                                         <Font size="14.0" />
                                     </font>
                                 </Label>
-                                <ComboBox fx:id="typeComboBox" layoutX="105.0" layoutY="150.0" prefHeight="26.0" prefWidth="158.0" promptText="Choose Type" />
-                                <Label layoutX="37.0" layoutY="185.0" prefHeight="22.0" prefWidth="85.0" text="Quantity:">
+                                <ComboBox fx:id="categoryComboBox" layoutX="104.0" layoutY="135.0" prefHeight="26.0" prefWidth="158.0" promptText="Choose Category" />
+                                <Label layoutX="19.0" layoutY="165.0" prefHeight="22.0" prefWidth="85.0" text="Price:">
                                     <font>
                                         <Font size="14.0" />
                                     </font>
                                 </Label>
-                                <TextField fx:id="quantityField" layoutX="104.0" layoutY="183.0" prefHeight="26.0" prefWidth="158.0" promptText="0" />
+                                <TextField fx:id="priceField" layoutX="104.0" layoutY="165.0" prefHeight="26.0" prefWidth="158.0" promptText="0.0" />
+                                <Label layoutX="19.0" layoutY="195.0" prefHeight="22.0" prefWidth="85.0" text="Quantity:">
+                                    <font>
+                                        <Font size="14.0" />
+                                    </font>
+                                </Label>
+                                <TextField fx:id="quantityField" layoutX="104.0" layoutY="195.0" prefHeight="26.0" prefWidth="158.0" promptText="0" />
+                                <Label layoutX="19.0" layoutY="225.0" prefHeight="22.0" prefWidth="85.0" text="Status:">
+                                    <font>
+                                        <Font size="14.0" />
+                                    </font>
+                                </Label>
+                                <ComboBox fx:id="statusComboBox" layoutX="104.0" layoutY="225.0" prefHeight="26.0" prefWidth="158.0" promptText="Choose Status" />
                                 <Button fx:id="btnAddItem" layoutX="282.0" layoutY="69.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="80.0" style="-fx-background-color: #2F3A47;" text="Add item" textFill="WHITE" onAction="#handleAddItem">
                                     <font>
                                         <Font size="14.0" />
@@ -94,12 +113,6 @@
                                 </Button>
                                 <AnchorPane layoutX="473.0" layoutY="29.0" prefHeight="134.0" prefWidth="140.0" style="-fx-background-color: #2F3A47; -fx-border-color: #2F3A47;" />
                                 <Button fx:id="btnImportImage" layoutX="499.0" layoutY="171.0" mnemonicParsing="false" style="-fx-background-color: #2F3A47;" text="Import image" textFill="WHITE" onAction="#handleImportImage" />
-                                <TextField fx:id="productIdField" layoutX="105.0" layoutY="43.0" prefHeight="26.0" prefWidth="158.0" />
-                                <Label layoutX="19.0" layoutY="45.0" prefHeight="22.0" prefWidth="85.0" text="Product ID:">
-                                    <font>
-                                        <Font size="14.0" />
-                                    </font>
-                                </Label>
                             </children>
                         </AnchorPane>
                         <Separator layoutX="18.0" layoutY="234.0" prefHeight="4.0" prefWidth="630.0" AnchorPane.leftAnchor="18.0" />
@@ -112,10 +125,13 @@
                             <children>
                                 <TableView fx:id="productsTable" layoutX="17.0" layoutY="8.0" prefHeight="210.0" prefWidth="596.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="17.0" AnchorPane.topAnchor="8.0">
                                     <columns>
-                                        <TableColumn fx:id="productNameColumn" text="Product name" prefWidth="150.0" />
-                                    <TableColumn fx:id="typeColumn" text="Type" prefWidth="150.0" />
-                                    <TableColumn fx:id="quantityColumn" text="Quantity" prefWidth="100.0" />
-                                    <TableColumn fx:id="priceColumn" text="Price" prefWidth="100.0" />
+                                        <TableColumn fx:id="productNameColumn" text="Product name" prefWidth="100.0" />
+                                        <TableColumn fx:id="descriptionColumn" text="Description" prefWidth="150.0" />
+                                        <TableColumn fx:id="categoryColumn" text="Category" prefWidth="100.0" />
+                                        <TableColumn fx:id="quantityColumn" text="Quantity" prefWidth="100.0" />
+                                        <TableColumn fx:id="priceColumn" text="Price" prefWidth="100.0" />
+                                        <TableColumn fx:id="statusColumn" text="Status" prefWidth="100.0" />
+                                    </columns>
                                 </TableView>
                             </children>
                         </AnchorPane>

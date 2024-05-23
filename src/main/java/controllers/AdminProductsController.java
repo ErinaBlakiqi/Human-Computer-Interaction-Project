@@ -15,22 +15,30 @@ public class AdminProductsController {
     @FXML
     private TableColumn<Product, String> productNameColumn;
     @FXML
-    private TableColumn<Product, String> typeColumn;
+    private TableColumn<Product, String> descriptionColumn;
+    @FXML
+    private TableColumn<Product, String> categoryColumn;
     @FXML
     private TableColumn<Product, Integer> quantityColumn;
     @FXML
     private TableColumn<Product, Double> priceColumn;
+    @FXML
+    private TableColumn<Product, String> statusColumn;
 
     @FXML
     private TextField productIdField;
     @FXML
     private TextField productNameField;
     @FXML
+    private TextField descriptionField;
+    @FXML
+    private ComboBox<String> categoryComboBox;
+    @FXML
     private TextField priceField;
     @FXML
-    private ComboBox<String> typeComboBox;
-    @FXML
     private TextField quantityField;
+    @FXML
+    private ComboBox<String> statusComboBox;
 
     private ProductService productService = new ProductService();
     private ObservableList<Product> productList;
@@ -38,14 +46,20 @@ public class AdminProductsController {
     @FXML
     public void initialize() {
         productNameColumn.setCellValueFactory(new PropertyValueFactory<>("productName"));
-        typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
+        descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
+        categoryColumn.setCellValueFactory(new PropertyValueFactory<>("category"));
         quantityColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+        statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
 
         productList = FXCollections.observableArrayList(productService.getAllProducts());
         productsTable.setItems(productList);
 
-        typeComboBox.setItems(FXCollections.observableArrayList("Type1", "Type2", "Type3")); // Example types
+        // Load categories dynamically from the database
+        ObservableList<String> categories = FXCollections.observableArrayList(productService.getAllCategories());
+        categoryComboBox.setItems(categories);
+
+        statusComboBox.setItems(FXCollections.observableArrayList("Active", "Sold Out"));
     }
 
     @FXML
@@ -70,26 +84,28 @@ public class AdminProductsController {
 
     @FXML
     private void handleAddItem(ActionEvent event) {
-        // Add item logic
         String productName = productNameField.getText();
-        String type = typeComboBox.getValue();
+        String description = descriptionField.getText();
+        String category = categoryComboBox.getValue();
         int quantity = Integer.parseInt(quantityField.getText());
         double price = Double.parseDouble(priceField.getText());
+        String status = statusComboBox.getValue();
 
-        Product product = new Product(productName, type, quantity, price);
+        Product product = new Product(0, productName, description, category, quantity, price, status);
         productService.addProduct(product);
         productList.add(product);
     }
 
     @FXML
     private void handleUpdateItem(ActionEvent event) {
-        // Update item logic
         Product selectedProduct = productsTable.getSelectionModel().getSelectedItem();
         if (selectedProduct != null) {
             selectedProduct.setProductName(productNameField.getText());
-            selectedProduct.setType(typeComboBox.getValue());
+            selectedProduct.setDescription(descriptionField.getText());
+            selectedProduct.setCategory(categoryComboBox.getValue());
             selectedProduct.setQuantity(Integer.parseInt(quantityField.getText()));
             selectedProduct.setPrice(Double.parseDouble(priceField.getText()));
+            selectedProduct.setStatus(statusComboBox.getValue());
             productService.updateProduct(selectedProduct);
             productsTable.refresh();
         }
@@ -97,20 +113,20 @@ public class AdminProductsController {
 
     @FXML
     private void handleClear(ActionEvent event) {
-        // Clear fields
         productIdField.clear();
         productNameField.clear();
+        descriptionField.clear();
+        categoryComboBox.setValue(null);
         priceField.clear();
-        typeComboBox.setValue(null);
         quantityField.clear();
+        statusComboBox.setValue(null);
     }
 
     @FXML
     private void handleDeleteItem(ActionEvent event) {
-        // Delete item logic
         Product selectedProduct = productsTable.getSelectionModel().getSelectedItem();
         if (selectedProduct != null) {
-            productService.deleteProduct(selectedProduct.getId());
+            productService.deleteProduct(selectedProduct.getProductId());
             productList.remove(selectedProduct);
         }
     }
@@ -120,3 +136,4 @@ public class AdminProductsController {
         // Import image logic
     }
 }
+

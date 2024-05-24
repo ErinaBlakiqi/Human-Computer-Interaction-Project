@@ -4,84 +4,63 @@ public class Product {
     private int productId;
     private String productName;
     private int sellerId;
-    private double price;
+    private int price;
     private int quantity;
     private int categoryId;
     private String status;
 
-    // Constructor including productId
-    public Product(int productId, String productName, int sellerId, double price, int quantity, int categoryId, String status) {
-        this.productId = productId;
-        this.productName = productName;
-        this.sellerId = sellerId;
-        this.price = price;
-        this.quantity = quantity;
-        this.categoryId = categoryId;
-        this.status = status;
-    }
-
-    // Constructor without productId
-    public Product(String productName, int sellerId, double price, int quantity, int categoryId, String status) {
-        this.productName = productName;
-        this.sellerId = sellerId;
-        this.price = price;
-        this.quantity = quantity;
-        this.categoryId = categoryId;
-        this.status = status;
-    }
-
-    // Getters and setters
-
+    // Getters
     public int getProductId() {
         return productId;
-    }
-
-    public void setProductId(int productId) {
-        this.productId = productId;
     }
 
     public String getProductName() {
         return productName;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
-
     public int getSellerId() {
         return sellerId;
     }
 
-    public void setSellerId(int sellerId) {
-        this.sellerId = sellerId;
-    }
-
-    public double getPrice() {
+    public int getPrice() {
         return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
     }
 
     public int getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
     public int getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryId(int categoryId) {
-        this.categoryId = categoryId;
-    }
-
     public String getStatus() {
         return status;
+    }
+
+    // Setters
+    public void setProductId(int productId) {
+        this.productId = productId;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    public void setSellerId(int sellerId) {
+        this.sellerId = sellerId;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
     }
 
     public void setStatus(String status) {

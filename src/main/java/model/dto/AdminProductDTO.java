@@ -10,7 +10,7 @@ public class AdminProductDTO {
     private String status;
 
     // Constructor
-    public ProductDTO(int productId, String productName, String sellerName, double price, int quantity, String categoryName, String status) {
+    public AdminProductDTO(int productId, String productName, String sellerName, double price, int quantity, String categoryName, String status) {
         this.productId = productId;
         this.productName = productName;
         this.sellerName = sellerName;
@@ -78,5 +78,5 @@ public class AdminProductDTO {
     }
 }
 
-}
+
 

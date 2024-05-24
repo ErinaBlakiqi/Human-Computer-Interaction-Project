@@ -1,7 +1,5 @@
 package model;
 
-import java.sql.Timestamp;
-
 public class User {
     private int userId;
     private String firstName;
@@ -10,11 +8,8 @@ public class User {
     private String email;
     private String passwordHash;
     private String salt;
-    private String contactNumber;
-    private Timestamp createdAt;
-    private Timestamp updatedAt;
-
-    public User(int userId, String firstName, String lastName, String username, String email, String passwordHash, String salt, String contactNumber, Timestamp createdAt, Timestamp updatedAt) {
+    private String role;
+    public User(int userId, String firstName, String lastName, String username, String email, String passwordHash, String salt, String role) {
         this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -22,9 +17,7 @@ public class User {
         this.email = email;
         this.passwordHash = passwordHash;
         this.salt = salt;
-        this.contactNumber = contactNumber;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
+        this.role = role;
     }
 
     // Getters and setters
@@ -84,27 +77,11 @@ public class User {
         this.salt = salt;
     }
 
-    public String getContactNumber() {
-        return contactNumber;
+    public String getRole() {
+        return role;
     }
 
-    public void setContactNumber(String contactNumber) {
-        this.contactNumber = contactNumber;
-    }
-
-    public Timestamp getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Timestamp createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public Timestamp getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(Timestamp updatedAt) {
-        this.updatedAt = updatedAt;
+    public void setRole(String role) {
+        this.role = role;
     }
 }

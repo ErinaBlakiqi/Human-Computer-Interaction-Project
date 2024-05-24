@@ -3,28 +3,30 @@ package model;
 public class Product {
     private int productId;
     private String productName;
-    private String description;
-    private String category;
-    private int quantity;
+    private int sellerId;
     private double price;
+    private int quantity;
+    private int categoryId;
     private String status;
 
-    public Product(int productId, String productName, String description, String category, int quantity, double price, String status) {
+    // Constructor including productId
+    public Product(int productId, String productName, int sellerId, double price, int quantity, int categoryId, String status) {
         this.productId = productId;
         this.productName = productName;
-        this.description = description;
-        this.category = category;
-        this.quantity = quantity;
+        this.sellerId = sellerId;
         this.price = price;
+        this.quantity = quantity;
+        this.categoryId = categoryId;
         this.status = status;
     }
 
-    public Product(String productName, String description, String category, int quantity, double price, String status) {
+    // Constructor without productId
+    public Product(String productName, int sellerId, double price, int quantity, int categoryId, String status) {
         this.productName = productName;
-        this.description = description;
-        this.category = category;
-        this.quantity = quantity;
+        this.sellerId = sellerId;
         this.price = price;
+        this.quantity = quantity;
+        this.categoryId = categoryId;
         this.status = status;
     }
 
@@ -46,20 +48,20 @@ public class Product {
         this.productName = productName;
     }
 
-    public String getDescription() {
-        return description;
+    public int getSellerId() {
+        return sellerId;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setSellerId(int sellerId) {
+        this.sellerId = sellerId;
     }
 
-    public String getCategory() {
-        return category;
+    public double getPrice() {
+        return price;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     public int getQuantity() {
@@ -70,12 +72,12 @@ public class Product {
         this.quantity = quantity;
     }
 
-    public double getPrice() {
-        return price;
+    public int getCategoryId() {
+        return categoryId;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
     }
 
     public String getStatus() {

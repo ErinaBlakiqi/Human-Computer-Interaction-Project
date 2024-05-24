@@ -1,16 +1,15 @@
-package model;
+package model.dto;
 
-public class Product {
+public class SellItem {
     private int productId;
     private String productName;
     private int sellerId;
-    private double price;
+    private int price;
     private int quantity;
     private int categoryId;
     private String status;
 
-    // Constructor including productId
-    public Product(int productId, String productName, int sellerId, double price, int quantity, int categoryId, String status) {
+    public SellItem(int productId, String productName, int sellerId, int price, int quantity, int categoryId, String status) {
         this.productId = productId;
         this.productName = productName;
         this.sellerId = sellerId;
@@ -20,18 +19,10 @@ public class Product {
         this.status = status;
     }
 
-    // Constructor without productId
-    public Product(String productName, int sellerId, double price, int quantity, int categoryId, String status) {
-        this.productName = productName;
-        this.sellerId = sellerId;
-        this.price = price;
-        this.quantity = quantity;
-        this.categoryId = categoryId;
-        this.status = status;
-    }
+    // Default constructor
+    public SellItem() {}
 
-    // Getters and setters
-
+    // Getters and Setters
     public int getProductId() {
         return productId;
     }
@@ -56,11 +47,11 @@ public class Product {
         this.sellerId = sellerId;
     }
 
-    public double getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 
@@ -86,5 +77,18 @@ public class Product {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "SellItem{" +
+                "productId=" + productId +
+                ", productName='" + productName + '\'' +
+                ", sellerId=" + sellerId +
+                ", price=" + price +
+                ", quantity=" + quantity +
+                ", categoryId=" + categoryId +
+                ", status='" + status + '\'' +
+                '}';
     }
 }

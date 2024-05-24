@@ -37,4 +37,17 @@ create table Orders(
     FOREIGN KEY (BuyerID) REFERENCES Users(UserID),
     FOREIGN KEY (ProductID) REFERENCES Products(ProductID)
 );
+
+CREATE TABLE Profiles(
+    ProfileId INT AUTO_INCREMENT PRIMARY KEY,
+    UserId INT NOT NULL,
+    UserName VARCHAR(255),
+    Location VARCHAR(255),
+    ContactNumber VARCHAR(15),
+    ContactEmail VARCHAR(255),
+    Bio TEXT,
+    PictureURL VARCHAR(255),
+    FOREIGN KEY (UserId) REFERENCES Users(UserId)
+);
+
     

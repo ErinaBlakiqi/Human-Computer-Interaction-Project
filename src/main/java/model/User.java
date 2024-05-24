@@ -1,32 +1,31 @@
 package model;
 
 public class User {
-    private int userId;
+    private int id;
     private String firstName;
     private String lastName;
     private String username;
     private String email;
-    private String passwordHash;
     private String salt;
-    private String role;
-    public User(int userId, String firstName, String lastName, String username, String email, String passwordHash, String salt, String role) {
-        this.userId = userId;
+    private String passwordHash;
+
+    public User(int id, String firstName, String lastName, String username, String email, String salt, String passwordHash) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
         this.email = email;
-        this.passwordHash = passwordHash;
         this.salt = salt;
-        this.role = role;
+        this.passwordHash = passwordHash;
     }
 
-    // Getters and setters
-    public int getUserId() {
-        return userId;
+    // Getters and Setters
+    public int getId() {
+        return id;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getFirstName() {
@@ -61,14 +60,6 @@ public class User {
         this.email = email;
     }
 
-    public String getPasswordHash() {
-        return passwordHash;
-    }
-
-    public void setPasswordHash(String passwordHash) {
-        this.passwordHash = passwordHash;
-    }
-
     public String getSalt() {
         return salt;
     }
@@ -77,11 +68,11 @@ public class User {
         this.salt = salt;
     }
 
-    public String getRole() {
-        return role;
+    public String getPasswordHash() {
+        return passwordHash;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
     }
 }

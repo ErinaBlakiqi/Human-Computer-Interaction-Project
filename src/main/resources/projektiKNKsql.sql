@@ -19,7 +19,7 @@ create table Users(
     Email varchar(255),
     Salt varchar(255),
     PasswordHash varchar(300),
-    Roli varchar(255)
+    Role varchar(255)
 );
 
 create table Categories(

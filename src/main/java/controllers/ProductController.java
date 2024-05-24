@@ -1,91 +1,113 @@
 package controllers;
 
-import javafx.event.ActionEvent;
+import javafx.scene.control.TableCell;
+import model.dto.ProductDTO;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
+import javafx.scene.control.cell.PropertyValueFactory;
+import repository.ProductRepository;
+import services.ProductService;
+import repository.CartRepository;
+import model.Cart;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.List;
 
 public class ProductController {
+    @FXML
+    private TableColumn<ProductDTO, String> colAction_products;
 
     @FXML
-    private Button btnOrder_Products;
+    private TableColumn<ProductDTO, String> colCategory_products;
 
     @FXML
-    private Button btnRemove_Products;
+    private TableColumn<ProductDTO, Integer> colPrice_products;
 
     @FXML
-    private Button btnSearch;
+    private TableColumn<ProductDTO, String> colProductName_products;
 
     @FXML
-    private TableColumn<?, ?> colAction_products;
+    private TableColumn<ProductDTO, String> colSeller_products;
 
     @FXML
-    private TableColumn<?, ?> colCategory_products;
+    private TableView<ProductDTO> tableProductsPage;
 
-    @FXML
-    private TableColumn<?, ?> colPrice_products;
+    private ProductService productService;
+    private CartRepository cartRepository;
 
-    @FXML
-    private TableColumn<?, ?> colProductName_products;
+    private int currentUserId = 1; // This should be dynamically set based on the logged-in user
 
-    @FXML
-    private TableColumn<?, ?> colSeller_products;
-
-    @FXML
-    private TableColumn<?, ?> col_Price_Products;
-
-    @FXML
-    private TableColumn<?, ?> col_Product_Products;
-
-    @FXML
-    private TableColumn<?, ?> col_Quantity_Products;
-
-    @FXML
-    private TextField fieldProductSearch;
-
-    @FXML
-    private ChoiceBox<?> listPayment_Products;
-
-    @FXML
-    private Pane pane_Products;
-
-    @FXML
-    private ImageView profileImage;
-
-    @FXML
-    private TableView<?> tableCart;
-
-    @FXML
-    private TableView<?> tableProducts;
-
-    @FXML
-    private Label txtTotal_Products;
-
-    @FXML
-    void onActionOrder(ActionEvent event) {
-
+    public ProductController() {
+        try {
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/yourdatabase", "username", "password");
+            productService = new ProductService(new ProductRepository(connection));
+            cartRepository = new CartRepository(connection);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
-    void onActionRemove(ActionEvent event) {
+    public void initialize() {
+        colProductName_products.setCellValueFactory(new PropertyValueFactory<>("productName"));
+        colSeller_products.setCellValueFactory(new PropertyValueFactory<>("sellerName"));
+        colPrice_products.setCellValueFactory(new PropertyValueFactory<>("price"));
+        colCategory_products.setCellValueFactory(new PropertyValueFactory<>("categoryName"));
+        colAction_products.setCellFactory(param -> new TableCell<>() {
+            private final Button buyButton = new Button("Buy");
 
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+
+                if (empty) {
+                    setGraphic(null);
+                    setText(null);
+                } else {
+                    buyButton.setOnAction(event -> {
+                        ProductDTO product = getTableView().getItems().get(getIndex());
+                        addToCart(product);
+                    });
+                    setGraphic(buyButton);
+                    setText(null);
+                }
+            }
+        });
+
+        loadProducts();
     }
 
-    @FXML
-    void onActionSearch(ActionEvent event) {
-
+    private void loadProducts() {
+        try {
+            List<ProductDTO> products = productService.getAllProductDTOs();
+            ObservableList<ProductDTO> productObservableList = FXCollections.observableArrayList(products);
+            tableProductsPage.setItems(productObservableList);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
-    @FXML
-    void onClickPayment(MouseEvent event) {
-
+    private void addToCart(ProductDTO product) {
+        try {
+            Cart cart = cartRepository.getCartByUserIdAndProductId(currentUserId, product.getProductId());
+            if (cart == null) {
+                cart = new Cart();
+                cart.setUserId(currentUserId);
+                cart.setProductId(product.getProductId());
+                cart.setQuantity(1);
+                cartRepository.addCart(cart);
+            } else {
+                cart.setQuantity(cart.getQuantity() + 1);
+                cartRepository.updateCart(cart);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
-
 }

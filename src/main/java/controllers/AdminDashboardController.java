@@ -5,14 +5,17 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.chart.AreaChart;
 import javafx.scene.chart.BarChart;
+import javafx.scene.chart.XYChart;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import model.dto.DailyRevenueDto;
 import services.AdminService;
 
 import java.io.IOException;
+import java.util.List;
 
 public class AdminDashboardController {
 
@@ -27,9 +30,9 @@ public class AdminDashboardController {
     @FXML
     private Label dailyRevenueLabel;
     @FXML
-    private AreaChart<?, ?> dailyIncomeChart;
+    private AreaChart<String, Number> dailyIncomeChart;
     @FXML
-    private BarChart<?, ?> monthlyIncomeChart;
+    private BarChart<String, Number> monthlyIncomeChart;
     @FXML
     private Button btnDashboard;
     @FXML
@@ -57,6 +60,28 @@ public class AdminDashboardController {
         totalRevenueLabel.setText("Total Revenue: $" + String.format("%.2f", totalRevenue));
         dailyRevenueLabel.setText("Daily Revenue: $" + String.format("%.2f", dailyRevenue));
 
+        updateDailyIncomeChart();
+        updateMonthlyIncomeChart();
+    }
+
+    private void updateDailyIncomeChart() {
+        List<DailyRevenueDto> dailyRevenues = adminService.getDailyRevenueData();
+        XYChart.Series<String, Number> series = new XYChart.Series<>();
+        for (DailyRevenueDto dailyRevenue : dailyRevenues) {
+            series.getData().add(new XYChart.Data<>(dailyRevenue.getDate().toString(), dailyRevenue.getRevenue()));
+        }
+        dailyIncomeChart.getData().clear();
+        dailyIncomeChart.getData().add(series);
+    }
+
+    private void updateMonthlyIncomeChart() {
+        List<DailyRevenueDto> monthlyRevenues = adminService.getMonthlyRevenueData();
+        XYChart.Series<String, Number> series = new XYChart.Series<>();
+        for (DailyRevenueDto monthlyRevenue : monthlyRevenues) {
+            series.getData().add(new XYChart.Data<>(monthlyRevenue.getDate().toString(), monthlyRevenue.getRevenue()));
+        }
+        monthlyIncomeChart.getData().clear();
+        monthlyIncomeChart.getData().add(series);
     }
 
     @FXML

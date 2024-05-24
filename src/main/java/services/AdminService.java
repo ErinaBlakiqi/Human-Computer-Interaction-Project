@@ -1,6 +1,9 @@
 package services;
 
+import model.dto.DailyRevenueDto;
 import repository.AdminRepository;
+
+import java.util.List;
 
 public class AdminService {
 
@@ -24,5 +27,13 @@ public class AdminService {
 
     public double getDailyRevenue() {
         return adminRepository.getDailyRevenue();
+    }
+
+    public List<DailyRevenueDto> getDailyRevenueData() {
+        return adminRepository.getDailyRevenueData();
+    }
+
+    public List<DailyRevenueDto> getMonthlyRevenueData() {
+        return adminRepository.getMonthlyRevenueData();
     }
 }

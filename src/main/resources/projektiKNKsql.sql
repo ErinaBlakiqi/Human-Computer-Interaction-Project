@@ -28,7 +28,7 @@ create table Categories(
 );
 
 create table Orders(
-	OrderId int,
+	OrderId int NOT NULL AUTO_INCREMENT,
     ProductId int,
     BuyerId int,
     TotalPrice int not null,
@@ -36,6 +36,15 @@ create table Orders(
     CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (BuyerID) REFERENCES Users(UserID),
     FOREIGN KEY (ProductID) REFERENCES Products(ProductID)
+);
+
+create table Cart(
+    CartId INT PRIMARY KEY AUTO_INCREMENT,
+    UserId INT,
+    ProductId INT,
+    Quantity INT,
+    FOREIGN KEY (UserId) REFERENCES Users(UserId),
+    FOREIGN KEY (ProductId) REFERENCES Products(ProductId)
 );
 
 CREATE TABLE Profiles(

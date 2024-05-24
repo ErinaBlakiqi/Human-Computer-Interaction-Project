@@ -60,13 +60,10 @@ public class ProductController {
     private ImageView profileImage;
 
     @FXML
-    private TableView<?> tableProductsPage;
+    private TableView<?> tableCart;
 
     @FXML
-    private TableView<?> tableView_Products;
-
-    @FXML
-    private TextField txtAmount_Products;
+    private TableView<?> tableProducts;
 
     @FXML
     private Label txtTotal_Products;

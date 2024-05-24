@@ -3,6 +3,9 @@ package controllers;
 import application.Navigator;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.chart.AreaChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
@@ -10,12 +13,15 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import model.User;
 import model.dto.DailyChartDto;
 import model.dto.ProfileDto;
 import repository.ProfileRepository;
 import utils.SessionManager;
 
+import java.io.IOException;
 import java.util.List;
 
 public class AccountController {
@@ -108,7 +114,26 @@ public class AccountController {
 
     @FXML
     void handleEditAccount(ActionEvent event) {
-        Navigator.navigate("/views/editAccount.fxml");
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/editAccount.fxml"));
+            Parent editAccountRoot = fxmlLoader.load();
+
+            Stage editAccountStage = new Stage();
+            editAccountStage.setTitle("Edit Account");
+            editAccountStage.setScene(new Scene(editAccountRoot));
+
+            // Set the new window as a modal dialog
+            editAccountStage.initModality(Modality.WINDOW_MODAL);
+
+            // Set the owner of the new window
+            Stage primaryStage = (Stage) editAccountButton.getScene().getWindow();
+            editAccountStage.initOwner(primaryStage);
+
+            // Show the new window and wait until it is closed
+            editAccountStage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML

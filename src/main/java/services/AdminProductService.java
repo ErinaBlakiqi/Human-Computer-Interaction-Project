@@ -4,14 +4,19 @@ import model.dto.AdminProductDTO;
 import model.AdminProduct;
 import repository.AdminProductRepository;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class AdminProductService {
     private AdminProductRepository productRepository;
+    private Connection connection;
 
-    public AdminProductService(AdminProductRepository productRepository) {
+    public AdminProductService(AdminProductRepository productRepository, Connection connection) {
         this.productRepository = productRepository;
+        this.connection = connection;
     }
 
     public List<AdminProductDTO> getAllProducts() {
@@ -21,6 +26,10 @@ public class AdminProductService {
 
     public void deleteProduct(int productId) {
         productRepository.deleteProduct(productId);
+    }
+
+    public void updateProduct(AdminProduct product) {
+        productRepository.updateProduct(product);
     }
 
     private AdminProductDTO convertToDTO(AdminProduct product) {
@@ -37,12 +46,34 @@ public class AdminProductService {
     }
 
     private String getSellerName(int sellerId) {
-        // Implement logic to get seller name
-        return "Seller Name"; // Placeholder
+        String sellerName = "Unknown Seller";
+        try {
+            String query = "SELECT UserName FROM Users WHERE UserId = ?";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1, sellerId);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                sellerName = resultSet.getString("UserName");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return sellerName;
     }
 
     private String getCategoryName(int categoryId) {
-        // Implement logic to get category name
-        return "Category Name"; // Placeholder
+        String categoryName = "Unknown Category";
+        try {
+            String query = "SELECT CName FROM Categories WHERE CategoryID = ?";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1, categoryId);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                categoryName = resultSet.getString("CName");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return categoryName;
     }
 }

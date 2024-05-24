@@ -50,5 +50,26 @@ public class AdminProductRepository {
         }
     }
 
+    public void updateProduct(AdminProduct product) {
+        try {
+            String query = "UPDATE Products SET ProductName = ?, SellerId = ?, Price = ?, Quantity = ?, CategoryId = ?, status = ? WHERE ProductId = ?";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, product.getProductName());
+            statement.setInt(2, product.getSellerId());
+            statement.setDouble(3, product.getPrice());
+            statement.setInt(4, product.getQuantity());
+            statement.setInt(5, product.getCategoryId());
+            statement.setString(6, product.getStatus());
+            statement.setInt(7, product.getProductId());
+            statement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
     // Other CRUD operations
+    // me shtu per update
+
 }

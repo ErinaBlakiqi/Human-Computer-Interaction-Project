@@ -1,69 +1,93 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.AreaChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Rectangle?>
 
 <AnchorPane maxHeight="-Infinity" prefHeight="490.0" prefWidth="827.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AccountController">
-    <BorderPane layoutY="82.0" prefHeight="491.0" prefWidth="711.0">
-    <left>
-    <HBox>
-         <VBox prefHeight="602.0" prefWidth="200" style="-fx-background-color: #2F3A47;">
-            <VBox alignment="CENTER" spacing="10" style="-fx-padding: 20;">
-                <ImageView fx:id="profileImage" fitHeight="79.0" fitWidth="93.0">
-                    <!-- Add your profile image path here -->
-                    <Image url="@../../Downloads/path/to/profile/image.png" />
-                </ImageView>
-                <Label style="-fx-text-fill: white; -fx-font-size: 14;" text="Welcome," />
-                <Label style="-fx-text-fill: white; -fx-font-size: 18;" text="Admin" />
-                <Rectangle height="2" style="-fx-fill: #A4A4A4;" width="160" />
-            </VBox>
-            <VBox style="-fx-padding: 20;">
-                <Button contentDisplay="CENTER" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16;" text="Home">
-                    <graphic>
-                        <ImageView fitHeight="20" fitWidth="20">
-                            <!-- Add your home icon path here -->
-                            <Image url="@../../Downloads/path/to/home/icon.png" />
+    <BorderPane prefHeight="573.0" prefWidth="825.0">
+        <left>
+            <HBox>
+                <VBox prefHeight="602.0" prefWidth="200" style="-fx-background-color: #2F3A47;">
+                    <VBox alignment="CENTER" spacing="10" style="-fx-padding: 20;">
+                        <ImageView fx:id="profileImage" fitHeight="79.0" fitWidth="93.0">
+                            <!-- Add your profile image path here -->
+                            <!-- <Image url="@../../Downloads/path/to/profile/image.png" /> -->
                         </ImageView>
-                    </graphic>
-                </Button>
-                <Button style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16;" text="Products" />
-                <Button style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16;" text="Sell" />
-                <Button style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16;" text="Profile" />
-                <Button style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16;" text="Admin" />
-            </VBox>
-            <VBox style="-fx-padding: 20; -fx-alignment: bottom-left;">
-                <Button prefHeight="33.0" prefWidth="118.0" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16;" text="Sign Out">
-                    <graphic>
-                        <ImageView fitHeight="20" fitWidth="20">
-                            <!-- Add your sign-out icon path here -->
-                            <Image url="@../../Downloads/path/to/signout/icon.png" />
-                        </ImageView>
-                    </graphic>
-                </Button>
-            </VBox>
-         </VBox>
-    </HBox>
-    </left>
-    <center>
-    <BorderPane>
-        <top>
-            <VBox />
-        </top>
+                        <Label style="-fx-text-fill: white; -fx-font-size: 14;" text="Welcome," />
+                        <Label style="-fx-text-fill: white; -fx-font-size: 18;" text="Admin" />
+                        <Rectangle height="2" style="-fx-fill: #A4A4A4;" width="160" />
+                    </VBox>
+                    <VBox style="-fx-padding: 20;">
+                        <Button fx:id="homeButton" contentDisplay="CENTER" onMouseClicked="#handleHome" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16;" text="Home">
+                            <graphic>
+                                <ImageView fitHeight="20" fitWidth="20">
+                                    <!-- Add your home icon path here -->
+                                    <!-- <Image url="@../../Downloads/path/to/home/icon.png" /> -->
+                                </ImageView>
+                            </graphic>
+                        </Button>
+                        <Button fx:id="productsButton" onMouseClicked="#handleProducts" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16;" text="Products">
+                            <graphic>
+                                <ImageView fitHeight="20" fitWidth="20">
+                                    <!-- Add your products icon path here -->
+                                    <!-- <Image url="@../../Downloads/path/to/products/icon.png" /> -->
+                                </ImageView>
+                            </graphic>
+                        </Button>
+                        <Button fx:id="sellButton" onMouseClicked="#handleSell" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16;" text="Sell">
+                            <graphic>
+                                <ImageView fitHeight="20" fitWidth="20">
+                                    <!-- Add your sell icon path here -->
+                                    <!-- <Image url="@../../Downloads/path/to/sell/icon.png" /> -->
+                                </ImageView>
+                            </graphic>
+                        </Button>
+                        <Button fx:id="userButton" onMouseClicked="#handleUser" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16;" text="Profile">
+                            <graphic>
+                                <ImageView fitHeight="20" fitWidth="20">
+                                    <!-- Add your profile icon path here -->
+                                    <!-- <Image url="@../../Downloads/path/to/profile/icon.png" /> -->
+                                </ImageView>
+                            </graphic>
+                        </Button>
+                        <Button fx:id="adminButton" onMouseClicked="#handleAdmin" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16;" text="Admin">
+                            <graphic>
+                                <ImageView fitHeight="20" fitWidth="20">
+                                    <!-- Add your admin icon path here -->
+                                    <!-- <Image url="@../../Downloads/path/to/admin/icon.png" /> -->
+                                </ImageView>
+                            </graphic>
+                        </Button>
+                        <Button fx:id="signoutButton" onMouseClicked="#handleSignOut" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16;" text="Sign Out">
+                            <graphic>
+                                <ImageView fitHeight="20" fitWidth="20">
+                                    <!-- Add your signout icon path here -->
+                                    <!-- <Image url="@../../Downloads/path/to/signout/icon.png" /> -->
+                                </ImageView>
+                            </graphic>
+                        </Button>
+                    </VBox>
+                </VBox>
+            </HBox>
+        </left>
         <center>
             <VBox spacing="20">
                 <padding>
                     <Insets bottom="10" left="10" right="10" top="10" />
                 </padding>
-                <HBox alignment="CENTER_LEFT" spacing="10">
+                <HBox alignment="CENTER_LEFT" prefHeight="144.0" prefWidth="619.0" spacing="10">
                     <padding>
                         <Insets bottom="10" left="10" right="10" top="10" />
                     </padding>
@@ -74,22 +98,66 @@
                         <Label fx:id="usernameLabel" style="-fx-font-weight: bold;" text="Username" />
                         <Label fx:id="locationLabel" text="London, UK" />
                         <HBox>
-                     <Label fx:id="contactLabel" text="Contact number" />
+                            <Label fx:id="contactLabel" text="Contact number" />
                         </HBox>
-                  <Label fx:id="bioLabel" text="Contact email" />
+                        <Label fx:id="bioLabel" text="Contact email" />
                         <Label text="Bio" />
                         <HBox prefHeight="100.0" prefWidth="200.0" />
                     </VBox>
-                     <VBox prefHeight="53.0" prefWidth="105.0">
-                        <children>
-                          <Button fx:id="editAccountButton" alignment="BOTTOM_CENTER" contentDisplay="CENTER" onAction="#handleEditAccount" text="Edit Account" />
-                        </children>
-                     </VBox>
                     <Pane HBox.hgrow="ALWAYS" />
+                    <Button fx:id="editAccountButton" alignment="BOTTOM_CENTER" contentDisplay="CENTER" onAction="#handleEditAccount" text="Edit Account" />
+                </HBox>
+                <HBox spacing="20">
+                    <VBox>
+                        <Label text="Last Items Sold" />
+                        <!-- Table for Last Items Sold -->
+                        <TableView fx:id="lastItemsSoldTableProfile" prefHeight="200" prefWidth="300">
+                            <columns>
+                                <TableColumn fx:id="itemSoldColumn" prefWidth="133.33340454101562" text="Item" />
+                                <TableColumn fx:id="priceSoldColumn" prefWidth="77.33331298828125" text="Price" />
+                                <TableColumn fx:id="dateSoldColumn" prefWidth="80.66665649414062" text="Date Sold" />
+                            </columns>
+                        </TableView>
+                    </VBox>
+                    <VBox>
+                        <Label text="Last Items Bought" />
+                        <!-- Table for Last Items Bought -->
+                        <TableView fx:id="lastItemsBoughtTableProfile" prefHeight="200" prefWidth="300">
+                            <columns>
+                                <TableColumn fx:id="itemBoughtColumn" prefWidth="127.11107885837555" text="Item" />
+                                <TableColumn fx:id="priceBoughtColumn" prefWidth="82.888916015625" text="Price" />
+                                <TableColumn fx:id="dateBoughtColumn" prefWidth="82.88893127441406" text="Date Bought" />
+                            </columns>
+                        </TableView>
+                    </VBox>
+                </HBox>
+                <HBox spacing="20">
+                    <VBox>
+                        <Label text="Products Bought" />
+                        <!-- Area Chart for Bought Products -->
+                        <AreaChart fx:id="boughtProductsChartProfile" prefHeight="200" prefWidth="300">
+                            <xAxis>
+                                <CategoryAxis fx:id="boughtXAxis" />
+                            </xAxis>
+                            <yAxis>
+                                <NumberAxis fx:id="boughtYAxis" />
+                            </yAxis>
+                        </AreaChart>
+                    </VBox>
+                    <VBox>
+                        <Label text="Products Sold" />
+                        <!-- Area Chart for Sold Products -->
+                        <AreaChart fx:id="soldProductsChartProfile" prefHeight="200" prefWidth="300">
+                            <xAxis>
+                                <CategoryAxis fx:id="soldXAxis" />
+                            </xAxis>
+                            <yAxis>
+                                <NumberAxis fx:id="soldYAxis" />
+                            </yAxis>
+                        </AreaChart>
+                    </VBox>
                 </HBox>
             </VBox>
         </center>
-    </BorderPane>
-    </center>
     </BorderPane>
 </AnchorPane>

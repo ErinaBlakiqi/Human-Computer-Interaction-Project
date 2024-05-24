@@ -19,22 +19,12 @@
         <HBox>
             <VBox prefWidth="200" style="-fx-background-color: #2F3A47;">
                 <VBox alignment="CENTER" spacing="10" style="-fx-padding: 20;">
-                    <ImageView fx:id="profileImage" fitHeight="79.0" fitWidth="93.0">
-                        <!-- Add your profile image path here -->
-                        <Image url="@../../../Downloads/path/to/profile/image.png" />
-                    </ImageView>
                     <Label style="-fx-text-fill: white; -fx-font-size: 14;" text="Welcome," />
                     <Label style="-fx-text-fill: white; -fx-font-size: 18;" text="Admin" />
                     <Rectangle height="2" style="-fx-fill: #A4A4A4;" width="160" />
                 </VBox>
                 <VBox style="-fx-padding: 20;">
                     <Button contentDisplay="CENTER" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16;" text="Home">
-                        <graphic>
-                            <ImageView fitHeight="20" fitWidth="20">
-                                <!-- Add your home icon path here -->
-                                <Image url="@../../../Downloads/path/to/home/icon.png" />
-                            </ImageView>
-                        </graphic>
                     </Button>
                     <Button style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16;" text="Products" />
                     <Button alignment="TOP_LEFT" minWidth="42.0" prefHeight="36.0" prefWidth="55.0" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16;" text="Sell" />
@@ -43,18 +33,12 @@
                 </VBox>
                 <VBox style="-fx-padding: 20; -fx-alignment: bottom-left;">
                     <Button prefHeight="33.0" prefWidth="118.0" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16;" text="Sign Out">
-                        <graphic>
-                            <ImageView fitHeight="20" fitWidth="20">
-                                <!-- Add your sign-out icon path here -->
-                                <Image url="@../../../Downloads/path/to/signout/icon.png" />
-                            </ImageView>
-                        </graphic>
                     </Button>
                 </VBox>
             </VBox>
             <Pane fx:id="pane_Products" prefHeight="495.0" prefWidth="650.0" style="-fx-background-color: white;">
             <children>
-               <AnchorPane layoutX="425.0" layoutY="3.0" prefHeight="489.0" prefWidth="222.0" style="-fx-border-color: #2F3A47; -fx-border-radius: 5;" stylesheets="@../styles.css">
+               <AnchorPane layoutX="425.0" layoutY="3.0" prefHeight="489.0" prefWidth="222.0" style="-fx-border-color: #2F3A47; -fx-border-radius: 5;" stylesheets="@../css/mainFormDesign.css">
                   <children>
                      <TableView fx:id="tableView_Products" layoutX="2.0" layoutY="3.0" prefHeight="285.0" prefWidth="217.0" style="-fx-border-color: #a3a1a1; -fx-border-radius: 5;" styleClass="custom-table">
                        <columns>

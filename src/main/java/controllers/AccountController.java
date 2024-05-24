@@ -103,7 +103,7 @@ public class AccountController {
 
     @FXML
     void handleEditAccount(ActionEvent event) {
-
+        Navigator.navigate(event, Navigator.EDIT_PAGE);
     }
 
     @FXML

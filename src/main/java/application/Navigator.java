@@ -16,10 +16,8 @@ public class Navigator{
     public final static String USER_PAGE= "views/account2.fxml";
 // <<<<<<< HEAD
     public final static String ADMIN_PAGE= "views/AdminDashboard.fxml";
-    public final static String SIGNIN_PAGE="SignIn.fxml";
-// =======
-    public final static String ADMIN_PAGE= "views/AdminHome.fxml";
     public final static String SIGNIN_PAGE="com.example.shitjeblerjeonline/SignIn.fxml";
+    public final static String EDIT_PAGE="views/editAccount.fxml";
 // >>>>>>> 90254dfd54b7819026e9f0d5a18909d9e6913e11
     public static void navigate(Stage stage, String page) {
         FXMLLoader loader=new FXMLLoader(

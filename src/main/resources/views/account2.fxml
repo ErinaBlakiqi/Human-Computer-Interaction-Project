@@ -3,8 +3,6 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -14,8 +12,8 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 
-<AnchorPane prefHeight="549.0" prefWidth="711.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AccountController">
-    <BorderPane prefHeight="573.0" prefWidth="711.0">
+<AnchorPane maxHeight="-Infinity" prefHeight="490.0" prefWidth="827.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AccountController">
+    <BorderPane layoutY="82.0" prefHeight="491.0" prefWidth="711.0">
     <left>
     <HBox>
          <VBox prefHeight="602.0" prefWidth="200" style="-fx-background-color: #2F3A47;">
@@ -76,10 +74,10 @@
                         <Label fx:id="usernameLabel" style="-fx-font-weight: bold;" text="Username" />
                         <Label fx:id="locationLabel" text="London, UK" />
                         <HBox>
-                     <Label fx:id="contactLabel" text="Contact number:" />
-                     <TextField fx:id="numberField" prefHeight="25.0" prefWidth="125.0" />
+                     <Label fx:id="contactLabel" text="Contact number" />
                         </HBox>
-                  <Label fx:id="bioLabel" text="Label" />
+                  <Label fx:id="bioLabel" text="Contact email" />
+                        <Label text="Bio" />
                         <HBox prefHeight="100.0" prefWidth="200.0" />
                     </VBox>
                      <VBox prefHeight="53.0" prefWidth="105.0">
@@ -89,34 +87,6 @@
                      </VBox>
                     <Pane HBox.hgrow="ALWAYS" />
                 </HBox>
-                <Label fx:id="recentlyListedLabel" style="-fx-font-size: 16px;" text="Recently Liked Items" />
-                <ScrollPane fx:id="itemsScrollPane" fitToWidth="true" hbarPolicy="AS_NEEDED" vbarPolicy="NEVER">
-                    <HBox fx:id="itemsContainer" spacing="10">
-                        <!-- Example item, repeat this structure for each item -->
-                        <VBox>
-                            <ImageView fitHeight="100" fitWidth="100" preserveRatio="true">
-                                <!-- Ensure a valid image URL is used -->
-                            </ImageView>
-                            <Label text="Item Name" />
-                            <Label text="Price" />
-                        </VBox>
-                        <!-- Additional items would be added here -->
-                    </HBox>
-                </ScrollPane>
-                <Label fx:id="collectionsLabel" style="-fx-font-size: 16px;" text="Items On Sale" />
-                <ScrollPane fx:id="collectionsScrollPane" fitToWidth="true" hbarPolicy="AS_NEEDED" vbarPolicy="NEVER">
-                    <HBox fx:id="sellsContainer" spacing="10">
-                        <!-- Example item, repeat this structure for each item -->
-                        <VBox>
-                            <ImageView fitHeight="100" fitWidth="100" preserveRatio="true">
-                                <!-- Ensure a valid image URL is used -->
-                            </ImageView>
-                            <Label text="Item Name" />
-                            <Label text="Price" />
-                        </VBox>
-                        <!-- Additional items would be added here -->
-                    </HBox>
-                </ScrollPane>
             </VBox>
         </center>
     </BorderPane>

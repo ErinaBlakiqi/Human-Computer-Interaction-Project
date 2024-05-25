@@ -95,35 +95,35 @@ public class AccountController {
 
     @FXML
     void handleAdmin(MouseEvent event) {
-        Navigator.navigate(event, Navigator.ADMIN_PAGE);
+        Navigator.navigate("/views/AdminDashboard.fxml");
     }
 
     @FXML
     void handleEditAccount(ActionEvent event) {
-        Navigator.navigate(event, Navigator.EDIT_PAGE);
+        Navigator.navigate("/views/editAccount.fxml");
     }
 
     @FXML
     void handleProducts(MouseEvent event) {
-        Navigator.navigate(event, Navigator.PRODUCTS_PAGE);
+        Navigator.navigate("/views/products.fxml");
     }
 
     @FXML
     void handleSell(MouseEvent event) {
-        Navigator.navigate(event, Navigator.SELL_PAGE);
+        Navigator.navigate("/views/sellitem.fxml");
     }
 
     @FXML
     void handleSignOut(MouseEvent event) {
-        Navigator.navigate(event, Navigator.SIGNIN_PAGE);
+        Navigator.navigate("/views/SignIn.fxml");
     }
 
     @FXML
     void handleUser(MouseEvent event) {
-        Navigator.navigate(event, Navigator.USER_PAGE);
+        Navigator.navigate("/views/account2.fxml");
     }
 
     public void handleChangePassword(ActionEvent actionEvent) {
-        Navigator.navigate(actionEvent, Navigator.CHANGEPASSWORD_PAGE);
+        Navigator.navigate("/views/ChangePassword.fxml");
     }
 }

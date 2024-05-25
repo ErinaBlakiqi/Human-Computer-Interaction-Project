@@ -10,8 +10,8 @@ import java.util.stream.Collectors;
 public class AdminProductService {
     private AdminProductRepository productRepository;
 
-    public AdminProductService(AdminProductRepository productRepository) {
-        this.productRepository = productRepository;
+    public AdminProductService() {
+        this.productRepository = new AdminProductRepository(); // Ensure this is correctly initialized
     }
 
     public List<AdminProductDTO> getAllProducts() {

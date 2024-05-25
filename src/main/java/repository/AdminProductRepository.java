@@ -25,7 +25,7 @@ public class AdminProductRepository {
                         resultSet.getDouble("Price"),
                         resultSet.getInt("Quantity"),
                         resultSet.getInt("CategoryId"),
-                        resultSet.getString("status")
+                        resultSet.getString("Status")
                 );
                 products.add(product);
             }
@@ -48,7 +48,7 @@ public class AdminProductRepository {
 
     public void updateProduct(AdminProduct product) {
         try (Connection connection = DBConnector.getConnection()) {
-            String query = "UPDATE Products SET ProductName = ?, SellerId = ?, Price = ?, Quantity = ?, CategoryId = ?, status = ? WHERE ProductId = ?";
+            String query = "UPDATE Products SET ProductName = ?, SellerId = ?, Price = ?, Quantity = ?, CategoryId = ?, Status = ? WHERE ProductId = ?";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, product.getProductName());
             statement.setInt(2, product.getSellerId());

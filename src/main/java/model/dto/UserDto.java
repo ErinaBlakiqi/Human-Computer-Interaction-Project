@@ -12,7 +12,7 @@ public class UserDto {
     private String confirmPassword;
     private String role;
 
-    public UserDto(int id, String firstName, String lastName, String username, String email, String salt, String passwordHash, String password, String confirmPassword,String role) {
+    public UserDto(int id, String firstName, String lastName, String username, String email, String salt, String passwordHash, String password, String confirmPassword) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;

@@ -91,9 +91,6 @@ public class AccountController {
     private Button userButton;
 
     @FXML
-    private ImageView userImageView;
-
-    @FXML
     private Label usernameLabel;
 
     @FXML

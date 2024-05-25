@@ -3,6 +3,7 @@ package controllers;
 import javafx.animation.PauseTransition;
 import javafx.scene.control.*;
 import javafx.util.Duration;
+import model.Order;
 import model.dto.ProductDTO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,6 +13,7 @@ import repository.ProductRepository;
 import services.ProductService;
 import repository.CartRepository;
 import model.Cart;
+import repository.OrderRepository;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -46,10 +48,13 @@ public class ProductController {
     private ChoiceBox<String> listPayment_Products;
 
     @FXML
+    private Button btnOrder_Products;
+    @FXML
     private Label lblFeedback;
 
     private ProductService productService;
     private CartRepository cartRepository;
+    private OrderRepository orderRepository;
 
     private int currentUserId = 1; // This should be dynamically set based on the logged-in user
 
@@ -154,5 +159,30 @@ public class ProductController {
         PauseTransition pause = new PauseTransition(Duration.seconds(3));
         pause.setOnFinished(event -> lblFeedback.setText(""));
         pause.play();
+    }
+
+    @FXML
+    private void onActionOrder() {
+        try {
+            String paymentMethod = listPayment_Products.getValue();
+            List<Cart> cartItems = cartRepository.getCartItemsByUserId(currentUserId);
+
+            for (Cart cartItem : cartItems) {
+                Order order = new Order();
+                order.setProductId(cartItem.getProductId());
+                order.setBuyerId(currentUserId);
+                order.setTotalPrice(cartItem.getQuantity() * cartItem.getPrice());
+                order.setOrderStatus("Pending");
+                order.setPaymentMethod(paymentMethod);
+                orderRepository.addOrder(order);
+            }
+
+            cartRepository.clearCartByUserId(currentUserId);
+            showFeedback("Order placed successfully.");
+            updateTotal();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            showFeedback("Error placing order.");
+        }
     }
 }

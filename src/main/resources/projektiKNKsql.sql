@@ -19,7 +19,7 @@ create table Users(
     Email varchar(255),
     Salt varchar(255),
     PasswordHash varchar(300),
-    Role varchar(255)
+    Roli varchar(255)
 );
 
 create table Categories(
@@ -44,9 +44,11 @@ create table Cart(
     UserId INT,
     ProductId INT,
     Quantity INT,
+    TotalPrice int,
     FOREIGN KEY (UserId) REFERENCES Users(UserId),
     FOREIGN KEY (ProductId) REFERENCES Products(ProductId)
 );
+
 
 CREATE TABLE Profiles(
     ProfileId INT AUTO_INCREMENT PRIMARY KEY,

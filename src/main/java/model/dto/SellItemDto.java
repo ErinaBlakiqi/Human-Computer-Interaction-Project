@@ -1,6 +1,7 @@
 package model.dto;
 
 import javafx.beans.property.*;
+import model.Product;
 
 public class SellItemDto {
     private final IntegerProperty productId = new SimpleIntegerProperty();
@@ -94,5 +95,31 @@ public class SellItemDto {
 
     public StringProperty statusProperty() {
         return status;
+    }
+
+    // Convert SellItemDto to Product
+    public Product toProduct() {
+        Product product = new Product();
+        product.setProductId(this.getProductId());
+        product.setProductName(this.getProductName());
+        product.setSellerId(this.getSellerId());
+        product.setPrice((int) this.getPrice());
+        product.setQuantity(this.getQuantity());
+        product.setCategoryId(this.getCategoryId());
+        product.setStatus(this.getStatus());
+        return product;
+    }
+
+    // Convert Product to SellItemDto
+    public static SellItemDto fromProduct(Product product) {
+        SellItemDto dto = new SellItemDto();
+        dto.setProductId(product.getProductId());
+        dto.setProductName(product.getProductName());
+        dto.setSellerId(product.getSellerId());
+        dto.setPrice(product.getPrice());
+        dto.setQuantity(product.getQuantity());
+        dto.setCategoryId(product.getCategoryId());
+        dto.setStatus(product.getStatus());
+        return dto;
     }
 }

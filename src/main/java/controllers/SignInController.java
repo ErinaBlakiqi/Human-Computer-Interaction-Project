@@ -31,7 +31,7 @@ public class SignInController {
 
     @FXML
     void handleCreateAccountClick(MouseEvent me) throws IOException {
-        Navigator.navigate(me,Navigator.SIGNUP_PAGE);
+        Navigator.navigate(me, Navigator.SIGNUP_PAGE);
     }
 
     @FXML

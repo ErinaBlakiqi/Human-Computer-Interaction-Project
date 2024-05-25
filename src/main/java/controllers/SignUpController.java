@@ -29,7 +29,6 @@ public class SignUpController {
     @FXML
     private Button cancelButton;
 
-
     @FXML
     private void handleSignUp(ActionEvent event) {
         String firstName = txtFirstname.getText();
@@ -39,8 +38,8 @@ public class SignUpController {
         String password = pwdPassword.getText();
         String confirmPassword = pwdComfirmPassword.getText();
 
-        // Create UserDto with salt and passwordHash parameters as placeholders
-        UserDto userDto = new UserDto(firstName, lastName, username, email, "", "", password, confirmPassword);
+        // Create UserDto with default role as "user"
+        UserDto userDto = new UserDto(firstName, lastName, username, email, password, confirmPassword);
         boolean success = UserService.signUp(userDto);
 
         if (success) {
@@ -54,8 +53,9 @@ public class SignUpController {
 
     @FXML
     private void handleLogin(ActionEvent event) {
-        Navigator.navigate(event,Navigator.PRODUCTS_PAGE);
+        Navigator.navigate(event, Navigator.SIGNIN_PAGE);
     }
+
     @FXML
     private void handleCancel(ActionEvent event) {
         Stage stage = (Stage) cancelButton.getScene().getWindow();

@@ -2,19 +2,15 @@ package controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.chart.AreaChart;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.stage.Stage;
 import model.dto.DailyRevenueDto;
 import services.AdminService;
+import application.Navigator;
 
-import java.io.IOException;
 import java.util.List;
 
 public class AdminDashboardController {
@@ -88,29 +84,21 @@ public class AdminDashboardController {
 
     @FXML
     private void handleDashboard(ActionEvent event) {
-        updateDashboard();
+        Navigator.navigate(Navigator.ADMIN_DASHBOARD_PAGE);
     }
 
     @FXML
-    private void handleProducts(ActionEvent event) throws IOException {
-        loadPage("/views/AdminProducts.fxml", event);
+    private void handleProducts(ActionEvent event) {
+        Navigator.navigate(Navigator.ADMIN_PRODUCTS_PAGE);
     }
 
     @FXML
-    private void handleOrders(ActionEvent event) throws IOException {
-        loadPage("/views/AdminOrder.fxml", event);
+    private void handleOrders(ActionEvent event) {
+        Navigator.navigate(Navigator.ADMIN_ORDERS_PAGE);
     }
 
     @FXML
-    private void handleSignOut(ActionEvent event) throws IOException {
-        loadPage("/views/SignIn.fxml", event);
-    }
-
-    private void loadPage(String page, ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(page));
-        Parent root = loader.load();
-        Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-        stage.setScene(new Scene(root));
-        stage.show();
+    private void handleSignOut(ActionEvent event) {
+        Navigator.navigate(Navigator.SIGNIN_PAGE);
     }
 }

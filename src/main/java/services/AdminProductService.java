@@ -1,61 +1,81 @@
 package services;
 
-import model.dto.AdminProductDTO;
-import model.AdminProduct;
+import model.Product;
 import repository.AdminProductRepository;
-
+import model.dto.AdminProductDTO;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class AdminProductService {
-    private AdminProductRepository productRepository;
+    private AdminProductRepository adminProductRepository;
 
     public AdminProductService() {
-        this.productRepository = new AdminProductRepository(); // Ensure this is correctly initialized
+        this.adminProductRepository = new AdminProductRepository();
     }
 
-    public List<AdminProductDTO> getAllProducts() {
-        List<AdminProduct> products = productRepository.findAll();
-        return products.stream().map(this::convertToDTO).collect(Collectors.toList());
-    }
+    public List<AdminProductDTO> getAllAdminProductDTOs() throws SQLException {
+        List<Product> products = adminProductRepository.getAllProducts();
+        List<AdminProductDTO> adminProductDTOs = new ArrayList<>();
 
-    public void deleteProduct(int productId) {
-        productRepository.deleteProduct(productId);
-    }
-
-    public void updateProduct(AdminProduct product) {
-        productRepository.updateProduct(product);
-    }
-
-    private AdminProductDTO convertToDTO(AdminProduct product) {
-        return new AdminProductDTO(
-                product.getProductId(),
-                product.getProductName(),
-                getSellerName(product.getSellerId()),
-                product.getPrice(),
-                product.getQuantity(),
-                getCategoryName(product.getCategoryId()),
-                product.getStatus()
-        );
-    }
-
-    private String getSellerName(int sellerId) {
-        String sellerName = "Unknown Seller";
-        try {
-            sellerName = productRepository.findSellerNameById(sellerId);
-        } catch (Exception e) {
-            e.printStackTrace();
+        for (Product product : products) {
+            AdminProductDTO adminProductDTO = new AdminProductDTO();
+            adminProductDTO.setProductId(product.getProductId());
+            adminProductDTO.setProductName(product.getProductName());
+            adminProductDTO.setSellerName(product.getSellerName());
+            adminProductDTO.setPrice(product.getPrice());
+            adminProductDTO.setCategoryName(product.getCategoryName());
+            adminProductDTO.setQuantity(product.getQuantity());
+            adminProductDTO.setStatus(product.getStatus());
+            adminProductDTOs.add(adminProductDTO);
         }
-        return sellerName;
+
+        return adminProductDTOs;
     }
 
-    private String getCategoryName(int categoryId) {
-        String categoryName = "Unknown Category";
-        try {
-            categoryName = productRepository.findCategoryNameById(categoryId);
-        } catch (Exception e) {
-            e.printStackTrace();
+    public List<AdminProductDTO> searchAdminProductDTOsByName(String productName) throws SQLException {
+        List<Product> products = adminProductRepository.searchProductsByName(productName);
+        List<AdminProductDTO> adminProductDTOs = new ArrayList<>();
+
+        for (Product product : products) {
+            AdminProductDTO adminProductDTO = new AdminProductDTO();
+            adminProductDTO.setProductId(product.getProductId());
+            adminProductDTO.setProductName(product.getProductName());
+            adminProductDTO.setSellerName(product.getSellerName());
+            adminProductDTO.setPrice(product.getPrice());
+            adminProductDTO.setCategoryName(product.getCategoryName());
+            adminProductDTO.setQuantity(product.getQuantity());
+            adminProductDTO.setStatus(product.getStatus());
+            adminProductDTOs.add(adminProductDTO);
         }
-        return categoryName;
+
+        return adminProductDTOs;
+    }
+
+    public void addProduct(AdminProductDTO adminProductDTO) throws SQLException {
+        Product product = new Product();
+        product.setProductName(adminProductDTO.getProductName());
+        product.setSellerId(adminProductDTO.getSellerId());  // Make sure SellerId is set in AdminProductDTO
+        product.setPrice(adminProductDTO.getPrice());
+        product.setQuantity(adminProductDTO.getQuantity());
+        product.setCategoryId(adminProductDTO.getCategoryId());  // Make sure CategoryId is set in AdminProductDTO
+        product.setStatus(adminProductDTO.getStatus());
+        adminProductRepository.addProduct(product);
+    }
+
+    public void updateProduct(AdminProductDTO adminProductDTO) throws SQLException {
+        Product product = new Product();
+        product.setProductId(adminProductDTO.getProductId());
+        product.setProductName(adminProductDTO.getProductName());
+        product.setSellerId(adminProductDTO.getSellerId());  // Make sure SellerId is set in AdminProductDTO
+        product.setPrice(adminProductDTO.getPrice());
+        product.setQuantity(adminProductDTO.getQuantity());
+        product.setCategoryId(adminProductDTO.getCategoryId());  // Make sure CategoryId is set in AdminProductDTO
+        product.setStatus(adminProductDTO.getStatus());
+        adminProductRepository.updateProduct(product);
+    }
+
+    public void deleteProduct(int productId) throws SQLException {
+        adminProductRepository.deleteProduct(productId);
     }
 }

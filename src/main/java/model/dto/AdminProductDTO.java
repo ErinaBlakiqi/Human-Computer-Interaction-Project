@@ -4,34 +4,84 @@ public class AdminProductDTO {
     private int productId;
     private String productName;
     private String sellerName;
-    private double price;
-    private int quantity;
+    private int sellerId;
+    private int price;
     private String categoryName;
+    private int categoryId;
+    private int quantity;
     private String status;
 
-    public AdminProductDTO(int productId, String productName, String sellerName, double price, int quantity, String categoryName, String status) {
-        this.productId = productId;
-        this.productName = productName;
-        this.sellerName = sellerName;
-        this.price = price;
-        this.quantity = quantity;
-        this.categoryName = categoryName;
-        this.status = status;
+    // Getters and Setters
+
+    public int getProductId() {
+        return productId;
     }
 
-    // Getters and Setters
-    public int getProductId() { return productId; }
-    public void setProductId(int productId) { this.productId = productId; }
-    public String getProductName() { return productName; }
-    public void setProductName(String productName) { this.productName = productName; }
-    public String getSellerName() { return sellerName; }
-    public void setSellerName(String sellerName) { this.sellerName = sellerName; }
-    public double getPrice() { return price; }
-    public void setPrice(double price) { this.price = price; }
-    public int getQuantity() { return quantity; }
-    public void setQuantity(int quantity) { this.quantity = quantity; }
-    public String getCategoryName() { return categoryName; }
-    public void setCategoryName(String categoryName) { this.categoryName = categoryName; }
-    public String getStatus() { return status; }
-    public void setStatus(String status) { this.status = status; }
+    public void setProductId(int productId) {
+        this.productId = productId;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    public String getSellerName() {
+        return sellerName;
+    }
+
+    public void setSellerName(String sellerName) {
+        this.sellerName = sellerName;
+    }
+
+    public int getSellerId() {
+        return sellerId;
+    }
+
+    public void setSellerId(int sellerId) {
+        this.sellerId = sellerId;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
+    public int getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 }

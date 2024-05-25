@@ -70,10 +70,10 @@ public class ChangePasswordController {
         }
     }
 
-    @FXML
-    private void handleCancel(ActionEvent event) {
-        Navigator.navigate(event, Navigator.USER_PAGE); // e ndrron me shku te prfile page
-    }
+//    @FXML
+//    private void handleCancel(ActionEvent event) {
+//        Navigator.navigate(event, Navigator.USER_PAGE); // e ndrron me shku te prfile page
+//    }
 
     private void showAlert(Alert.AlertType alertType, String title, String message) {
         Alert alert = new Alert(alertType);

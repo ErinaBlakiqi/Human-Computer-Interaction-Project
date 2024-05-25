@@ -1,47 +1,40 @@
 package application;
 
-import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-
 import java.io.IOException;
 
-public class Navigator{
+public class Navigator {
 
-    public final static String PRODUCTS_PAGE= "views/products.fxml";
-    public final static String SELL_PAGE= "views/sellitem.fxml";
-    public final static String USER_PAGE= "views/account2.fxml";
+    private static Stage stage;
 
-    public final static String ADMIN_PAGE= "views/AdminDashboard.fxml";
-
-    public final static String SIGNIN_PAGE="com.example.shitjeblerjeonline/SignIn.fxml";
-
-    public final static String SIGNUP_PAGE="com.example.shitjeblerjeonline/SignUp.fxml";
-    public final static String EDIT_PAGE="views/editAccount.fxml";
-    public final static String CHANGEPASSWORD_PAGE="com.example.shitblerjeonline/ChangePassword.fxml";
-    
-
-
-
-    public static void navigate(Stage stage, String page) {
-        FXMLLoader loader=new FXMLLoader(
-                Navigator.class.getResource(page)
-        );
-        try{
-            Scene scene=new Scene(loader.load());
-            stage.setScene(scene);
-            stage.show();
-
-        }catch(IOException ioe){
-            ioe.printStackTrace();
-        }
+    public static void setStage(Stage primaryStage) {
+        stage = primaryStage;
     }
-    public static void navigate(Event event, String page){
-        Node node=(Node)event.getSource();
-        Stage stage=(Stage)node.getScene().getWindow();
-        navigate(stage,page);
+
+    public final static String PRODUCTS_PAGE = "/views/products.fxml";
+    public final static String SELL_PAGE = "/views/sellitem.fxml";
+    public final static String USER_PAGE = "/views/account2.fxml";
+    public final static String ADMIN_DASHBOARD_PAGE = "/views/AdminDashboard.fxml";
+    public final static String ADMIN_PRODUCTS_PAGE = "/views/AdminProducts.fxml";
+    public final static String ADMIN_ORDERS_PAGE = "/views/AdminOrder.fxml";
+    public final static String SIGNIN_PAGE = "/views/SignIn.fxml";
+    public final static String SIGNUP_PAGE = "/views/SignUp.fxml";
+    public final static String EDIT_PAGE = "/views/editAccount.fxml";
+    public final static String CHANGEPASSWORD_PAGE = "/views/ChangePassword.fxml";
+
+    public static void navigate(String fxmlFile) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Navigator.class.getResource(fxmlFile));
+            Parent root = loader.load();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -28,7 +28,7 @@ create table Categories(
 );
 
 create table Orders(
-	OrderId int NOT NULL AUTO_INCREMENT,
+	OrderId int PRIMARY KEY AUTO_INCREMENT,
     ProductId int,
     BuyerId int,
     TotalPrice int not null,

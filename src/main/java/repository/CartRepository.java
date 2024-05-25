@@ -31,6 +31,7 @@ public class CartRepository {
             cart.setProductId(resultSet.getInt("ProductId"));
             cart.setQuantity(resultSet.getInt("Quantity"));
 
+            cart.setPrice(getProductPriceById(cart.getProductId()));
             String productName = getProductNameById(cart.getProductId());
             cart.setProductName(productName);
             return cart;
@@ -83,6 +84,18 @@ public class CartRepository {
 
         return null;
     }
+    public int getProductPriceById(int productId) throws SQLException {
+        String query = "SELECT Price FROM Products WHERE ProductId = ?";
+        PreparedStatement statement = connection.prepareStatement(query);
+        statement.setInt(1, productId);
+        ResultSet resultSet = statement.executeQuery();
+
+        if (resultSet.next()) {
+            return resultSet.getInt("Price");
+        }
+
+        return 0; // Or handle this case as needed
+    }
     public List<Cart> getCartItemsByUserId(int userId) throws SQLException {
         List<Cart> cartItems = new ArrayList<>();
         String query = "SELECT * FROM Cart WHERE UserId = ?";
@@ -98,7 +111,7 @@ public class CartRepository {
             cart.setQuantity(resultSet.getInt("Quantity"));
             cart.setPrice(resultSet.getInt("TotalPrice"));
 
-            // Fetch and set the product name
+            cart.setPrice(getProductPriceById(cart.getProductId()));
             String productName = getProductNameById(cart.getProductId());
             cart.setProductName(productName);
 

@@ -3,21 +3,17 @@ package utils;
 import model.User;
 
 public class SessionManager {
-    private static User loggedInUser;
+    private static User currentUser;
 
-    public static void setLoggedInUser(User user) {
-        loggedInUser = user;
+    public static void setCurrentUser(User user) {
+        currentUser = user;
     }
 
     public static User getLoggedInUser() {
-        return loggedInUser;
-    }
-
-    public static void clearSession() {
-        loggedInUser = null;
+        return currentUser;
     }
 
     public static boolean isAdmin() {
-        return loggedInUser != null && "admin".equalsIgnoreCase(loggedInUser.getRole());
+        return currentUser != null && "admin".equalsIgnoreCase(currentUser.getRole());
     }
 }

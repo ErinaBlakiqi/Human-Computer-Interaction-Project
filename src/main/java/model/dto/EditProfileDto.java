@@ -7,17 +7,14 @@ public class EditProfileDto {
     private String contactNumber;
     private String contactEmail;
     private String bio;
-    private String pictureURL;
-
     // Constructor
-    public EditProfileDto(int userId, String userName, String location, String contactNumber, String contactEmail, String bio, String pictureURL) {
+    public EditProfileDto(int userId, String userName, String location, String contactNumber, String contactEmail, String bio) {
         this.userId = userId;
         this.userName = userName;
         this.location = location;
         this.contactNumber = contactNumber;
         this.contactEmail = contactEmail;
         this.bio = bio;
-        this.pictureURL = pictureURL;
     }
 
     public int getUserId() {
@@ -44,9 +41,6 @@ public class EditProfileDto {
         return bio;
     }
 
-    public String getPictureURL() {
-        return pictureURL;
-    }
 
     public void setUserId(int userId) {
         this.userId = userId;
@@ -81,7 +75,4 @@ public class EditProfileDto {
         this.bio = bio;
     }
 
-    public void setPictureURL(String pictureURL) {
-        this.pictureURL = pictureURL;
-    }
 }

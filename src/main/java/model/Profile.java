@@ -8,19 +8,17 @@ public class Profile {
     private String contactNumber;
     private String contactEmail;
     private String bio;
-    private String pictureURL;
 
-    public Profile(int userId, String userName, String location, String contactNumber, String contactEmail, String bio, String pictureURL) {
+    public Profile(int userId, String userName, String location, String contactNumber, String contactEmail, String bio) {
         this.userId = userId;
         this.userName = userName;
         this.location = location;
         this.contactNumber = contactNumber;
         this.contactEmail = contactEmail;
         this.bio = bio;
-        this.pictureURL = pictureURL;
     }
 
-    public Profile(int profileId, int userId, String userName, String location, String contactNumber, String contactEmail, String bio, String pictureURL) {
+    public Profile(int profileId, int userId, String userName, String location, String contactNumber, String contactEmail, String bio) {
         this.profileId = profileId;
         this.userId = userId;
         this.userName = userName;
@@ -28,7 +26,6 @@ public class Profile {
         this.contactNumber = contactNumber;
         this.contactEmail = contactEmail;
         this.bio = bio;
-        this.pictureURL = pictureURL;
     }
 
     public int getProfileId() {
@@ -85,13 +82,5 @@ public class Profile {
 
     public void setBio(String bio) {
         this.bio = bio;
-    }
-
-    public String getPictureURL() {
-        return pictureURL;
-    }
-
-    public void setPictureURL(String pictureURL) {
-        this.pictureURL = pictureURL;
     }
 }

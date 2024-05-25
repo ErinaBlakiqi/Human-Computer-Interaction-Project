@@ -7,6 +7,7 @@ import model.dto.LoginUserDto;
 import model.dto.UserDto;
 import repository.UserRepository;
 import services.PasswordHasher;
+import utils.SessionManager;
 
 import java.sql.SQLException;
 
@@ -26,6 +27,8 @@ public class UserService {
                 password, salt
         );
 
+        String role = "user";
+
         UserDto createUserData = new UserDto(
                 userData.getFirstName(),
                 userData.getLastName(),
@@ -33,7 +36,9 @@ public class UserService {
                 userData.getEmail(),
                 salt,
                 passwordHash,
-                userData.getRole()
+                password,
+                confirmPassword,
+                role
         );
 
         return UserRepository.create(createUserData);
@@ -49,9 +54,12 @@ public class UserService {
         String salt = user.getSalt();
         String passwordHash = user.getPasswordHash();
 
-        return PasswordHasher.compareSaltedHash(
-                password, salt, passwordHash
-        );
+        boolean passwordMatches = PasswordHasher.compareSaltedHash(password, salt, passwordHash);
+        if (passwordMatches) {
+            SessionManager.setCurrentUser(user);
+        }
+
+        return passwordMatches;
     }
 
     ////

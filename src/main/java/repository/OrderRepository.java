@@ -1,6 +1,7 @@
 package repository;
 
 import model.Order;
+import services.DBConnector;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,10 +10,9 @@ import java.sql.SQLException;
 public class OrderRepository {
     private Connection connection;
 
-    public OrderRepository(Connection connection) {
-        this.connection = connection;
+    public OrderRepository() {
+        this.connection = DBConnector.getConnection();
     }
-
     public void addOrder(Order order) throws SQLException {
         String query = "INSERT INTO Orders (ProductId, BuyerId, TotalPrice, OrderStatus, PaymentMethod, CreatedAt) " +
                 "VALUES (?, ?, ?, ?, ?, CURRENT_TIMESTAMP)";

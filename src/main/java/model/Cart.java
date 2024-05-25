@@ -43,5 +43,5 @@ public class Cart {
         this.quantity = quantity;
     }
 
-    public void setPrice(int Price){this.price = price;};
+    public void setPrice(int price){this.price = price;};
 }

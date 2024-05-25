@@ -38,6 +38,8 @@ public class AdminDashboardController {
     @FXML
     private Button btnProducts;
     @FXML
+    private Button btnOrders;
+    @FXML
     private Button btnSignOut;
 
     private AdminService adminService = new AdminService();
@@ -95,8 +97,13 @@ public class AdminDashboardController {
     }
 
     @FXML
+    private void handleOrders(ActionEvent event) throws IOException {
+        loadPage("/views/AdminOrder.fxml", event);
+    }
+
+    @FXML
     private void handleSignOut(ActionEvent event) throws IOException {
-        loadPage("/views/Login.fxml", event);
+        loadPage("/views/SignIn.fxml", event);
     }
 
     private void loadPage(String page, ActionEvent event) throws IOException {

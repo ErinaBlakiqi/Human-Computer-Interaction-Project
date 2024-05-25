@@ -10,7 +10,7 @@ import java.sql.SQLException;
 public class ProfileRepository {
     public static boolean updateProfile(EditProfileDto editProfileDto){
         Connection conn = DBConnector.getConnection();
-        String sql = "UPDATE Profiles SET UserName = ?, Location = ?, ContactNumber = ?, ContactEmail = ?, Bio = ?, PictureURL = ? WHERE UserId = ?";
+        String sql = "UPDATE Profiles SET UserName = ?, Location = ?, ContactNumber = ?, ContactEmail = ?, Bio = ? WHERE UserId = ?";
         try{
             PreparedStatement pst = conn.prepareStatement(sql);
 
@@ -19,8 +19,7 @@ public class ProfileRepository {
             pst.setString(3, editProfileDto.getContactNumber());
             pst.setString(4, editProfileDto.getContactEmail());
             pst.setString(5, editProfileDto.getBio());
-            pst.setString(6, editProfileDto.getPictureURL());
-            pst.setInt(7, editProfileDto.getUserId());
+            pst.setInt(6, editProfileDto.getUserId());
 
             int affectedRows = pst.executeUpdate();
             return affectedRows > 0;

@@ -25,9 +25,10 @@
                     <Rectangle height="2" style="-fx-fill: #A4A4A4;" width="160" />
                 </VBox>
                 <VBox spacing="10" style="-fx-padding: 40 20 20 20;">
-                    <Button fx:id="btnDashboard" mnemonicParsing="false" onAction="#handleDashboard" prefHeight="26.0" prefWidth="160.0" text="Dashboard" />
-                    <Button fx:id="btnProducts" mnemonicParsing="false" onAction="#handleProducts" prefHeight="26.0" prefWidth="160.0" text="Products" />
-                    <Button fx:id="btnSignOut" mnemonicParsing="false" onAction="#handleSignOut" prefHeight="26.0" prefWidth="160.0" text="Sign Out" />
+                    <Button fx:id="btnDashboard" mnemonicParsing="false" onAction="#handleDashboard" prefHeight="26.0" prefWidth="160.0" style="-fx-background-color: #2F3A47;" text="Dashboard" textFill="WHITE" />
+                    <Button fx:id="btnProducts" mnemonicParsing="false" onAction="#handleProducts" prefHeight="26.0" prefWidth="160.0" style="-fx-background-color: #2F3A47;" text="Products" textFill="WHITE" />
+                    <Button fx:id="btnOrders" mnemonicParsing="false" onAction="#handleOrders" prefHeight="26.0" prefWidth="160.0" style="-fx-background-color: #2F3A47;" text="Orders" textFill="WHITE" />
+                    <Button fx:id="btnSignOut" mnemonicParsing="false" onAction="#handleSignOut" prefHeight="26.0" prefWidth="160.0" style="-fx-background-color: #2F3A47;" text="Sign Out" textFill="WHITE" />
                 </VBox>
                 <VBox style="-fx-padding: 20; -fx-alignment: bottom-left;">
                 </VBox>
@@ -43,10 +44,10 @@
                                     <Label fx:id="pendingOrdersLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="27.0" layoutY="62.0" prefHeight="18.0" prefWidth="248.0" text="Pending Orders: 0" textFill="WHITE" />
                                     <Label fx:id="completedOrdersLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="27.0" layoutY="80.0" prefHeight="18.0" prefWidth="248.0" text="Completed Orders: 0" textFill="WHITE" />
                                 </children>
-                        <styleClass>
-                           <String fx:value="nav-form" />
-                           <String fx:value="radius" />
-                        </styleClass>
+                                <styleClass>
+                                    <String fx:value="nav-form" />
+                                    <String fx:value="radius" />
+                                </styleClass>
                             </AnchorPane>
                             <AnchorPane layoutX="14.0" layoutY="6.0" prefHeight="142.0" prefWidth="294.0" style="-fx-background-color: #2F3A47;" stylesheets="@../css/mainFormDesign.css">
                                 <children>
@@ -54,10 +55,10 @@
                                     <Label fx:id="totalRevenueLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="29.0" layoutY="50.0" prefHeight="18.0" prefWidth="238.0" text="Total Revenue: $0.00" textFill="WHITE" />
                                     <Label fx:id="dailyRevenueLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="29.0" layoutY="70.0" prefHeight="18.0" prefWidth="238.0" text="Daily Revenue: $0.00" textFill="WHITE" />
                                 </children>
-                        <styleClass>
-                           <String fx:value="nav-form" />
-                           <String fx:value="radius" />
-                        </styleClass>
+                                <styleClass>
+                                    <String fx:value="nav-form" />
+                                    <String fx:value="radius" />
+                                </styleClass>
                             </AnchorPane>
                         </children>
                         <styleClass>
@@ -119,3 +120,6 @@
         <Pane prefHeight="472.0" prefWidth="0.0" />
     </center>
 </BorderPane>
+
+
+

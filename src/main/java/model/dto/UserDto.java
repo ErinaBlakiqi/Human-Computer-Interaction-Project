@@ -12,7 +12,7 @@ public class UserDto {
     private String confirmPassword;
     private String role;
 
-    public UserDto(int id, String firstName, String lastName, String username, String email, String salt, String passwordHash, String password, String confirmPassword) {
+    public UserDto(int id, String firstName, String lastName, String username, String email, String salt, String passwordHash, String password, String confirmPassword, String role) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -22,9 +22,10 @@ public class UserDto {
         this.passwordHash = passwordHash;
         this.password = password;
         this.confirmPassword = confirmPassword;
+        this.role = role;
     }
 
-    public UserDto(String firstName, String lastName, String username, String email, String salt, String passwordHash, String password, String confirmPassword) {
+    public UserDto(String firstName, String lastName, String username, String email, String salt, String passwordHash, String password, String confirmPassword, String role) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
@@ -33,16 +34,11 @@ public class UserDto {
         this.passwordHash = passwordHash;
         this.password = password;
         this.confirmPassword = confirmPassword;
+        this.role = role;
     }
 
-    public UserDto(String firstName, String lastName, String username, String email, String password, String confirmPassword,String role) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.username = username;
-        this.email = email;
-        this.password = password;
-        this.confirmPassword = confirmPassword;
-        this.role=role;
+    public UserDto(String firstName, String lastName, String username, String email, String password, String confirmPassword) {
+        this(firstName, lastName, username, email, "", "", password, confirmPassword, "user");
     }
 
     // Getters and Setters

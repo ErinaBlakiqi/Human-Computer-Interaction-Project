@@ -5,15 +5,14 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
-
 <?import javafx.scene.control.cell.PropertyValueFactory?>
+
 <BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AdminProductsController">
     <left>
         <HBox>
@@ -24,17 +23,13 @@
                     <Rectangle height="2" style="-fx-fill: #A4A4A4;" width="160" />
                 </VBox>
                 <VBox style="-fx-padding: 20;">
-                    <Button contentDisplay="CENTER" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16;" text="Home">
-                    </Button>
+                    <Button contentDisplay="CENTER" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16;" text="Dashboard" onAction="#navigateToDashboard"/>
                     <Button style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16;" text="Products" />
-                    <Button alignment="TOP_LEFT" minWidth="42.0" prefHeight="36.0" prefWidth="55.0" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16;" text="Sell" />
-                    <Button style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16;" text="User" />
-                    <Button style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16;" text="Admin" />
+                    <Button alignment="TOP_LEFT" minWidth="42.0" prefHeight="36.0" prefWidth="55.0" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16;" text="Sell" onAction="#navigateToSell"/>
+                    <Button style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16;" text="Profile" onAction="#navigateToProfile"/>
                 </VBox>
                 <VBox style="-fx-padding: 20; -fx-alignment: bottom-left;">
-                    <Button prefHeight="33.0" prefWidth="118.0" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16;" text="Sign Out">
-
-                    </Button>
+                    <Button prefHeight="33.0" prefWidth="118.0" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16;" text="Sign Out" />
                 </VBox>
             </VBox>
             <Pane fx:id="pane_Products" prefHeight="495.0" prefWidth="650.0" style="-fx-background-color: white;">
@@ -56,7 +51,8 @@
                             <Button fx:id="btnSearch" layoutX="165.0" layoutY="10.0" mnemonicParsing="false" onAction="#onActionSearch" text="Search" />
                         </children>
                     </AnchorPane>
-                </children></Pane>
+                </children>
+            </Pane>
         </HBox>
     </left>
     <center>

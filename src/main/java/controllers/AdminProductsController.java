@@ -8,6 +8,7 @@ import javafx.scene.layout.HBox;
 import javafx.util.Callback;
 import model.dto.AdminProductDTO;
 import services.AdminProductService;
+import application.Navigator;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -119,5 +120,20 @@ public class AdminProductsController {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    private void navigateToDashboard(ActionEvent actionEvent) {
+        Navigator.navigate(Navigator.ADMIN_DASHBOARD_PAGE);
+    }
+
+    @FXML
+    private void navigateToSell(ActionEvent actionEvent) {
+        Navigator.navigate(Navigator.SELL_PAGE);
+    }
+
+    @FXML
+    private void navigateToProfile(ActionEvent actionEvent) {
+        Navigator.navigate(Navigator.USER_PAGE);
     }
 }

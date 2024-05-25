@@ -96,7 +96,7 @@ public class AdminDashboardController {
 
     @FXML
     private void handleSignOut(ActionEvent event) throws IOException {
-        loadPage("/views/Login.fxml", event);
+        loadPage("/views/SignIn.fxml", event);
     }
 
     private void loadPage(String page, ActionEvent event) throws IOException {

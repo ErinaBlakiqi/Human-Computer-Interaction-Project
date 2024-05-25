@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OrderRepository {
+public class AdminOrderRepository {
 
     public List<Order> getAllOrders() {
         List<Order> orders = new ArrayList<>();
@@ -54,5 +54,5 @@ public class OrderRepository {
         }
     }
 
-    // Add other CRUD methods if needed
+
 }

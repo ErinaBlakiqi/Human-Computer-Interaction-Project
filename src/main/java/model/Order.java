@@ -7,12 +7,11 @@ public class Order {
     private int productId;
     private int buyerId;
     private int quantity;
-    private int totalPrice;  // Ensure totalPrice is int
+    private int totalPrice;
     private String orderStatus;
     private String paymentMethod;
-    private LocalDateTime createdAt;  // Ensure createdAt is LocalDateTime
+    private LocalDateTime createdAt;
 
-    // Getters and setters
     public int getOrderId() {
         return orderId;
     }

@@ -8,8 +8,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.Order;
-import services.OrderService;
-// import services.Navigator;
+import services.AdminOrderService;
+import application.Navigator;
 
 public class AdminOrderController {
     @FXML
@@ -23,13 +23,13 @@ public class AdminOrderController {
     @FXML
     private TableColumn<Order, Integer> quantityColumn;
     @FXML
-    private TableColumn<Order, Double> totalPriceColumn;
+    private TableColumn<Order, Integer> totalPriceColumn;
     @FXML
     private TableColumn<Order, String> orderStatusColumn;
     @FXML
     private TableColumn<Order, String> createdAtColumn;
 
-    private OrderService orderService = new OrderService();
+    private AdminOrderService adminOrderService = new AdminOrderService();
 
     @FXML
     public void initialize() {
@@ -45,17 +45,17 @@ public class AdminOrderController {
     }
 
     private ObservableList<Order> getOrders() {
-        return FXCollections.observableArrayList(orderService.getAllOrders());
+        return FXCollections.observableArrayList(adminOrderService.getAllOrders());
     }
 
     @FXML
     private void handleHome(ActionEvent event) {
-        //Navigator.loadScene(event, "AdminDashboard.fxml");
+        //Navigator.loadScene(event, "/views/AdminDashboard.fxml");
     }
 
     @FXML
     private void handleProducts(ActionEvent event) {
-        //Navigator.loadScene(event, "AdminProducts.fxml");
+        //Navigator.loadScene(event, "/views/AdminProducts.fxml");
     }
 
     @FXML
@@ -65,6 +65,6 @@ public class AdminOrderController {
 
     @FXML
     private void handleSignOut(ActionEvent event) {
-        //Navigator.loadScene(event, "SignIn.fxml");
+        // Navigator.loadScene(event, "/views/SignIn.fxml");
     }
 }

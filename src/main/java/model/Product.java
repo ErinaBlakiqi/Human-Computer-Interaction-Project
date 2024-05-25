@@ -8,6 +8,8 @@ public class Product {
     private int quantity;
     private int categoryId;
     private String status;
+    private String sellerName;
+    private String categoryName;
 
     // Getters
     public int getProductId() {
@@ -65,5 +67,21 @@ public class Product {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getSellerName() {
+        return sellerName;
+    }
+
+    public void setSellerName(String sellerName) {
+        this.sellerName = sellerName;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 }

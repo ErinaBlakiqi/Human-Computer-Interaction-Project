@@ -10,7 +10,6 @@ import java.util.List;
 
 public class ProductService {
     private ProductRepository productRepository;
-
     public ProductService() {
         this.productRepository = new ProductRepository();
     }
@@ -23,10 +22,9 @@ public class ProductService {
             ProductDTO productDTO = new ProductDTO();
             productDTO.setProductId(product.getProductId());
             productDTO.setProductName(product.getProductName());
-            // Assuming getSellerName and getCategoryName methods exist to fetch these details
-            productDTO.setSellerName("SellerName"); // Replace with actual implementation
+            productDTO.setSellerName(product.getSellerName());
             productDTO.setPrice(product.getPrice());
-            productDTO.setCategoryName("CategoryName"); // Replace with actual implementation
+            productDTO.setCategoryName(product.getCategoryName());
             productDTOs.add(productDTO);
         }
 
@@ -41,9 +39,9 @@ public class ProductService {
             ProductDTO productDTO = new ProductDTO();
             productDTO.setProductId(product.getProductId());
             productDTO.setProductName(product.getProductName());
-            productDTO.setSellerName("SellerName"); // Replace with actual implementation
+            productDTO.setSellerName(product.getSellerName());
             productDTO.setPrice(product.getPrice());
-            productDTO.setCategoryName("CategoryName"); // Replace with actual implementation
+            productDTO.setCategoryName(product.getCategoryName());
             productDTOs.add(productDTO);
         }
 

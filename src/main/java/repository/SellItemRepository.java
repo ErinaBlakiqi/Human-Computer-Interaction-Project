@@ -24,7 +24,7 @@ public class SellItemRepository {
     public List<SellItemDto> getAllItems() throws SQLException {
         List<SellItemDto> items = new ArrayList<>();
         String query = "SELECT * FROM Products";
-        try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+        try (Connection conn = DBConnector.getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(query)) {
             while (rs.next()) {
@@ -44,7 +44,7 @@ public class SellItemRepository {
 
     public void updateItem(SellItemDto item) throws SQLException {
         String query = "UPDATE Products SET ProductName=?, Price=?, Quantity=?, CategoryId=? WHERE ProductId=?";
-        try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+        try (Connection conn = DBConnector.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(query)) {
             pstmt.setString(1, item.getProductName());
             pstmt.setDouble(2, item.getPrice());
@@ -57,7 +57,7 @@ public class SellItemRepository {
 
     public void deleteItem(int productId) throws SQLException {
         String query = "DELETE FROM Products WHERE ProductId=?";
-        try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+        try (Connection conn = DBConnector.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(query)) {
             pstmt.setInt(1, productId);
             pstmt.executeUpdate();

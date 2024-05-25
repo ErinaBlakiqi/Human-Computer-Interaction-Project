@@ -1,6 +1,7 @@
 package repository;
 
 import model.Cart;
+import services.DBConnector;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,8 +13,8 @@ import java.util.List;
 public class CartRepository {
     private Connection connection;
 
-    public CartRepository(Connection connection) {
-        this.connection = connection;
+    public CartRepository() {
+        this.connection = DBConnector.getConnection();
     }
 
     public Cart getCartByUserIdAndProductId(int userId, int productId) throws SQLException {
@@ -91,6 +92,14 @@ public class CartRepository {
         String query = "DELETE FROM Cart WHERE UserId = ?";
         PreparedStatement statement = connection.prepareStatement(query);
         statement.setInt(1, userId);
+        statement.executeUpdate();
+    }
+
+    public void removeCartByUserIdAndProductId(int userId, int productId) throws SQLException {
+        String query = "DELETE FROM Cart WHERE UserId = ? AND ProductId = ?";
+        PreparedStatement statement = connection.prepareStatement(query);
+        statement.setInt(1, userId);
+        statement.setInt(2, productId);
         statement.executeUpdate();
     }
 }

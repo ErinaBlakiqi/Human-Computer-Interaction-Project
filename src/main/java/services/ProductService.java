@@ -1,6 +1,7 @@
 package services;
 
 import model.Product;
+import repository.CartRepository;
 import repository.ProductRepository;
 import model.dto.ProductDTO;
 import java.sql.SQLException;
@@ -10,8 +11,8 @@ import java.util.List;
 public class ProductService {
     private ProductRepository productRepository;
 
-    public ProductService(ProductRepository productRepository) {
-        this.productRepository = productRepository;
+    public ProductService() {
+        this.productRepository = new ProductRepository();
     }
 
     public List<ProductDTO> getAllProductDTOs() throws SQLException {

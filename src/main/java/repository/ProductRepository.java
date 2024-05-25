@@ -1,6 +1,8 @@
 package repository;
 
 import model.Product;
+import services.DBConnector;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,8 +10,8 @@ import java.util.List;
 public class ProductRepository {
     private Connection connection;
 
-    public ProductRepository(Connection connection) {
-        this.connection = connection;
+    public ProductRepository() {
+        this.connection = DBConnector.getConnection();
     }
 
     public List<Product> getAllProducts() throws SQLException {

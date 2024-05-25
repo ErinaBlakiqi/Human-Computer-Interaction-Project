@@ -10,12 +10,14 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.cell.PropertyValueFactory;
 import repository.ProductRepository;
+import services.CartService;
+import services.DBConnector;
+import services.OrderService;
 import services.ProductService;
 import repository.CartRepository;
 import model.Cart;
 import repository.OrderRepository;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -49,23 +51,23 @@ public class ProductController {
 
     @FXML
     private Button btnOrder_Products;
+
+    @FXML
+    private Button btnRemove_Products;
     @FXML
     private Label lblFeedback;
 
     private ProductService productService;
-    private CartRepository cartRepository;
-    private OrderRepository orderRepository;
+    private CartService cartService;
+    private OrderService orderService;
 
     private int currentUserId = 1; // This should be dynamically set based on the logged-in user
 
     public ProductController() {
-        try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/yourdatabase", "username", "password");
-            productService = new ProductService(new ProductRepository(connection));
-            cartRepository = new CartRepository(connection);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+            Connection connection = DBConnector.getConnection();
+            productService = new ProductService();
+            cartService = new CartService();
+            orderService = new OrderService();
     }
 
     @FXML
@@ -126,16 +128,16 @@ public class ProductController {
 
     private void addToCart(ProductDTO product) {
         try {
-            Cart cart = cartRepository.getCartByUserIdAndProductId(currentUserId, product.getProductId());
+            Cart cart = cartService.getCartByUserIdAndProductId(currentUserId, product.getProductId());
             if (cart == null) {
                 cart = new Cart();
                 cart.setUserId(currentUserId);
                 cart.setProductId(product.getProductId());
                 cart.setQuantity(1);
-                cartRepository.addCart(cart);
+                cartService.addCart(cart);
             } else {
                 cart.setQuantity(cart.getQuantity() + 1);
-                cartRepository.updateCart(cart);
+                cartService.updateCart(cart);
             }
             showFeedback("Product added to cart.");
             updateTotal();
@@ -147,7 +149,7 @@ public class ProductController {
 
     private void updateTotal() {
         try {
-            int total = cartRepository.getTotalPriceByUserId(currentUserId);
+            int total = cartService.getTotalPriceByUserId(currentUserId);
             txtTotal_Products.setText(total + "$");
         } catch (SQLException e) {
             e.printStackTrace();
@@ -165,7 +167,7 @@ public class ProductController {
     private void onActionOrder() {
         try {
             String paymentMethod = listPayment_Products.getValue();
-            List<Cart> cartItems = cartRepository.getCartItemsByUserId(currentUserId);
+            List<Cart> cartItems = cartService.getCartItemsByUserId(currentUserId);
 
             for (Cart cartItem : cartItems) {
                 Order order = new Order();
@@ -174,15 +176,32 @@ public class ProductController {
                 order.setTotalPrice(cartItem.getQuantity() * cartItem.getPrice());
                 order.setOrderStatus("Pending");
                 order.setPaymentMethod(paymentMethod);
-                orderRepository.addOrder(order);
+                orderService.addOrder(order);
             }
 
-            cartRepository.clearCartByUserId(currentUserId);
+            cartService.clearCartByUserId(currentUserId);
             showFeedback("Order placed successfully.");
             updateTotal();
         } catch (SQLException e) {
             e.printStackTrace();
             showFeedback("Error placing order.");
+        }
+    }
+
+    @FXML
+    private void onActionRemove() {
+        ProductDTO selectedProduct = tableProductsPage.getSelectionModel().getSelectedItem();
+        if (selectedProduct != null) {
+            try {
+                cartService.removeCartByUserIdAndProductId(currentUserId, selectedProduct.getProductId());
+                showFeedback("Product removed from cart.");
+                updateTotal();
+            } catch (SQLException e) {
+                e.printStackTrace();
+                showFeedback("Error removing product from cart.");
+            }
+        } else {
+            showFeedback("No product selected.");
         }
     }
 }

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SellItemRepository {
+
     public void addItem(SellItemDto item) throws SQLException {
         String query = "INSERT INTO Products (ProductName, SellerId, Price, Quantity, CategoryId, Status) VALUES (?, ?, ?, ?, ?, 'Active')";
         try (Connection conn = DBConnector.getConnection();

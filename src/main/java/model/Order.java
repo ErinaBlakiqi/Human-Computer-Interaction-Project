@@ -1,32 +1,23 @@
 package model;
 
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
 
 public class Order {
     private int orderId;
-    private int buyerId;
     private int productId;
-    private int quantity;
-    private double totalPrice;
+    private int buyerId;
+    private int totalPrice;
     private String orderStatus;
-    private LocalDateTime createdAt;
+    private String paymentMethod;
+    private Timestamp createdAt;
 
     // Getters and setters
-
     public int getOrderId() {
         return orderId;
     }
 
     public void setOrderId(int orderId) {
         this.orderId = orderId;
-    }
-
-    public int getBuyerId() {
-        return buyerId;
-    }
-
-    public void setBuyerId(int buyerId) {
-        this.buyerId = buyerId;
     }
 
     public int getProductId() {
@@ -37,19 +28,19 @@ public class Order {
         this.productId = productId;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public int getBuyerId() {
+        return buyerId;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setBuyerId(int buyerId) {
+        this.buyerId = buyerId;
     }
 
-    public double getTotalPrice() {
+    public int getTotalPrice() {
         return totalPrice;
     }
 
-    public void setTotalPrice(double totalPrice) {
+    public void setTotalPrice(int totalPrice) {
         this.totalPrice = totalPrice;
     }
 
@@ -61,11 +52,19 @@ public class Order {
         this.orderStatus = orderStatus;
     }
 
-    public LocalDateTime getCreatedAt() {
+    public String getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public void setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
+    }
+
+    public Timestamp getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
+    public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
     }
 }

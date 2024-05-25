@@ -50,7 +50,7 @@ public class LayoutController {
 
     @FXML
     void handleHome(MouseEvent event) {
-        Navigator.navigate(event, Navigator.HOME_PAGE);
+        Navigator.navigate(event, Navigator.PRODUCTS_PAGE);
     }
 
     @FXML

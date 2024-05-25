@@ -61,7 +61,7 @@ public class SignInController {
             if (SessionManager.isAdmin()) {
                 Navigator.navigate(event, Navigator.ADMIN_PAGE);
             } else {
-                Navigator.navigate(event, Navigator.HOME_PAGE);
+                Navigator.navigate(event, Navigator.PRODUCTS_PAGE);
             }
             showAlert(Alert.AlertType.INFORMATION, "Login Successful!", "Welcome " + username);
         } else {

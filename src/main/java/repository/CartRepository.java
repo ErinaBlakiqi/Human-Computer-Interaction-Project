@@ -6,6 +6,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CartRepository {
     private Connection connection;
@@ -63,5 +65,32 @@ public class CartRepository {
         }
 
         return 0;
+    }
+
+    public List<Cart> getCartItemsByUserId(int userId) throws SQLException {
+        List<Cart> cartItems = new ArrayList<>();
+        String query = "SELECT c.*, p.Price FROM Cart c JOIN Products p ON c.ProductId = p.ProductId WHERE c.UserId = ?";
+        PreparedStatement statement = connection.prepareStatement(query);
+        statement.setInt(1, userId);
+        ResultSet resultSet = statement.executeQuery();
+
+        while (resultSet.next()) {
+            Cart cart = new Cart();
+            cart.setCartId(resultSet.getInt("CartId"));
+            cart.setUserId(resultSet.getInt("UserId"));
+            cart.setProductId(resultSet.getInt("ProductId"));
+            cart.setQuantity(resultSet.getInt("Quantity"));
+            cart.setPrice(resultSet.getInt("Price"));
+            cartItems.add(cart);
+        }
+
+        return cartItems;
+    }
+
+    public void clearCartByUserId(int userId) throws SQLException {
+        String query = "DELETE FROM Cart WHERE UserId = ?";
+        PreparedStatement statement = connection.prepareStatement(query);
+        statement.setInt(1, userId);
+        statement.executeUpdate();
     }
 }

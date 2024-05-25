@@ -21,22 +21,24 @@ public class SellItemRepository {
         }
     }
 
-    public List<SellItemDto> getAllItems() throws SQLException {
+    public List<SellItemDto> getItemsByUserId(int userId) throws SQLException {
         List<SellItemDto> items = new ArrayList<>();
-        String query = "SELECT * FROM Products";
+        String query = "SELECT * FROM Products WHERE SellerId = ?";
         try (Connection conn = DBConnector.getConnection();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(query)) {
-            while (rs.next()) {
-                SellItemDto item = new SellItemDto();
-                item.setProductId(rs.getInt("ProductId"));
-                item.setProductName(rs.getString("ProductName"));
-                item.setSellerId(rs.getInt("SellerId"));
-                item.setPrice(rs.getDouble("Price"));
-                item.setQuantity(rs.getInt("Quantity"));
-                item.setCategoryId(rs.getInt("CategoryId"));
-                item.setStatus(rs.getString("Status"));
-                items.add(item);
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setInt(1, userId);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    SellItemDto item = new SellItemDto();
+                    item.setProductId(rs.getInt("ProductId"));
+                    item.setProductName(rs.getString("ProductName"));
+                    item.setSellerId(rs.getInt("SellerId"));
+                    item.setPrice(rs.getDouble("Price"));
+                    item.setQuantity(rs.getInt("Quantity"));
+                    item.setCategoryId(rs.getInt("CategoryId"));
+                    item.setStatus(rs.getString("Status"));
+                    items.add(item);
+                }
             }
         }
         return items;

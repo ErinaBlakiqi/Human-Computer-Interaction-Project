@@ -43,6 +43,9 @@ public class ProductController {
     private Label txtTotal_Products;
 
     @FXML
+    private ChoiceBox<String> listPayment_Products;
+
+    @FXML
     private Label lblFeedback;
 
     private ProductService productService;
@@ -86,6 +89,9 @@ public class ProductController {
                 }
             }
         });
+
+        listPayment_Products.setItems(FXCollections.observableArrayList("OnDelivery", "CreditCard"));
+        listPayment_Products.getSelectionModel().selectFirst();
 
         loadProducts();
     }

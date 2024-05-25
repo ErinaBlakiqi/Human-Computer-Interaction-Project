@@ -10,15 +10,14 @@ import utils.SessionManager;
 import application.Navigator;
 
 public class UserController {
-
+/*
     @FXML
     private PasswordField currentPasswordField;
     @FXML
     private PasswordField newPasswordField;
     @FXML
     private PasswordField confirmNewPasswordField;
-    @FXML
-    private Button changePasswordButton;
+
     @FXML
     private Button cancelButton;
 
@@ -68,7 +67,7 @@ public class UserController {
 
     @FXML
     private void handleCancel(ActionEvent event) {
-        Navigator.navigate(event, Navigator.SIGNIN_PAGE);
+        Navigator.navigate(event, Navigator.SIGNIN_PAGE); // e ndrron me shku te prfile page
     }
 
     private void showAlert(Alert.AlertType alertType, String title, String message) {
@@ -78,4 +77,6 @@ public class UserController {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
+ */
 }

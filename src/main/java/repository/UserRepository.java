@@ -16,7 +16,7 @@ public class UserRepository {
 
     public static boolean create(UserDto userData) {
         String query = """
-                INSERT INTO Users (firstName, lastName, username, email, salt, passwordHash)
+                INSERT INTO Users (firstName, lastName, username, email, salt, passwordHash,role)
                 VALUES (?, ?, ?, ?, ?, ?)
                 """;
         try (Connection conn = DBConnector.getConnection();
@@ -27,6 +27,7 @@ public class UserRepository {
             pst.setString(4, userData.getEmail());
             pst.setString(5, userData.getSalt());
             pst.setString(6, userData.getPasswordHash());
+            pst.setString(7, userData.getRole());
             pst.execute();
             return true;
         } catch (Exception e) {
@@ -59,13 +60,14 @@ public class UserRepository {
             String email = result.getString("Email");
             String salt = result.getString("Salt");
             String passwordHash = result.getString("PasswordHash");
-            return new User(id, firstName, lastName, username, email, salt, passwordHash);
+            String role = result.getString("Role");
+            return new User(id, firstName, lastName, username, email, salt, passwordHash,role);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
     }
-    public static boolean updatePassword(int userId, String newPasswordHash, String newSalt) {
+  /*  public static boolean updatePassword(int userId, String newPasswordHash, String newSalt) {
         String query = "UPDATE Users SET passwordHash = ?, salt = ? WHERE userId = ?";
         try (Connection conn = DBConnector.getConnection();
              PreparedStatement pst = conn.prepareStatement(query)) {
@@ -79,4 +81,6 @@ public class UserRepository {
             return false;
         }
     }
+
+   */
 }

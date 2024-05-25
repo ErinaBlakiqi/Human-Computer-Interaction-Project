@@ -8,8 +8,9 @@ public class User {
     private String email;
     private String salt;
     private String passwordHash;
+    private String role;
 
-    public User(int id, String firstName, String lastName, String username, String email, String salt, String passwordHash) {
+    public User(int id, String firstName, String lastName, String username, String email, String salt, String passwordHash, String role) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -17,6 +18,7 @@ public class User {
         this.email = email;
         this.salt = salt;
         this.passwordHash = passwordHash;
+        this.role=role;
     }
 
     // Getters and Setters
@@ -74,5 +76,12 @@ public class User {
 
     public void setPasswordHash(String passwordHash) {
         this.passwordHash = passwordHash;
+    }
+
+    public String getRole(){
+        return role;
+    }
+    public void setRole(String role){
+        this.role=role;
     }
 }

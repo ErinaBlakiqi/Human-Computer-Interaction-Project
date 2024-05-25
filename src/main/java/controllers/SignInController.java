@@ -1,11 +1,15 @@
 package controllers;
 
+import application.Navigator;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import model.dto.LoginUserDto;
 import services.UserService;
+
+import java.io.IOException;
 
 public class SignInController {
 
@@ -23,6 +27,11 @@ public class SignInController {
     private TextField txtPassword;
     @FXML
     private Label loginMessageLabel;
+
+    @FXML
+    void handleCreateAccountClick(MouseEvent me) throws IOException {
+        Navigator.navigate(me,Navigator.SIGNUP_PAGE);
+    }
 
     @FXML
     public void initialize() {

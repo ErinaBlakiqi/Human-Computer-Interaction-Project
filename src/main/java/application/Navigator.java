@@ -18,6 +18,8 @@ public class Navigator{
     public final static String ADMIN_PAGE= "views/AdminDashboard.fxml";
 
     public final static String SIGNIN_PAGE="com.example.shitjeblerjeonline/SignIn.fxml";
+
+    public final static String SIGNUP_PAGE="com.example.shitjeblerjeonline/SignUp.fxml";
     public final static String EDIT_PAGE="views/editAccount.fxml";
     
 

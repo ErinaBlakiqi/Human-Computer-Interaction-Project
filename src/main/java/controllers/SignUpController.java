@@ -1,5 +1,6 @@
 package controllers;
 
+import application.Navigator;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -25,6 +26,9 @@ public class SignUpController {
     private Button signupButton;
     @FXML
     private Button loginButton;
+    @FXML
+    private Button cancelButton;
+
 
     @FXML
     private void handleSignUp(ActionEvent event) {
@@ -41,7 +45,6 @@ public class SignUpController {
 
         if (success) {
             showAlert(Alert.AlertType.INFORMATION, "Registration Successful!", "Welcome " + username);
-            // Optionally close the sign-up window or clear the fields
             Stage stage = (Stage) signupButton.getScene().getWindow();
             stage.close();
         } else {
@@ -51,8 +54,11 @@ public class SignUpController {
 
     @FXML
     private void handleLogin(ActionEvent event) {
-        // Redirect to login page or close the sign-up window
-        Stage stage = (Stage) loginButton.getScene().getWindow();
+        Navigator.navigate(event,Navigator.PRODUCTS_PAGE);
+    }
+    @FXML
+    private void handleCancel(ActionEvent event) {
+        Stage stage = (Stage) cancelButton.getScene().getWindow();
         stage.close();
     }
 

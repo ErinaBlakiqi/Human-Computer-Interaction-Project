@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class Main {
     public static void main(String[] args) {
-        String url = "jdbc:mysql://localhost:3306/projektiKNK";
+        String url = "jdbc:mysql://localhost:3306/projektiKNKsql?user=root&password=passi&useSSL=false&allowPublicKeyRetrieval=true";
         String user = "root";
         String password = "";
         try {

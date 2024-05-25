@@ -32,6 +32,7 @@ create table Orders(
     ProductId int,
     BuyerId int,
     TotalPrice int not null,
+    PaymentMethod varchar(255),
     OrderStatus varchar(255) NOT NULL,
     CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (BuyerID) REFERENCES Users(UserID),

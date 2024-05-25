@@ -1,19 +1,17 @@
 package controllers;
 
-import javafx.scene.control.TableCell;
+import javafx.animation.PauseTransition;
+import javafx.scene.control.*;
+import javafx.util.Duration;
 import model.dto.ProductDTO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import repository.ProductRepository;
 import services.ProductService;
 import repository.CartRepository;
 import model.Cart;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -37,6 +35,15 @@ public class ProductController {
 
     @FXML
     private TableView<ProductDTO> tableProductsPage;
+
+    @FXML
+    private TextField fieldProductSearch;
+
+    @FXML
+    private Label txtTotal_Products;
+
+    @FXML
+    private Label lblFeedback;
 
     private ProductService productService;
     private CartRepository cartRepository;
@@ -93,6 +100,18 @@ public class ProductController {
         }
     }
 
+    @FXML
+    private void onActionSearch() {
+        String searchQuery = fieldProductSearch.getText();
+        try {
+            List<ProductDTO> products = productService.searchProductDTOsByName(searchQuery);
+            ObservableList<ProductDTO> productObservableList = FXCollections.observableArrayList(products);
+            tableProductsPage.setItems(productObservableList);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     private void addToCart(ProductDTO product) {
         try {
             Cart cart = cartRepository.getCartByUserIdAndProductId(currentUserId, product.getProductId());
@@ -106,8 +125,26 @@ public class ProductController {
                 cart.setQuantity(cart.getQuantity() + 1);
                 cartRepository.updateCart(cart);
             }
+            showFeedback("Product added to cart.");
+            updateTotal();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    private void updateTotal() {
+        try {
+            int total = cartRepository.getTotalPriceByUserId(currentUserId);
+            txtTotal_Products.setText(total + "$");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void showFeedback(String message) {
+        lblFeedback.setText(message);
+        PauseTransition pause = new PauseTransition(Duration.seconds(3));
+        pause.setOnFinished(event -> lblFeedback.setText(""));
+        pause.play();
     }
 }

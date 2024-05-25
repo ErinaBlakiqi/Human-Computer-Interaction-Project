@@ -21,6 +21,7 @@ module com.example.shitjeblerjetonline {
     exports model;
     opens model to javafx.fxml;
 
+
     exports model.dto;
     opens model.dto to javafx.fxml;
 
@@ -37,6 +38,10 @@ module com.example.shitjeblerjetonline {
 
     // Export and open the utils package if needed
     exports utils;
+
+    //opens processor to javafx.fxml;
+    //opens resources to javafx.fxml;
+
     opens utils to javafx.fxml;
 
     // Ensure the resources folder is recognized by the module system

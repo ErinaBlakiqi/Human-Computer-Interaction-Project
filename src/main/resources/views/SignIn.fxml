@@ -24,13 +24,13 @@
                         <PasswordField fx:id="pwdPassword" layoutX="56.0" layoutY="261.0" prefHeight="36.0" prefWidth="270.0" promptText="Password" />
                         <TextField fx:id="txtPassword" layoutX="56.0" layoutY="261.0" prefHeight="36.0" prefWidth="270.0" promptText="Password" visible="false"/>
                         <CheckBox fx:id="showpassword" layoutX="56.0" layoutY="307.0" mnemonicParsing="false" text="Show password" />
-                        <Button fx:id="loginButton" layoutX="56.0" layoutY="356.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="270.0" style="-fx-background-color: #2F3A47;" text="Login" textFill="WHITE">
+                        <Button fx:id="loginButton" layoutX="56.0" layoutY="356.0" mnemonicParsing="false" onAction="#handleLogin" prefHeight="46.0" prefWidth="270.0" style="-fx-background-color: #2F3A47;" text="Login" textFill="WHITE">
                             <font>
                                 <Font name="System Bold" size="13.0" />
                             </font>
                         </Button>
                         <Label layoutX="129.0" layoutY="515.0" onMouseClicked="#handleCreateAccountClick" text="Create new account " underline="true" />
-                        <Button fx:id="cancelButton" layoutX="56.0" layoutY="422.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="270.0" style="-fx-background-color: #2F3A47;" text="Cancel" textFill="WHITE">
+                        <Button fx:id="cancelButton" layoutX="56.0" layoutY="422.0" mnemonicParsing="false" onAction="#handleCancel" prefHeight="46.0" prefWidth="270.0" style="-fx-background-color: #2F3A47;" text="Cancel" textFill="WHITE">
                             <font>
                                 <Font name="System Bold" size="13.0" />
                             </font>

@@ -5,18 +5,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
-        // Set the stage in the Navigator
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/SignIn.fxml"));
+        Parent root = loader.load();
         Navigator.setStage(primaryStage);
-
-        // Load the FXML file using the correct path
-        Parent root = FXMLLoader.load(getClass().getResource("/views/SignIn.fxml"));
-        primaryStage.initStyle(StageStyle.UNDECORATED);
-        primaryStage.setScene(new Scene(root, 1000, 1000));
+        primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }
 

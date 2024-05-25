@@ -67,20 +67,4 @@ public class UserRepository {
             return null;
         }
     }
-  /*  public static boolean updatePassword(int userId, String newPasswordHash, String newSalt) {
-        String query = "UPDATE Users SET passwordHash = ?, salt = ? WHERE userId = ?";
-        try (Connection conn = DBConnector.getConnection();
-             PreparedStatement pst = conn.prepareStatement(query)) {
-            pst.setString(1, newPasswordHash);
-            pst.setString(2, newSalt);
-            pst.setInt(3, userId);
-            int rowsUpdated = pst.executeUpdate();
-            return rowsUpdated > 0;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
-   */
 }

@@ -21,6 +21,7 @@ public class Navigator{
 
     public final static String SIGNUP_PAGE="com.example.shitjeblerjeonline/SignUp.fxml";
     public final static String EDIT_PAGE="views/editAccount.fxml";
+    public final static String CHANGEPASSWORD_PAGE="com.example.shitblerjeonline/ChangePassword.fxml";
     
 
 

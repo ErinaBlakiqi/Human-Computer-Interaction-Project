@@ -1,16 +1,19 @@
 package controllers;
 
+import application.Navigator;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import model.User;
 import model.dto.UpdateUserDto;
+import services.ChangePasswordService;
 import services.UserService;
 import utils.SessionManager;
-import application.Navigator;
 
-public class UserController {
-/*
+public class ChangePasswordController {
+
     @FXML
     private PasswordField currentPasswordField;
     @FXML
@@ -20,6 +23,8 @@ public class UserController {
 
     @FXML
     private Button cancelButton;
+    @FXML
+    private Button changePasswordButton;
 
     @FXML
     private void handleChangePassword(ActionEvent event) {
@@ -53,7 +58,7 @@ public class UserController {
         // Create UpdateUserDto
         UpdateUserDto updateUserDto = new UpdateUserDto(user.getId(), newPassword);
 
-        boolean success = UserService.updatePassword(updateUserDto);
+        boolean success = ChangePasswordService.updatePassword(updateUserDto);
         if (success) {
             showAlert(Alert.AlertType.INFORMATION, "Success", "Password updated successfully.");
             // Optionally clear the fields
@@ -67,7 +72,7 @@ public class UserController {
 
     @FXML
     private void handleCancel(ActionEvent event) {
-        Navigator.navigate(event, Navigator.SIGNIN_PAGE); // e ndrron me shku te prfile page
+        Navigator.navigate(event, Navigator.USER_PAGE); // e ndrron me shku te prfile page
     }
 
     private void showAlert(Alert.AlertType alertType, String title, String message) {
@@ -77,6 +82,4 @@ public class UserController {
         alert.setContentText(message);
         alert.showAndWait();
     }
-
- */
 }

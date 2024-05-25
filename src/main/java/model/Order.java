@@ -4,14 +4,13 @@ import java.time.LocalDateTime;
 
 public class Order {
     private int orderId;
-    private int buyerId;
     private int productId;
+    private int buyerId;
     private int quantity;
-    private double totalPrice;
+    private int totalPrice;
     private String orderStatus;
+    private String paymentMethod;
     private LocalDateTime createdAt;
-
-    // Getters and setters
 
     public int getOrderId() {
         return orderId;
@@ -19,14 +18,6 @@ public class Order {
 
     public void setOrderId(int orderId) {
         this.orderId = orderId;
-    }
-
-    public int getBuyerId() {
-        return buyerId;
-    }
-
-    public void setBuyerId(int buyerId) {
-        this.buyerId = buyerId;
     }
 
     public int getProductId() {
@@ -37,6 +28,14 @@ public class Order {
         this.productId = productId;
     }
 
+    public int getBuyerId() {
+        return buyerId;
+    }
+
+    public void setBuyerId(int buyerId) {
+        this.buyerId = buyerId;
+    }
+
     public int getQuantity() {
         return quantity;
     }
@@ -45,11 +44,11 @@ public class Order {
         this.quantity = quantity;
     }
 
-    public double getTotalPrice() {
+    public int getTotalPrice() {
         return totalPrice;
     }
 
-    public void setTotalPrice(double totalPrice) {
+    public void setTotalPrice(int totalPrice) {
         this.totalPrice = totalPrice;
     }
 
@@ -59,6 +58,14 @@ public class Order {
 
     public void setOrderStatus(String orderStatus) {
         this.orderStatus = orderStatus;
+    }
+
+    public String getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public void setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
     }
 
     public LocalDateTime getCreatedAt() {

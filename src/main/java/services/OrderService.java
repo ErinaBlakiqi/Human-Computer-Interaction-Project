@@ -25,7 +25,7 @@ public class OrderService {
                 order.setBuyerId(rs.getInt("BuyerID"));
                 order.setProductId(rs.getInt("ProductID"));
                 order.setQuantity(rs.getInt("Quantity"));
-                order.setTotalPrice(rs.getDouble("TotalPrice"));
+                order.setTotalPrice(rs.getInt("TotalPrice"));
                 order.setOrderStatus(rs.getString("OrderStatus"));
                 order.setCreatedAt(rs.getTimestamp("CreatedAt").toLocalDateTime());
 
@@ -39,5 +39,5 @@ public class OrderService {
         return orders;
     }
 
-    // Add other CRUD methods if needed
+    //
 }

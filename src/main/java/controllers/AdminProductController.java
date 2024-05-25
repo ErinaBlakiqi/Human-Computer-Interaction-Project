@@ -57,8 +57,9 @@ public class AdminProductController {
 
     private AdminProductService productService;
 
-    public AdminProductController(AdminProductService productService) {
-        this.productService = productService;
+    public AdminProductController() {
+        // Initialize the productService
+        this.productService = new AdminProductService(); // Adjust this if you're using dependency injection
     }
 
     @FXML
@@ -131,12 +132,28 @@ public class AdminProductController {
 
             // Pass the product details to the sell page controller
             SellItemController controller = loader.getController();
-            controller.setProductDetails(productDTO); ///ne sellitemcontroller
+            controller.setProductDetails(productDTO); // Make sure this method exists in SellItemController
 
             Stage stage = (Stage) tableProductsPage.getScene().getWindow();
             stage.setScene(new Scene(root));
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void goToDashboard(ActionEvent actionEvent) {
+        // Implement navigation logic
+    }
+
+    public void goToProducts(ActionEvent actionEvent) {
+        // Implement navigation logic
+    }
+
+    public void goToSell(ActionEvent actionEvent) {
+        // Implement navigation logic
+    }
+
+    public void goToProfile(ActionEvent actionEvent) {
+        // Implement navigation logic
     }
 }

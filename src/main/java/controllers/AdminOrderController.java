@@ -65,6 +65,6 @@ public class AdminOrderController {
 
     @FXML
     private void handleSignOut(ActionEvent event) {
-        // Navigator.loadScene(event, "/views/SignIn.fxml");
+        //Navigator.loadScene(event, "/views/SignIn.fxml");
     }
 }

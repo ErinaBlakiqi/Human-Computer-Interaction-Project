@@ -27,6 +27,7 @@ public class ProductController {
 
     @FXML
     private TableView<Cart> tableView_Products;
+
     @FXML
     private TableColumn<Cart, Integer> col_Price_Products;
 

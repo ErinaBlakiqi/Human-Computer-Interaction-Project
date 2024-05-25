@@ -5,6 +5,15 @@ public class Cart {
     private int productId;
     private int quantity;
     private int price;
+    private String productName;
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
 
     public int getPrice(){ return price;}
 

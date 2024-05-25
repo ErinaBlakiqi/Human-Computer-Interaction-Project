@@ -32,5 +32,20 @@ public class ProductService {
         return productDTOs;
     }
 
-    // Add other service methods as needed
+    public List<ProductDTO> searchProductDTOsByName(String productName) throws SQLException {
+        List<Product> products = productRepository.searchProductsByName(productName);
+        List<ProductDTO> productDTOs = new ArrayList<>();
+
+        for (Product product : products) {
+            ProductDTO productDTO = new ProductDTO();
+            productDTO.setProductId(product.getProductId());
+            productDTO.setProductName(product.getProductName());
+            productDTO.setSellerName("SellerName"); // Replace with actual implementation
+            productDTO.setPrice(product.getPrice());
+            productDTO.setCategoryName("CategoryName"); // Replace with actual implementation
+            productDTOs.add(productDTO);
+        }
+
+        return productDTOs;
+    }
 }

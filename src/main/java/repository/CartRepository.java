@@ -49,4 +49,19 @@ public class CartRepository {
         statement.setInt(3, cart.getQuantity());
         statement.executeUpdate();
     }
+
+    public int getTotalPriceByUserId(int userId) throws SQLException {
+        String query = "SELECT SUM(p.Price * c.Quantity) AS TotalPrice " +
+                "FROM Cart c JOIN Products p ON c.ProductId = p.ProductId " +
+                "WHERE c.UserId = ?";
+        PreparedStatement statement = connection.prepareStatement(query);
+        statement.setInt(1, userId);
+        ResultSet resultSet = statement.executeQuery();
+
+        if (resultSet.next()) {
+            return resultSet.getInt("TotalPrice");
+        }
+
+        return 0;
+    }
 }

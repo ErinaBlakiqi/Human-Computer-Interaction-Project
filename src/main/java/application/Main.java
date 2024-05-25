@@ -6,11 +6,21 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.util.Locale;
+import java.util.ResourceBundle;
+
 public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/products.fxml"));
+        // Set the default locale to English
+        Locale.setDefault(new Locale("en"));
+        ResourceBundle bundle = ResourceBundle.getBundle("translations.content", Locale.getDefault());
+
+        // Load the FXML file with the resource bundle
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/SignIn.fxml"), bundle);
         Parent root = loader.load();
+
+        // Set the primary stage
         Navigator.setStage(primaryStage);
         primaryStage.setScene(new Scene(root));
         primaryStage.show();

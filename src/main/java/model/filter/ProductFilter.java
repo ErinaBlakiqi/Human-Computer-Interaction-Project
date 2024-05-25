@@ -26,4 +26,6 @@ public class ProductFilter extends Filter<AdminProductDTO> {
 
         return filteredProducts;
     }
+
+
 }

@@ -57,6 +57,7 @@ public class AdminProductsController {
     @FXML
     private Button btnHelp;
 
+
     private AdminProductService adminProductService;
     private ObservableList<AdminProductDTO> masterData = FXCollections.observableArrayList();
     private Filter<AdminProductDTO> productFilter = new ProductFilter();

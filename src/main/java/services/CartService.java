@@ -3,6 +3,7 @@ package services;
 import model.Cart;
 import repository.CartRepository;
 
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -39,5 +40,11 @@ public class CartService {
 
     public void removeCartByUserIdAndProductId(int userId, int productId) throws SQLException {
         cartRepository.removeCartByUserIdAndProductId(userId, productId);
+    }
+
+    public void decrementProductQuantities(List<Cart> cartItems) throws SQLException {
+        for (Cart cartItem : cartItems) {
+            cartRepository.decrementProductQuantity(cartItem.getProductId(), cartItem.getQuantity());
+        }
     }
 }

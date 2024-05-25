@@ -47,4 +47,9 @@ public class ProductService {
 
         return productDTOs;
     }
+
+    public Product getProductById(int productId) throws SQLException {
+        return productRepository.getProductById(productId);
+    }
+
 }

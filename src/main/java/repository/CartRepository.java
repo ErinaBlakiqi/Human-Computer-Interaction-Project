@@ -135,4 +135,12 @@ public class CartRepository {
         statement.setInt(2, productId);
         statement.executeUpdate();
     }
+
+    public void decrementProductQuantity(int productId, int quantity) throws SQLException {
+        String query = "UPDATE Products SET Quantity = Quantity - ? WHERE ProductId = ?";
+        PreparedStatement statement = connection.prepareStatement(query);
+        statement.setInt(1, quantity);
+        statement.setInt(2, productId);
+        statement.executeUpdate();
+    }
 }

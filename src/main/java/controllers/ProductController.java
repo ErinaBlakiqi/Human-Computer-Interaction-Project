@@ -13,6 +13,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import model.Order;
+import model.Product;
 import model.dto.ProductDTO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -197,6 +198,25 @@ public class ProductController {
     private void addToCart(ProductDTO product) {
         try {
             Cart cart = cartService.getCartByUserIdAndProductId(currentUserId, product.getProductId());
+            Product fetchedProduct = productService.getProductById(product.getProductId());
+
+            // Check if the product is out of stock
+            if (fetchedProduct.getQuantity() == 0) {
+                showFeedback("Product out of stock.");
+                return;
+            }
+
+            int newQuantity = 1;
+            if (cart != null) {
+                newQuantity = cart.getQuantity() + 1;
+            }
+
+            // Check if the new quantity exceeds the available stock
+            if (newQuantity > fetchedProduct.getQuantity()) {
+                showFeedback("Not enough quantity left. Available quantity: " + fetchedProduct.getQuantity());
+                return;
+            }
+
             if (cart == null) {
                 cart = new Cart();
                 cart.setUserId(currentUserId);
@@ -204,7 +224,7 @@ public class ProductController {
                 cart.setQuantity(1);
                 cartService.addCart(cart);
             } else {
-                cart.setQuantity(cart.getQuantity() + 1);
+                cart.setQuantity(newQuantity);
                 cartService.updateCart(cart);
             }
             updateTotal();
@@ -214,6 +234,7 @@ public class ProductController {
             showFeedback("Error adding product to cart.");
         }
     }
+
 
     private void updateTotal() {
         try {
@@ -248,6 +269,9 @@ public class ProductController {
                 order.setPaymentMethod(paymentMethod);
                 orderService.addOrder(order);
             }
+
+            // Decrement product quantities
+            cartService.decrementProductQuantities(cartItems);
 
             // Clear the cart after placing the order
             cartService.clearCartByUserId(currentUserId);

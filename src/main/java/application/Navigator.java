@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class Navigator{
-    public final static String HOME_PAGE= "views/home.fxml";
+
     public final static String PRODUCTS_PAGE= "views/products.fxml";
     public final static String SELL_PAGE= "views/sellitem.fxml";
     public final static String USER_PAGE= "views/account2.fxml";

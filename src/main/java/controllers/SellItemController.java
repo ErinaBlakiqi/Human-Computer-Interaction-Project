@@ -8,7 +8,7 @@ import model.dto.AdminProductDTO;
 import model.dto.SellItemDto;
 import services.SellItemService;
 
-public class SellItemController {
+    class SellItemController {
     @FXML
     private TextField productNameField;
     @FXML

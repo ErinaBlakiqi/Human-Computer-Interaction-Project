@@ -10,6 +10,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.cell.PropertyValueFactory;
 import repository.ProductRepository;
+import services.ConnectionUtil;
 import services.ProductService;
 import repository.CartRepository;
 import model.Cart;
@@ -63,7 +64,7 @@ public class ProductController {
 
     public ProductController() {
         try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/yourdatabase", "username", "password");
+            Connection connection = ConnectionUtil.getConnection();
             productService = new ProductService(new ProductRepository(connection));
             cartRepository = new CartRepository(connection);
             orderRepository = new OrderRepository(connection);

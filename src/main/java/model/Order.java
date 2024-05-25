@@ -1,25 +1,18 @@
 package model;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 public class Order {
     private int orderId;
     private int productId;
     private int buyerId;
-
     private int quantity;
-    private int totalPrice;
+    private int totalPrice;  // Ensure totalPrice is int
     private String orderStatus;
     private String paymentMethod;
-    private LocalDateTime createdAt;
+    private LocalDateTime createdAt;  // Ensure createdAt is LocalDateTime
 
-
-    private int totalPrice;
-    private String orderStatus;
-    private String paymentMethod;
-    private Timestamp createdAt;
-
-
+    // Getters and setters
     public int getOrderId() {
         return orderId;
     }
@@ -38,7 +31,6 @@ public class Order {
 
     public int getBuyerId() {
         return buyerId;
-
     }
 
     public void setBuyerId(int buyerId) {
@@ -47,11 +39,10 @@ public class Order {
 
     public int getQuantity() {
         return quantity;
-
     }
 
-    public void setBuyerId(int buyerId) {
-        this.buyerId = buyerId;
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     public int getTotalPrice() {
@@ -78,15 +69,11 @@ public class Order {
         this.paymentMethod = paymentMethod;
     }
 
-
     public LocalDateTime getCreatedAt() {
-
-    public Timestamp getCreatedAt() {
-
         return createdAt;
     }
 
-    public void setCreatedAt(Timestamp createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 }

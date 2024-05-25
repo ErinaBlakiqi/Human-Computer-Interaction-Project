@@ -10,13 +10,12 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.cell.PropertyValueFactory;
 import repository.ProductRepository;
-import services.ConnectionUtil;
+import services.DBConnector;
 import services.ProductService;
 import repository.CartRepository;
 import model.Cart;
 import repository.OrderRepository;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -63,14 +62,10 @@ public class ProductController {
     private int currentUserId = 1; // This should be dynamically set based on the logged-in user
 
     public ProductController() {
-        try {
-            Connection connection = ConnectionUtil.getConnection();
+            Connection connection = DBConnector.getConnection();
             productService = new ProductService(new ProductRepository(connection));
             cartRepository = new CartRepository(connection);
             orderRepository = new OrderRepository(connection);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
     }
 
     @FXML

@@ -48,9 +48,7 @@
                                     <TableColumn fx:id="colPrice_products" prefWidth="119.19992065429688" text="Price" />
                                     <TableColumn fx:id="colCategory_products" prefWidth="139.2000732421875" text="Category" />
                                     <TableColumn fx:id="colAction_products" prefWidth="101.59991455078125" text="Action">
-                                        <cellValueFactory>
-                                            <PropertyValueFactory property="dummy"/>
-                                        </cellValueFactory>
+                                        <!-- Leave cellValueFactory empty -->
                                     </TableColumn>
                                 </columns>
                             </TableView>

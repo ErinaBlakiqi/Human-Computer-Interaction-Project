@@ -1,6 +1,8 @@
 package controllers;
 
+import javafx.animation.FadeTransition;
 import javafx.animation.PauseTransition;
+import javafx.animation.SequentialTransition;
 import javafx.scene.control.*;
 import javafx.util.Duration;
 import model.Order;
@@ -22,6 +24,18 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class ProductController {
+
+    @FXML
+    private TableView<Cart> tableView_Products;
+    @FXML
+    private TableColumn<Cart, Integer> col_Price_Products;
+
+    @FXML
+    private TableColumn<Cart, String> col_Product_Products;
+
+    @FXML
+    private TableColumn<Cart, Integer> col_Quantity_Products;
+
     @FXML
     private TableColumn<ProductDTO, String> colAction_products;
 
@@ -54,8 +68,6 @@ public class ProductController {
 
     @FXML
     private Button btnRemove_Products;
-    @FXML
-    private Label lblFeedback;
 
     private ProductService productService;
     private CartService cartService;
@@ -64,10 +76,10 @@ public class ProductController {
     private int currentUserId = 1; // This should be dynamically set based on the logged-in user
 
     public ProductController() {
-            Connection connection = DBConnector.getConnection();
-            productService = new ProductService();
-            cartService = new CartService();
-            orderService = new OrderService();
+        Connection connection = DBConnector.getConnection();
+        productService = new ProductService();
+        cartService = new CartService();
+        orderService = new OrderService();
     }
 
     @FXML
@@ -76,6 +88,10 @@ public class ProductController {
         colSeller_products.setCellValueFactory(new PropertyValueFactory<>("sellerName"));
         colPrice_products.setCellValueFactory(new PropertyValueFactory<>("price"));
         colCategory_products.setCellValueFactory(new PropertyValueFactory<>("categoryName"));
+
+        col_Product_Products.setCellValueFactory(new PropertyValueFactory<>("productName"));
+        col_Quantity_Products.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+        col_Price_Products.setCellValueFactory(new PropertyValueFactory<>("price"));
         colAction_products.setCellFactory(param -> new TableCell<>() {
             private final Button buyButton = new Button("Buy");
 
@@ -100,8 +116,18 @@ public class ProductController {
         listPayment_Products.setItems(FXCollections.observableArrayList("OnDelivery", "CreditCard"));
         listPayment_Products.getSelectionModel().selectFirst();
 
-
         loadProducts();
+        loadCartItems();
+    }
+    private void loadCartItems() {
+        try {
+            List<Cart> cartItems = cartService.getCartItemsByUserId(currentUserId);
+            ObservableList<Cart> cartObservableList = FXCollections.observableArrayList(cartItems);
+            tableView_Products.setItems(cartObservableList);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            showFeedback("Error loading cart items.");
+        }
     }
 
     private void loadProducts() {
@@ -113,6 +139,7 @@ public class ProductController {
             e.printStackTrace();
         }
     }
+
 
     @FXML
     private void onActionSearch() {
@@ -139,8 +166,8 @@ public class ProductController {
                 cart.setQuantity(cart.getQuantity() + 1);
                 cartService.updateCart(cart);
             }
-            showFeedback("Product added to cart.");
             updateTotal();
+            loadCartItems();  // Load cart items into the TableView after adding a product
         } catch (SQLException e) {
             e.printStackTrace();
             showFeedback("Error adding product to cart.");
@@ -157,12 +184,12 @@ public class ProductController {
     }
 
     private void showFeedback(String message) {
-        lblFeedback.setText(message);
-        PauseTransition pause = new PauseTransition(Duration.seconds(3));
-        pause.setOnFinished(event -> lblFeedback.setText(""));
-        pause.play();
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Notification");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
-
     @FXML
     private void onActionOrder() {
         try {
@@ -179,9 +206,12 @@ public class ProductController {
                 orderService.addOrder(order);
             }
 
+            // Clear the cart after placing the order
             cartService.clearCartByUserId(currentUserId);
+            loadCartItems(); // Reload the cart items to reflect the empty cart
+            updateTotal();   // Update the total price display
+
             showFeedback("Order placed successfully.");
-            updateTotal();
         } catch (SQLException e) {
             e.printStackTrace();
             showFeedback("Error placing order.");
@@ -190,18 +220,19 @@ public class ProductController {
 
     @FXML
     private void onActionRemove() {
-        ProductDTO selectedProduct = tableProductsPage.getSelectionModel().getSelectedItem();
-        if (selectedProduct != null) {
+        Cart selectedCart = tableView_Products.getSelectionModel().getSelectedItem();
+        if (selectedCart != null) {
             try {
-                cartService.removeCartByUserIdAndProductId(currentUserId, selectedProduct.getProductId());
-                showFeedback("Product removed from cart.");
+                cartService.removeCartByUserIdAndProductId(selectedCart.getUserId(), selectedCart.getProductId());
+                loadCartItems();
                 updateTotal();
+                showFeedback("Item removed from cart.");
             } catch (SQLException e) {
                 e.printStackTrace();
-                showFeedback("Error removing product from cart.");
+                showFeedback("Error removing item from cart.");
             }
         } else {
-            showFeedback("No product selected.");
+            showFeedback("No item selected.");
         }
     }
 }

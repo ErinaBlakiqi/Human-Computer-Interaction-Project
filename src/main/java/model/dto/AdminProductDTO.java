@@ -77,6 +77,3 @@ public class AdminProductDTO {
         this.status = status;
     }
 }
-
-
-

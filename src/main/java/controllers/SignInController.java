@@ -1,11 +1,16 @@
 package controllers;
 
+import application.Navigator;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import model.dto.LoginUserDto;
 import services.UserService;
+import utils.SessionManager;
+
+import java.io.IOException;
 
 public class SignInController {
 
@@ -23,6 +28,11 @@ public class SignInController {
     private TextField txtPassword;
     @FXML
     private Label loginMessageLabel;
+
+    @FXML
+    void handleCreateAccountClick(MouseEvent me) throws IOException {
+        Navigator.navigate(me,Navigator.SIGNUP_PAGE);
+    }
 
     @FXML
     public void initialize() {
@@ -48,10 +58,12 @@ public class SignInController {
         boolean success = UserService.login(loginUserDto);
 
         if (success) {
+            if (SessionManager.isAdmin()) {
+                Navigator.navigate(event, Navigator.ADMIN_PAGE);
+            } else {
+                Navigator.navigate(event, Navigator.HOME_PAGE);
+            }
             showAlert(Alert.AlertType.INFORMATION, "Login Successful!", "Welcome " + username);
-            // Optionally redirect to the main application window
-            Stage stage = (Stage) loginButton.getScene().getWindow();
-            stage.close();
         } else {
             loginMessageLabel.setText("Invalid username or password.");
         }

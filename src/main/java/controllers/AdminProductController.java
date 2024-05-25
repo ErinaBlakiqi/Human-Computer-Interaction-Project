@@ -1,19 +1,27 @@
 package controllers;
 
-import javafx.scene.control.TableCell;
 import model.dto.AdminProductDTO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 import services.AdminProductService;
+import application.Navigator;
 
+import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class AdminProductController {
 
@@ -41,6 +49,12 @@ public class AdminProductController {
     @FXML
     private TableColumn<AdminProductDTO, Void> colAction_products;
 
+    @FXML
+    private TextField fieldProductSearch;
+
+    @FXML
+    private Button btnSearch;
+
     private AdminProductService productService;
 
     public AdminProductController(AdminProductService productService) {
@@ -56,10 +70,6 @@ public class AdminProductController {
         colCategory_products.setCellValueFactory(new PropertyValueFactory<>("categoryName"));
         colStatus_products.setCellValueFactory(new PropertyValueFactory<>("status"));
 
-        List<AdminProductDTO> products = productService.getAllProducts();
-        ObservableList<AdminProductDTO> productList = FXCollections.observableArrayList(products);
-        tableProductsPage.setItems(productList);
-
         colAction_products.setCellFactory(param -> new TableCell<>() {
             private final Button editButton = new Button("Edit");
             private final Button deleteButton = new Button("Delete");
@@ -70,6 +80,12 @@ public class AdminProductController {
                     AdminProductDTO product = getTableView().getItems().get(getIndex());
                     productService.deleteProduct(product.getProductId());
                     getTableView().getItems().remove(product);
+                });
+
+                editButton.setOnAction(event -> {
+                    AdminProductDTO product = getTableView().getItems().get(getIndex());
+                    // Redirect to the sell page with the product details
+                    redirectToSellPage(product);
                 });
             }
 
@@ -83,10 +99,44 @@ public class AdminProductController {
                 }
             }
         });
+
+        btnSearch.setOnAction(this::onActionSearch);
+
+        loadProducts();
+    }
+
+    private void loadProducts() {
+        List<AdminProductDTO> products = productService.getAllProducts();
+        ObservableList<AdminProductDTO> productList = FXCollections.observableArrayList(products);
+        tableProductsPage.setItems(productList);
     }
 
     @FXML
-    void onActionSearch(ActionEvent event) {
-        // Implement search logic
+    private void onActionSearch(ActionEvent event) {
+        String searchText = fieldProductSearch.getText().toLowerCase();
+        List<AdminProductDTO> products = productService.getAllProducts();
+        List<AdminProductDTO> filteredProducts = products.stream()
+                .filter(product -> product.getProductName().toLowerCase().contains(searchText) ||
+                        product.getSellerName().toLowerCase().contains(searchText) ||
+                        product.getCategoryName().toLowerCase().contains(searchText))
+                .collect(Collectors.toList());
+        ObservableList<AdminProductDTO> productList = FXCollections.observableArrayList(filteredProducts);
+        tableProductsPage.setItems(productList);
+    }
+
+    private void redirectToSellPage(AdminProductDTO productDTO) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/sellitem.fxml"));
+            Parent root = loader.load();
+
+            // Pass the product details to the sell page controller
+            SellItemController controller = loader.getController();
+            controller.setProductDetails(productDTO); ///ne sellitemcontroller
+
+            Stage stage = (Stage) tableProductsPage.getScene().getWindow();
+            stage.setScene(new Scene(root));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

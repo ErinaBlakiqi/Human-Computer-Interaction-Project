@@ -10,12 +10,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import java.sql.SQLException;
 
 public class UserRepository {
 
     public static boolean create(UserDto userData) {
         String query = """
-                INSERT INTO Users (firstName, lastName, username, email, salt, passwordHash)
+                INSERT INTO Users (firstName, lastName, username, email, salt, passwordHash,role)
                 VALUES (?, ?, ?, ?, ?, ?)
                 """;
         try (Connection conn = DBConnector.getConnection();
@@ -26,6 +27,7 @@ public class UserRepository {
             pst.setString(4, userData.getEmail());
             pst.setString(5, userData.getSalt());
             pst.setString(6, userData.getPasswordHash());
+            pst.setString(7, userData.getRole());
             pst.execute();
             return true;
         } catch (Exception e) {
@@ -51,14 +53,15 @@ public class UserRepository {
 
     private static User getFromResultSet(ResultSet result) {
         try {
-            int id = result.getInt("userId");
-            String firstName = result.getString("firstName");
-            String lastName = result.getString("lastName");
-            String username = result.getString("username");
-            String email = result.getString("email");
-            String salt = result.getString("salt");
-            String passwordHash = result.getString("passwordHash");
-            return new User(id, firstName, lastName, username, email, salt, passwordHash);
+            int id = result.getInt("UserId");  // lexojna prej bazes se te dhenave
+            String firstName = result.getString("FirstName");
+            String lastName = result.getString("LastName");
+            String username = result.getString("UserName");
+            String email = result.getString("Email");
+            String salt = result.getString("Salt");
+            String passwordHash = result.getString("PasswordHash");
+            String role = result.getString("Role");
+            return new User(id, firstName, lastName, username, email, salt, passwordHash,role);
         } catch (Exception e) {
             e.printStackTrace();
             return null;

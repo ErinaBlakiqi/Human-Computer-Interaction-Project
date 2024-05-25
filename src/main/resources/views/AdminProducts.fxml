@@ -5,70 +5,48 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Rectangle?>
 
 <BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AdminProductController">
     <left>
         <HBox>
             <VBox prefWidth="200" style="-fx-background-color: #2F3A47;">
                 <VBox alignment="CENTER" spacing="10" style="-fx-padding: 20;">
-                    <ImageView fx:id="profileImage" fitHeight="79.0" fitWidth="93.0">
-                        <!-- Add your profile image path here -->
-                        <Image url="@../../../../../../../../../../../../../Downloads/path/to/profile/image.png" />
-                    </ImageView>
                     <Label style="-fx-text-fill: white; -fx-font-size: 14;" text="Welcome," />
                     <Label style="-fx-text-fill: white; -fx-font-size: 18;" text="Admin" />
-                    <Rectangle height="2" style="-fx-fill: #A4A4A4;" width="160" />
                 </VBox>
                 <VBox style="-fx-padding: 20;">
-                    <Button contentDisplay="CENTER" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16;" text="Home">
-                        <graphic>
-                            <ImageView fitHeight="20" fitWidth="20">
-                                <!-- Add your home icon path here -->
-                                <Image url="@../../../../../../../../../../../../../Downloads/path/to/home/icon.png" />
-                            </ImageView>
-                        </graphic>
-                    </Button>
-                    <Button style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16;" text="Products" />
-                    <Button alignment="TOP_LEFT" minWidth="42.0" prefHeight="36.0" prefWidth="55.0" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16;" text="Sell" />
-                    <Button style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16;" text="User" />
-                    <Button style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16;" text="Admin" />
-                </VBox>
-                <VBox style="-fx-padding: 20; -fx-alignment: bottom-left;">
-                    <Button prefHeight="33.0" prefWidth="118.0" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16;" text="Sign Out">
-                        <graphic>
-                            <ImageView fitHeight="20" fitWidth="20">
-                                <!-- Add your sign-out icon path here -->
-                                <Image url="@../../../../../../../../../../../../../Downloads/path/to/signout/icon.png" />
-                            </ImageView>
-                        </graphic>
-                    </Button>
+                    <Button style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16;" text="Home" onAction="#goToDashboard" />
+                    <Button style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16;" text="Products" onAction="#goToProducts" />
+                    <Button style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16;" text="Sell" onAction="#goToSell" />
+                    <Button style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16;" text="User" onAction="#goToProfile" />
                 </VBox>
             </VBox>
             <Pane fx:id="pane_Products" prefHeight="495.0" prefWidth="650.0" style="-fx-background-color: white;">
-            <children>
-               <AnchorPane layoutX="3.0" layoutY="3.0" prefHeight="488.0" prefWidth="420.0" style="-fx-border-radius: 5; -fx-border-color: #2F3A47;">
-                  <children>
-                     <TableView fx:id="tableProductsPage" layoutX="2.0" layoutY="45.0" prefHeight="448.0" prefWidth="638.0">
-                       <columns>
-                         <TableColumn fx:id="colProductName_products" prefWidth="112.0" text="Product Name" />
-                         <TableColumn fx:id="colSeller_products" prefWidth="113.5999755859375" text="Seller" />
-                           <TableColumn fx:id="colPrice_products" prefWidth="131.19998168945312" text="Price" />
-                           <TableColumn fx:id="colCategory_products" prefWidth="139.99993896484375" text="Category" />
-                           <TableColumn fx:id="colAction_products" prefWidth="146.4000244140625" text="Action" />
-                       </columns>
-                     </TableView>
-                     <TextField fx:id="fieldProductSearch" layoutX="11.0" layoutY="10.0" promptText="Search products..." />
-                     <Button fx:id="btnSearch" layoutX="165.0" layoutY="10.0" mnemonicParsing="false" onAction="#onActionSearch" text="Search" />
-                  </children>
-               </AnchorPane>
-            </children></Pane>
+                <children>
+                    <AnchorPane layoutX="3.0" layoutY="3.0" prefHeight="488.0" prefWidth="420.0" style="-fx-border-radius: 5; -fx-border-color: #2F3A47;">
+                        <children>
+                            <TableView fx:id="tableProductsPage" layoutX="2.0" layoutY="45.0" prefHeight="448.0" prefWidth="638.0">
+                                <columns>
+                                    <TableColumn fx:id="colProductName_products" prefWidth="112.0" text="Product Name" />
+                                    <TableColumn fx:id="colSeller_products" prefWidth="113.5999755859375" text="Seller" />
+                                    <TableColumn fx:id="colPrice_products" prefWidth="131.19998168945312" text="Price" />
+                                    <TableColumn fx:id="colQuantity_products" prefWidth="139.99993896484375" text="Quantity" />
+                                    <TableColumn fx:id="colCategory_products" prefWidth="139.99993896484375" text="Category" />
+                                    <TableColumn fx:id="colStatus_products" prefWidth="139.99993896484375" text="Status" />
+                                    <TableColumn fx:id="colAction_products" prefWidth="146.4000244140625" text="Action" />
+                                </columns>
+                            </TableView>
+                            <TextField fx:id="fieldProductSearch" layoutX="11.0" layoutY="10.0" promptText="Search products..." />
+                            <Button fx:id="btnSearch" layoutX="165.0" layoutY="10.0" mnemonicParsing="false" text="Search" />
+                        </children>
+                    </AnchorPane>
+                </children>
+            </Pane>
         </HBox>
     </left>
     <center>

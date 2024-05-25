@@ -1,16 +1,24 @@
 package model;
 
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
 
 public class Order {
     private int orderId;
     private int productId;
     private int buyerId;
+
     private int quantity;
     private int totalPrice;
     private String orderStatus;
     private String paymentMethod;
     private LocalDateTime createdAt;
+
+
+    private int totalPrice;
+    private String orderStatus;
+    private String paymentMethod;
+    private Timestamp createdAt;
+
 
     public int getOrderId() {
         return orderId;
@@ -30,6 +38,7 @@ public class Order {
 
     public int getBuyerId() {
         return buyerId;
+
     }
 
     public void setBuyerId(int buyerId) {
@@ -38,10 +47,11 @@ public class Order {
 
     public int getQuantity() {
         return quantity;
+
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setBuyerId(int buyerId) {
+        this.buyerId = buyerId;
     }
 
     public int getTotalPrice() {
@@ -68,11 +78,15 @@ public class Order {
         this.paymentMethod = paymentMethod;
     }
 
+
     public LocalDateTime getCreatedAt() {
+
+    public Timestamp getCreatedAt() {
+
         return createdAt;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
+    public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
     }
 }

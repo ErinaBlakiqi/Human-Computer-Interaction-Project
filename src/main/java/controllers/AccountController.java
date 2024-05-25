@@ -107,11 +107,6 @@ public class AccountController {
     }
 
     @FXML
-    void handleHome(MouseEvent event) {
-        Navigator.navigate(event, Navigator.HOME_PAGE);
-    }
-
-    @FXML
     void handleProducts(MouseEvent event) {
         Navigator.navigate(event, Navigator.PRODUCTS_PAGE);
     }
@@ -131,4 +126,7 @@ public class AccountController {
         Navigator.navigate(event, Navigator.USER_PAGE);
     }
 
+    public void handleChangePassword(ActionEvent actionEvent) {
+        Navigator.navigate(actionEvent, Navigator.CHANGEPASSWORD_PAGE);
+    }
 }

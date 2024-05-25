@@ -1,11 +1,14 @@
 package services;
 
 import model.User;
+import model.dto.UpdateUserDto;
 import model.dto.UserDto;
 import model.dto.LoginUserDto;
 import model.dto.UserDto;
 import repository.UserRepository;
 import services.PasswordHasher;
+
+import java.sql.SQLException;
 
 public class UserService {
     private UserRepository userRepository = new UserRepository();
@@ -29,7 +32,8 @@ public class UserService {
                 userData.getUsername(),
                 userData.getEmail(),
                 salt,
-                passwordHash
+                passwordHash,
+                userData.getRole()
         );
 
         return UserRepository.create(createUserData);
@@ -48,5 +52,14 @@ public class UserService {
         return PasswordHasher.compareSaltedHash(
                 password, salt, passwordHash
         );
+    }
+
+    ////
+    public static User getUserByUsername(String username) {
+        return UserRepository.getByUsername(username);
+    }
+
+    public static boolean verifyPassword(User user, String currentPassword) {
+        return PasswordHasher.compareSaltedHash(currentPassword, user.getSalt(), user.getPasswordHash());
     }
 }

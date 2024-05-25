@@ -31,7 +31,6 @@ public class AdminProduct {
     }
 
     // Getters and setters
-
     public int getProductId() {
         return productId;
     }

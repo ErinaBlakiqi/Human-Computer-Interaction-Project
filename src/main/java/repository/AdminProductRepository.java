@@ -1,6 +1,7 @@
 package repository;
 
 import model.AdminProduct;
+import services.DBConnector;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,15 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AdminProductRepository {
-    private Connection connection;
-
-    public AdminProductRepository(Connection connection) {
-        this.connection = connection;
-    }
 
     public List<AdminProduct> findAll() {
         List<AdminProduct> products = new ArrayList<>();
-        try {
+        try (Connection connection = DBConnector.getConnection()) {
             String query = "SELECT * FROM Products";
             PreparedStatement statement = connection.prepareStatement(query);
             ResultSet resultSet = statement.executeQuery();
@@ -40,7 +36,7 @@ public class AdminProductRepository {
     }
 
     public void deleteProduct(int productId) {
-        try {
+        try (Connection connection = DBConnector.getConnection()) {
             String query = "DELETE FROM Products WHERE ProductId = ?";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(1, productId);
@@ -51,7 +47,7 @@ public class AdminProductRepository {
     }
 
     public void updateProduct(AdminProduct product) {
-        try {
+        try (Connection connection = DBConnector.getConnection()) {
             String query = "UPDATE Products SET ProductName = ?, SellerId = ?, Price = ?, Quantity = ?, CategoryId = ?, status = ? WHERE ProductId = ?";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, product.getProductName());
@@ -67,9 +63,35 @@ public class AdminProductRepository {
         }
     }
 
+    public String findSellerNameById(int sellerId) {
+        String sellerName = "Unknown Seller";
+        try (Connection connection = DBConnector.getConnection()) {
+            String query = "SELECT UserName FROM Users WHERE UserId = ?";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1, sellerId);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                sellerName = resultSet.getString("UserName");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return sellerName;
+    }
 
-
-    // Other CRUD operations
-    // me shtu per update
-
+    public String findCategoryNameById(int categoryId) {
+        String categoryName = "Unknown Category";
+        try (Connection connection = DBConnector.getConnection()) {
+            String query = "SELECT CName FROM Categories WHERE CategoryID = ?";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1, categoryId);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                categoryName = resultSet.getString("CName");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return categoryName;
+    }
 }

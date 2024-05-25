@@ -11,14 +11,14 @@
     <children>
         <AnchorPane layoutX="19.0" layoutY="19.0" prefHeight="586.0" prefWidth="366.0">
             <children>
-                <Label layoutX="111.0" layoutY="150.0" text="Sign Up Account" textAlignment="CENTER" textFill="#2f3a47">
+                <Label layoutX="111.0" layoutY="150.0" text="Sign Up Account" textAlignment="CENTER">
                     <font>
                         <Font name="Franklin Gothic Heavy Italic" size="20.0" />
                     </font>
                 </Label>
                 <Button fx:id="signupButton" layoutX="52.0" layoutY="472.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="264.0" style="-fx-background-color: #2F3A47;" text="Sign Up" textFill="WHITE">
                <font>
-                  <Font name="System Bold" size="13.0" />
+                  <Font name="System Bold" size="12.0" />
                </font></Button>
                 <TextField fx:id="txtFirstname" layoutX="52.0" layoutY="190.0" prefHeight="36.0" prefWidth="264.0" promptText="Firstname" />
                 <TextField fx:id="txtLastname" layoutX="51.0" layoutY="238.0" prefHeight="36.0" prefWidth="264.0" promptText="Lastname" />
@@ -26,8 +26,8 @@
                 <TextField fx:id="txtEmail" layoutX="51.0" layoutY="330.0" prefHeight="36.0" prefWidth="264.0" promptText="Email" />
                 <PasswordField fx:id="pwdPassowrd" layoutX="51.0" layoutY="380.0" prefHeight="36.0" prefWidth="264.0" promptText="Password" />
                 <PasswordField fx:id="pwdComfirmPassword" layoutX="52.0" layoutY="424.0" prefHeight="36.0" prefWidth="264.0" promptText="Confirm Password" />
-                <Button fx:id="loginButton" layoutX="50.0" layoutY="528.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="122.0" style="-fx-background-color: #2F3A47;" text="Login " textFill="WHITE" />
-            <Button layoutX="193.0" layoutY="528.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="122.0" style="-fx-background-color: #2F3A47;" text="Cancel" textFill="WHITE" />
+                <Button fx:id="loginButton" layoutX="52.0" layoutY="530.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="118.0" style="-fx-background-color: #2F3A47;" text="Login " textFill="WHITE" />
+            <Button fx:id="cancelButton" layoutX="196.0" layoutY="530.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="118.0" style="-fx-background-color: #2F3A47;" text="Cancel" textFill="WHITE" />
             </children>
         </AnchorPane>
     </children>

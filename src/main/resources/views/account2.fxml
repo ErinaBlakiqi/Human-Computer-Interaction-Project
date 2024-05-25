@@ -15,6 +15,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.shape.Rectangle?>
 <AnchorPane maxHeight="-Infinity" prefHeight="490.0" prefWidth="827.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AccountController">
     <BorderPane prefHeight="573.0" prefWidth="825.0">
         <left>
@@ -30,14 +31,6 @@
                         <Rectangle height="2" style="-fx-fill: #A4A4A4;" width="160" />
                     </VBox>
                     <VBox style="-fx-padding: 20;">
-                        <Button fx:id="homeButton" contentDisplay="CENTER" onMouseClicked="#handleHome" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16;" text="Home">
-                            <graphic>
-                                <ImageView fitHeight="20" fitWidth="20">
-                                    <!-- Add your home icon path here -->
-                                    <!-- <Image url="@../../Downloads/path/to/home/icon.png" /> -->
-                                </ImageView>
-                            </graphic>
-                        </Button>
                         <Button fx:id="productsButton" onMouseClicked="#handleProducts" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16;" text="Products">
                             <graphic>
                                 <ImageView fitHeight="20" fitWidth="20">
@@ -105,7 +98,12 @@
                         <HBox prefHeight="100.0" prefWidth="200.0" />
                     </VBox>
                     <Pane HBox.hgrow="ALWAYS" />
-                    <Button fx:id="editAccountButton" alignment="BOTTOM_CENTER" contentDisplay="CENTER" onAction="#handleEditAccount" text="Edit Account" />
+                    <VBox layoutX="113.0" layoutY="9.0" prefHeight="104.0" prefWidth="125.0" spacing="10"> <!-- Add spacing attribute here -->
+                        <children>
+                            <Button fx:id="editAccountButton" alignment="BOTTOM_CENTER" contentDisplay="CENTER" onAction="#handleEditAccount" text="Edit Account" />
+                            <Button fx:id="changePasswordButton" mnemonicParsing="false" onAction="#handleChangePassword" prefHeight="25.0" prefWidth="117.0" text="Change Password" />
+                        </children>
+                    </VBox>
                 </HBox>
                 <HBox spacing="20">
                     <VBox>

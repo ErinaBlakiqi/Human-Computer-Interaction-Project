@@ -127,5 +127,6 @@ public class AccountController {
     }
 
     public void handleChangePassword(ActionEvent actionEvent) {
+        Navigator.navigate(actionEvent, Navigator.CHANGEPASSWORD_PAGE);
     }
 }

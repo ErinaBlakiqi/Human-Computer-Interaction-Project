@@ -1,36 +1,30 @@
 package application;
 
-import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-
 import java.io.IOException;
 
-public class Navigator{
+public class Navigator {
 
     private static Stage stage;
 
     public static void setStage(Stage primaryStage) {
         stage = primaryStage;
     }
-    public final static String PRODUCTS_PAGE= "views/products.fxml";
-    public final static String SELL_PAGE= "views/sellitem.fxml";
-    public final static String USER_PAGE= "views/account2.fxml";
 
-    public final static String ADMIN_PAGE= "views/AdminDashboard.fxml";
-
-    public final static String SIGNIN_PAGE="com.example.shitjeblerjeonline/SignIn.fxml";
-
-    public final static String SIGNUP_PAGE="com.example.shitjeblerjeonline/SignUp.fxml";
-    public final static String EDIT_PAGE="views/editAccount.fxml";
-    public final static String CHANGEPASSWORD_PAGE="com.example.shitblerjeonline/ChangePassword.fxml";
-
-
-
+    public final static String PRODUCTS_PAGE = "/views/products.fxml";
+    public final static String SELL_PAGE = "/views/sellitem.fxml";
+    public final static String USER_PAGE = "/views/account2.fxml";
+    public final static String ADMIN_DASHBOARD_PAGE = "/views/AdminDashboard.fxml";
+    public final static String ADMIN_PRODUCTS_PAGE = "/views/AdminProducts.fxml";
+    public final static String ADMIN_ORDERS_PAGE = "/views/AdminOrder.fxml";
+    public final static String SIGNIN_PAGE = "/views/SignIn.fxml";
+    public final static String SIGNUP_PAGE = "/views/SignUp.fxml";
+    public final static String EDIT_PAGE = "/views/editAccount.fxml";
+    public final static String CHANGEPASSWORD_PAGE = "/views/ChangePassword.fxml";
 
     public static void navigate(String fxmlFile) {
         try {
@@ -43,9 +37,4 @@ public class Navigator{
             e.printStackTrace();
         }
     }
-//    public static void navigate(Event event, String page){
-//        Node node=(Node)event.getSource();
-//        Stage stage=(Stage)node.getScene().getWindow();
-//        navigate(stage,page);
-//    }
 }

@@ -70,7 +70,6 @@ public class AdminProductController {
         colCategory_products.setCellValueFactory(new PropertyValueFactory<>("categoryName"));
         colStatus_products.setCellValueFactory(new PropertyValueFactory<>("status"));
 
-        // Add the cell factory for the action column
         colAction_products.setCellFactory(param -> new TableCell<>() {
             private final Button editButton = new Button("Edit");
             private final Button deleteButton = new Button("Delete");
@@ -132,7 +131,7 @@ public class AdminProductController {
 
             // Pass the product details to the sell page controller
             SellItemController controller = loader.getController();
-            controller.setProductDetails(productDTO); // sellitem controlelr
+            controller.setProductDetails(productDTO); ///ne sellitemcontroller
 
             Stage stage = (Stage) tableProductsPage.getScene().getWindow();
             stage.setScene(new Scene(root));

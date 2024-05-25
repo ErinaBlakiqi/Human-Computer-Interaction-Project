@@ -4,19 +4,14 @@ import model.dto.AdminProductDTO;
 import model.AdminProduct;
 import repository.AdminProductRepository;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class AdminProductService {
     private AdminProductRepository productRepository;
-    private Connection connection;
 
-    public AdminProductService(AdminProductRepository productRepository, Connection connection) {
+    public AdminProductService(AdminProductRepository productRepository) {
         this.productRepository = productRepository;
-        this.connection = connection;
     }
 
     public List<AdminProductDTO> getAllProducts() {
@@ -33,28 +28,21 @@ public class AdminProductService {
     }
 
     private AdminProductDTO convertToDTO(AdminProduct product) {
-        AdminProductDTO dto = new AdminProductDTO(
+        return new AdminProductDTO(
                 product.getProductId(),
                 product.getProductName(),
-                getSellerName(product.getSellerId()), // Implement this method
+                getSellerName(product.getSellerId()),
                 product.getPrice(),
                 product.getQuantity(),
-                getCategoryName(product.getCategoryId()), // Implement this method
+                getCategoryName(product.getCategoryId()),
                 product.getStatus()
         );
-        return dto;
     }
 
     private String getSellerName(int sellerId) {
         String sellerName = "Unknown Seller";
         try {
-            String query = "SELECT UserName FROM Users WHERE UserId = ?";
-            PreparedStatement statement = connection.prepareStatement(query);
-            statement.setInt(1, sellerId);
-            ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()) {
-                sellerName = resultSet.getString("UserName");
-            }
+            sellerName = productRepository.findSellerNameById(sellerId);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -64,13 +52,7 @@ public class AdminProductService {
     private String getCategoryName(int categoryId) {
         String categoryName = "Unknown Category";
         try {
-            String query = "SELECT CName FROM Categories WHERE CategoryID = ?";
-            PreparedStatement statement = connection.prepareStatement(query);
-            statement.setInt(1, categoryId);
-            ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()) {
-                categoryName = resultSet.getString("CName");
-            }
+            categoryName = productRepository.findCategoryNameById(categoryId);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -23,8 +23,10 @@ public class AdminProductService {
             adminProductDTO.setProductId(product.getProductId());
             adminProductDTO.setProductName(product.getProductName());
             adminProductDTO.setSellerName(product.getSellerName());
+            adminProductDTO.setSellerId(product.getSellerId());
             adminProductDTO.setPrice(product.getPrice());
             adminProductDTO.setCategoryName(product.getCategoryName());
+            adminProductDTO.setCategoryId(product.getCategoryId());
             adminProductDTO.setQuantity(product.getQuantity());
             adminProductDTO.setStatus(product.getStatus());
             adminProductDTOs.add(adminProductDTO);
@@ -42,8 +44,10 @@ public class AdminProductService {
             adminProductDTO.setProductId(product.getProductId());
             adminProductDTO.setProductName(product.getProductName());
             adminProductDTO.setSellerName(product.getSellerName());
+            adminProductDTO.setSellerId(product.getSellerId());
             adminProductDTO.setPrice(product.getPrice());
             adminProductDTO.setCategoryName(product.getCategoryName());
+            adminProductDTO.setCategoryId(product.getCategoryId());
             adminProductDTO.setQuantity(product.getQuantity());
             adminProductDTO.setStatus(product.getStatus());
             adminProductDTOs.add(adminProductDTO);
@@ -55,10 +59,10 @@ public class AdminProductService {
     public void addProduct(AdminProductDTO adminProductDTO) throws SQLException {
         Product product = new Product();
         product.setProductName(adminProductDTO.getProductName());
-        product.setSellerId(adminProductDTO.getSellerId());  // Make sure SellerId is set in AdminProductDTO
+        product.setSellerId(adminProductDTO.getSellerId());
         product.setPrice(adminProductDTO.getPrice());
         product.setQuantity(adminProductDTO.getQuantity());
-        product.setCategoryId(adminProductDTO.getCategoryId());  // Make sure CategoryId is set in AdminProductDTO
+        product.setCategoryId(adminProductDTO.getCategoryId());
         product.setStatus(adminProductDTO.getStatus());
         adminProductRepository.addProduct(product);
     }
@@ -67,10 +71,10 @@ public class AdminProductService {
         Product product = new Product();
         product.setProductId(adminProductDTO.getProductId());
         product.setProductName(adminProductDTO.getProductName());
-        product.setSellerId(adminProductDTO.getSellerId());  // Make sure SellerId is set in AdminProductDTO
+        product.setSellerId(adminProductDTO.getSellerId());
         product.setPrice(adminProductDTO.getPrice());
         product.setQuantity(adminProductDTO.getQuantity());
-        product.setCategoryId(adminProductDTO.getCategoryId());  // Make sure CategoryId is set in AdminProductDTO
+        product.setCategoryId(adminProductDTO.getCategoryId());
         product.setStatus(adminProductDTO.getStatus());
         adminProductRepository.updateProduct(product);
     }

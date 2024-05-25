@@ -2,14 +2,20 @@ package controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 import model.dto.AdminProductDTO;
 import services.AdminProductService;
 import application.Navigator;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -38,9 +44,14 @@ public class AdminProductsController {
 
     private AdminProductService adminProductService;
 
-    public void initialize() throws SQLException {
-        adminProductService = new AdminProductService();
 
+
+
+    public AdminProductsController() throws SQLException {
+        adminProductService = new AdminProductService();
+    }
+
+    public void initialize() throws SQLException {
         // Set up cell value factories
         colProductName_products.setCellValueFactory(new PropertyValueFactory<>("productName"));
         colSeller_products.setCellValueFactory(new PropertyValueFactory<>("sellerName"));
@@ -91,8 +102,25 @@ public class AdminProductsController {
     }
 
     private void handleEditProduct(AdminProductDTO product) {
-        // Implement edit product functionality
-        System.out.println("Edit product: " + product.getProductName());
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/EditProduct.fxml"));
+            Parent root = loader.load();
+
+            // Get the controller and pass the product details to it
+            EditProductController controller = loader.getController();
+            controller.setProductDetails(product, adminProductService);
+
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Edit Product");
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
+
+            // Reload the products after the pop-up is closed
+            loadProducts();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void handleDeleteProduct(AdminProductDTO product) {

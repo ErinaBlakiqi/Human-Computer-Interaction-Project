@@ -49,6 +49,9 @@ public class ProductController {
 
     @FXML
     private Button btnOrder_Products;
+
+    @FXML
+    private Button btnRemove_Products;
     @FXML
     private Label lblFeedback;
 
@@ -63,6 +66,7 @@ public class ProductController {
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/yourdatabase", "username", "password");
             productService = new ProductService(new ProductRepository(connection));
             cartRepository = new CartRepository(connection);
+            orderRepository = new OrderRepository(connection);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -183,6 +187,23 @@ public class ProductController {
         } catch (SQLException e) {
             e.printStackTrace();
             showFeedback("Error placing order.");
+        }
+    }
+
+    @FXML
+    private void onActionRemove() {
+        ProductDTO selectedProduct = tableProductsPage.getSelectionModel().getSelectedItem();
+        if (selectedProduct != null) {
+            try {
+                cartRepository.removeCartByUserIdAndProductId(currentUserId, selectedProduct.getProductId());
+                showFeedback("Product removed from cart.");
+                updateTotal();
+            } catch (SQLException e) {
+                e.printStackTrace();
+                showFeedback("Error removing product from cart.");
+            }
+        } else {
+            showFeedback("No product selected.");
         }
     }
 }

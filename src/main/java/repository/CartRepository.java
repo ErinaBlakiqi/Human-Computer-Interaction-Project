@@ -93,4 +93,12 @@ public class CartRepository {
         statement.setInt(1, userId);
         statement.executeUpdate();
     }
+
+    public void removeCartByUserIdAndProductId(int userId, int productId) throws SQLException {
+        String query = "DELETE FROM Cart WHERE UserId = ? AND ProductId = ?";
+        PreparedStatement statement = connection.prepareStatement(query);
+        statement.setInt(1, userId);
+        statement.setInt(2, productId);
+        statement.executeUpdate();
+    }
 }

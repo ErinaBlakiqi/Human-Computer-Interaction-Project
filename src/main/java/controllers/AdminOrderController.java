@@ -9,6 +9,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.Order;
 import services.OrderService;
+// import services.Navigator;
 
 public class AdminOrderController {
     @FXML
@@ -49,12 +50,12 @@ public class AdminOrderController {
 
     @FXML
     private void handleHome(ActionEvent event) {
-        // Navigate to Home
+        //Navigator.loadScene(event, "AdminDashboard.fxml");
     }
 
     @FXML
     private void handleProducts(ActionEvent event) {
-        // Navigate to Products
+        //Navigator.loadScene(event, "AdminProducts.fxml");
     }
 
     @FXML
@@ -64,6 +65,6 @@ public class AdminOrderController {
 
     @FXML
     private void handleSignOut(ActionEvent event) {
-        // Handle Sign Out
+        //Navigator.loadScene(event, "SignIn.fxml");
     }
 }

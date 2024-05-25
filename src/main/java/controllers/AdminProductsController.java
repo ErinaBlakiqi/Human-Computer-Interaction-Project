@@ -38,7 +38,7 @@ public class AdminProductsController {
 
     private AdminProductService adminProductService;
 
-    public void initialize() {
+    public void initialize() throws SQLException {
         adminProductService = new AdminProductService();
 
         // Set up cell value factories

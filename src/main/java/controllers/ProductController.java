@@ -76,7 +76,7 @@ public class ProductController {
 
     private int currentUserId = 1; // This should be dynamically set based on the logged-in user
 
-    public ProductController() {
+    public ProductController() throws SQLException {
         Connection connection = DBConnector.getConnection();
         productService = new ProductService();
         cartService = new CartService();

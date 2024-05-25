@@ -14,6 +14,6 @@ public class SessionManager {
     }
 
     public static boolean isAdmin() {
-        return currentUser != null && "admin".equalsIgnoreCase(currentUser.getRole());
+        return currentUser != null && "admin".equalsIgnoreCase(currentUser.getRoli());
     }
 }

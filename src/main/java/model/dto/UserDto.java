@@ -10,9 +10,9 @@ public class UserDto {
     private String passwordHash;
     private String password;
     private String confirmPassword;
-    private String role;
+    private String Roli;
 
-    public UserDto(int id, String firstName, String lastName, String username, String email, String salt, String passwordHash, String password, String confirmPassword, String role) {
+    public UserDto(int id, String firstName, String lastName, String username, String email, String salt, String passwordHash, String password, String confirmPassword, String Roli) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -22,10 +22,10 @@ public class UserDto {
         this.passwordHash = passwordHash;
         this.password = password;
         this.confirmPassword = confirmPassword;
-        this.role = role;
+        this.Roli = Roli;
     }
 
-    public UserDto(String firstName, String lastName, String username, String email, String salt, String passwordHash, String password, String confirmPassword, String role) {
+    public UserDto(String firstName, String lastName, String username, String email, String salt, String passwordHash, String password, String confirmPassword, String Roli) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
@@ -34,7 +34,7 @@ public class UserDto {
         this.passwordHash = passwordHash;
         this.password = password;
         this.confirmPassword = confirmPassword;
-        this.role = role;
+        this.Roli = Roli;
     }
 
     public UserDto(String firstName, String lastName, String username, String email, String password, String confirmPassword) {
@@ -115,10 +115,10 @@ public class UserDto {
     }
 
 
-    public String getRole(){
-        return role;
+    public String getRoli(){
+        return Roli;
     }
-    public void setRole(String role){
-        this.role=role;
+    public void setRoli(String Roli){
+        this.Roli=Roli;
     }
 }

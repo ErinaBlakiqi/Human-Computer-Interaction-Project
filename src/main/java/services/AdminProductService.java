@@ -10,7 +10,7 @@ import java.util.List;
 public class AdminProductService {
     private AdminProductRepository adminProductRepository;
 
-    public AdminProductService() {
+    public AdminProductService() throws SQLException {
         this.adminProductRepository = new AdminProductRepository();
     }
 

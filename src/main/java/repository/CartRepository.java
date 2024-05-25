@@ -13,7 +13,7 @@ import java.util.List;
 public class CartRepository {
     private Connection connection;
 
-    public CartRepository() {
+    public CartRepository() throws SQLException {
         this.connection = DBConnector.getConnection();
     }
 

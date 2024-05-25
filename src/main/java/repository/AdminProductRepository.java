@@ -10,7 +10,7 @@ import java.util.List;
 public class AdminProductRepository {
     private Connection connection;
 
-    public AdminProductRepository() {
+    public AdminProductRepository() throws SQLException {
         this.connection = DBConnector.getConnection();
     }
 

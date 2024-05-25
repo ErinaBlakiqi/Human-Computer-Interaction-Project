@@ -3,8 +3,10 @@ package controllers;
 import application.Navigator;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
-import javafx.stage.Stage;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import model.dto.UserDto;
 import services.UserService;
 
@@ -21,7 +23,7 @@ public class SignUpController {
     @FXML
     private PasswordField pwdPassword;
     @FXML
-    private PasswordField pwdComfirmPassword;
+    private PasswordField pwdConfirmPassword;
     @FXML
     private Button signupButton;
     @FXML
@@ -36,30 +38,31 @@ public class SignUpController {
         String username = txtUsername.getText();
         String email = txtEmail.getText();
         String password = pwdPassword.getText();
-        String confirmPassword = pwdComfirmPassword.getText();
+        String confirmPassword = pwdConfirmPassword.getText();
 
-        // Create UserDto with default role as "user"
-        UserDto userDto = new UserDto(firstName, lastName, username, email, password, confirmPassword);
-        boolean success = UserService.signUp(userDto);
+        if (password.equals(confirmPassword)) {
+            UserDto userDto = new UserDto(firstName, lastName, username, email, password, confirmPassword);
+            boolean success = UserService.signUp(userDto);
 
-        if (success) {
-            showAlert(Alert.AlertType.INFORMATION, "Registration Successful!", "Welcome " + username);
-            Stage stage = (Stage) signupButton.getScene().getWindow();
-            stage.close();
+            if (success) {
+                showAlert(Alert.AlertType.INFORMATION, "Registration Successful!", "Welcome " + username);
+                Navigator.navigate(Navigator.SIGNIN_PAGE);
+            } else {
+                showAlert(Alert.AlertType.ERROR, "Registration Failed", "An error occurred while creating the account.");
+            }
         } else {
-            showAlert(Alert.AlertType.ERROR, "Registration Failed", "Passwords do not match or an error occurred.");
+            showAlert(Alert.AlertType.ERROR, "Registration Failed", "Passwords do not match.");
         }
     }
 
     @FXML
     private void handleLogin(ActionEvent event) {
-        Navigator.navigate("/views/products.fxml");
+        Navigator.navigate(Navigator.SIGNIN_PAGE);
     }
 
     @FXML
     private void handleCancel(ActionEvent event) {
-        Stage stage = (Stage) cancelButton.getScene().getWindow();
-        stage.close();
+        // Add your cancel logic here if needed
     }
 
     private void showAlert(Alert.AlertType alertType, String title, String message) {

@@ -27,6 +27,9 @@ public class Navigator {
     public final static String CHANGEPASSWORD_PAGE = "/views/ChangePassword.fxml";
 
     public static void navigate(String fxmlFile) {
+        if (stage == null) {
+            throw new IllegalStateException("Stage is not set. Call Navigator.setStage() before navigating.");
+        }
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Navigator.class.getResource(fxmlFile));

@@ -9,7 +9,7 @@ import java.util.List;
 public class CartService {
     private CartRepository cartRepository;
 
-    public CartService() {
+    public CartService() throws SQLException {
         this.cartRepository = new CartRepository();
     }
 

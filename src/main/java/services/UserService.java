@@ -1,31 +1,25 @@
 package services;
 
 import model.User;
-import model.dto.UpdateUserDto;
-import model.dto.UserDto;
 import model.dto.LoginUserDto;
 import model.dto.UserDto;
 import repository.UserRepository;
-import services.PasswordHasher;
 import utils.SessionManager;
 
-import java.sql.SQLException;
-
 public class UserService {
-    private UserRepository userRepository = new UserRepository();
+    private static UserRepository userRepository = new UserRepository();
 
     public static boolean signUp(UserDto userData){
         String password = userData.getPassword();
         String confirmPassword = userData.getConfirmPassword();
 
         if(!password.equals(confirmPassword)){
+            System.out.println("Passwords do not match");
             return false;
         }
 
         String salt = PasswordHasher.generateSalt();
-        String passwordHash = PasswordHasher.generateSaltedHash(
-                password, salt
-        );
+        String passwordHash = PasswordHasher.generateSaltedHash(password, salt);
 
         String role = "user";
 
@@ -41,12 +35,19 @@ public class UserService {
                 role
         );
 
-        return UserRepository.create(createUserData);
+        boolean created = UserRepository.create(createUserData);
+        if (created) {
+            System.out.println("User created successfully");
+        } else {
+            System.out.println("Failed to create user");
+        }
+        return created;
     }
 
     public static boolean login(LoginUserDto loginData){
         User user = UserRepository.getByUsername(loginData.getUsername());
         if(user == null){
+            System.out.println("User not found");
             return false;
         }
 
@@ -57,12 +58,14 @@ public class UserService {
         boolean passwordMatches = PasswordHasher.compareSaltedHash(password, salt, passwordHash);
         if (passwordMatches) {
             SessionManager.setCurrentUser(user);
+            System.out.println("Login successful");
+        } else {
+            System.out.println("Incorrect password");
         }
 
         return passwordMatches;
     }
 
-    ////
     public static User getUserByUsername(String username) {
         return UserRepository.getByUsername(username);
     }

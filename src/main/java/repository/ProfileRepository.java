@@ -38,7 +38,7 @@ public class ProfileRepository {
             return null;
         }
     }
-    public static boolean updateProfile(EditProfileDto editProfileDto){
+    public static boolean updateProfile(EditProfileDto editProfileDto) throws SQLException {
         Connection conn = DBConnector.getConnection();
         String sql = "UPDATE Profiles SET UserName = ?, Location = ?, ContactNumber = ?, ContactEmail = ?, Bio = ? WHERE UserId = ?";
         try{

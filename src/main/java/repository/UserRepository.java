@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import java.sql.SQLException;
 
 public class UserRepository {
 
@@ -51,17 +52,31 @@ public class UserRepository {
 
     private static User getFromResultSet(ResultSet result) {
         try {
-            int id = result.getInt("userId");
-            String firstName = result.getString("firstName");
-            String lastName = result.getString("lastName");
-            String username = result.getString("username");
-            String email = result.getString("email");
-            String salt = result.getString("salt");
-            String passwordHash = result.getString("passwordHash");
+            int id = result.getInt("UserId");  // lexojna prej bazes se te dhenave
+            String firstName = result.getString("FirstName");
+            String lastName = result.getString("LastName");
+            String username = result.getString("UserName");
+            String email = result.getString("Email");
+            String salt = result.getString("Salt");
+            String passwordHash = result.getString("PasswordHash");
             return new User(id, firstName, lastName, username, email, salt, passwordHash);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
+        }
+    }
+    public static boolean updatePassword(int userId, String newPasswordHash, String newSalt) {
+        String query = "UPDATE Users SET passwordHash = ?, salt = ? WHERE userId = ?";
+        try (Connection conn = DBConnector.getConnection();
+             PreparedStatement pst = conn.prepareStatement(query)) {
+            pst.setString(1, newPasswordHash);
+            pst.setString(2, newSalt);
+            pst.setInt(3, userId);
+            int rowsUpdated = pst.executeUpdate();
+            return rowsUpdated > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
         }
     }
 }

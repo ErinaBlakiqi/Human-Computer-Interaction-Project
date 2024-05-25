@@ -16,7 +16,7 @@ module com.example.shitjeblerjetonline {
     opens processor to javafx.fxml;
     opens repository to javafx.fxml;
     opens resources to javafx.fxml;
-    opens utilities to javafx.fxml;
+    opens utils to javafx.fxml;
     opens views to javafx.fxml;
 
 

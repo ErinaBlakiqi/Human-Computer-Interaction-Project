@@ -1,13 +1,43 @@
 package repository;
 
+import model.dto.DailyChartDto;
 import model.dto.EditProfileDto;
+import model.dto.ProfileDto;
 import services.DBConnector;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProfileRepository {
+
+    public static ProfileDto fetchProfileData(int userId) {
+        String sql = "SELECT UserId, UserName, Location, ContactNumber, ContactEmail, Bio, ProfileImageUrl FROM Profiles WHERE UserId = ?";
+        try (Connection conn = DBConnector.getConnection();
+             PreparedStatement pst = conn.prepareStatement(sql)) {
+            pst.setInt(1, userId);
+            ResultSet rs = pst.executeQuery();
+
+            if (rs.next()) {
+                return new ProfileDto(
+                        rs.getInt("UserId"),
+                        rs.getString("UserName"),
+                        rs.getString("Location"),
+                        rs.getString("ContactNumber"),
+                        rs.getString("ContactEmail"),
+                        rs.getString("Bio")
+                );
+            } else {
+                return null;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
     public static boolean updateProfile(EditProfileDto editProfileDto){
         Connection conn = DBConnector.getConnection();
         String sql = "UPDATE Profiles SET UserName = ?, Location = ?, ContactNumber = ?, ContactEmail = ?, Bio = ? WHERE UserId = ?";
@@ -42,5 +72,44 @@ public class ProfileRepository {
             e.printStackTrace();
             return false;
         }
+    }
+    // Fetch bought products data per day
+    public List<DailyChartDto> fetchBoughtProductsData(int userId) {
+        List<DailyChartDto> data = new ArrayList<>();
+        String query = "SELECT DATE(Orders.CreatedAt) AS day, COUNT(*) AS count " +
+                "FROM Orders " +
+                "WHERE Orders.BuyerId = ? " +
+                "GROUP BY day";
+        try (Connection conn = DBConnector.getConnection();
+             PreparedStatement pst = conn.prepareStatement(query)) {
+            pst.setInt(1, userId);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                data.add(new DailyChartDto(rs.getString("day"), rs.getInt("count")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return data;
+    }
+    // Fetch sold products data per day
+    public List<DailyChartDto> fetchSoldProductsData(int userId) {
+        List<DailyChartDto> data = new ArrayList<>();
+        String query = "SELECT DATE(Orders.CreatedAt) AS day, COUNT(*) AS count " +
+                "FROM Orders " +
+                "INNER JOIN Products ON Orders.ProductId = Products.ProductId " +
+                "WHERE Products.SellerId = ? " +
+                "GROUP BY day";
+        try (Connection conn = DBConnector.getConnection();
+             PreparedStatement pst = conn.prepareStatement(query)) {
+            pst.setInt(1, userId);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                data.add(new DailyChartDto(rs.getString("day"), rs.getInt("count")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return data;
     }
 }

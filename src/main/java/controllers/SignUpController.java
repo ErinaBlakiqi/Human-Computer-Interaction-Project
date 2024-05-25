@@ -53,7 +53,7 @@ public class SignUpController {
 
     @FXML
     private void handleLogin(ActionEvent event) {
-        Navigator.navigate(event, Navigator.SIGNIN_PAGE);
+        Navigator.navigate("/views/products.fxml");
     }
 
     @FXML

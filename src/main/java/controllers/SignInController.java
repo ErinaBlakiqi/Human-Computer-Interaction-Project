@@ -31,7 +31,7 @@ public class SignInController {
 
     @FXML
     void handleCreateAccountClick(MouseEvent me) throws IOException {
-        Navigator.navigate(me, Navigator.SIGNUP_PAGE);
+        Navigator.navigate("/views/SignUp.fxml");
     }
 
     @FXML
@@ -59,9 +59,9 @@ public class SignInController {
 
         if (success) {
             if (SessionManager.isAdmin()) {
-                Navigator.navigate(event, Navigator.ADMIN_PAGE);
+                Navigator.navigate("/views/AdminDashboard.fxml");
             } else {
-                Navigator.navigate(event, Navigator.PRODUCTS_PAGE);
+                Navigator.navigate("/views/products.fxml");
             }
             showAlert(Alert.AlertType.INFORMATION, "Login Successful!", "Welcome " + username);
         } else {

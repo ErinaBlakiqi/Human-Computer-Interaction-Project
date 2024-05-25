@@ -16,7 +16,7 @@
                         <Font name="Franklin Gothic Heavy Italic" size="20.0" />
                     </font>
                 </Label>
-                <Button fx:id="signupButton" layoutX="52.0" layoutY="472.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="264.0" style="-fx-background-color: #2F3A47;" text="Sign Up" textFill="WHITE">
+                <Button fx:id="signupButton" layoutX="52.0" layoutY="472.0" mnemonicParsing="false" onAction="#handleSignUp" prefHeight="46.0" prefWidth="264.0" style="-fx-background-color: #2F3A47;" text="Sign Up" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font></Button>
@@ -26,8 +26,8 @@
                 <TextField fx:id="txtEmail" layoutX="51.0" layoutY="330.0" prefHeight="36.0" prefWidth="264.0" promptText="Email" />
                 <PasswordField fx:id="pwdPassowrd" layoutX="51.0" layoutY="380.0" prefHeight="36.0" prefWidth="264.0" promptText="Password" />
                 <PasswordField fx:id="pwdComfirmPassword" layoutX="52.0" layoutY="424.0" prefHeight="36.0" prefWidth="264.0" promptText="Confirm Password" />
-                <Button fx:id="loginButton" layoutX="52.0" layoutY="530.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="118.0" style="-fx-background-color: #2F3A47;" text="Login " textFill="WHITE" />
-            <Button fx:id="cancelButton" layoutX="196.0" layoutY="530.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="118.0" style="-fx-background-color: #2F3A47;" text="Cancel" textFill="WHITE" />
+                <Button fx:id="loginButton" layoutX="52.0" layoutY="530.0" mnemonicParsing="false" onAction="#handleLogin" prefHeight="36.0" prefWidth="118.0" style="-fx-background-color: #2F3A47;" text="Login " textFill="WHITE" />
+            <Button fx:id="cancelButton" layoutX="196.0" layoutY="530.0" mnemonicParsing="false" onAction="#handleCancel" prefHeight="36.0" prefWidth="118.0" style="-fx-background-color: #2F3A47;" text="Cancel" textFill="WHITE" />
             </children>
         </AnchorPane>
     </children>

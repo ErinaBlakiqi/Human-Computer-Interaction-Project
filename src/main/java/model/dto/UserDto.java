@@ -10,8 +10,9 @@ public class UserDto {
     private String passwordHash;
     private String password;
     private String confirmPassword;
+    private String role;
 
-    public UserDto(int id, String firstName, String lastName, String username, String email, String salt, String passwordHash, String password, String confirmPassword) {
+    public UserDto(int id, String firstName, String lastName, String username, String email, String salt, String passwordHash, String password, String confirmPassword,String role) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -34,13 +35,14 @@ public class UserDto {
         this.confirmPassword = confirmPassword;
     }
 
-    public UserDto(String firstName, String lastName, String username, String email, String password, String confirmPassword) {
+    public UserDto(String firstName, String lastName, String username, String email, String password, String confirmPassword,String role) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
         this.email = email;
         this.password = password;
         this.confirmPassword = confirmPassword;
+        this.role=role;
     }
 
     // Getters and Setters
@@ -114,5 +116,13 @@ public class UserDto {
 
     public void setConfirmPassword(String confirmPassword) {
         this.confirmPassword = confirmPassword;
+    }
+
+
+    public String getRole(){
+        return role;
+    }
+    public void setRole(String role){
+        this.role=role;
     }
 }

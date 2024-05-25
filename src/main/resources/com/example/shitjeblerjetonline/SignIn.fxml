@@ -26,7 +26,7 @@
                         <CheckBox fx:id="showpassword" layoutX="56.0" layoutY="307.0" mnemonicParsing="false" text="Show password" />
                         <Button fx:id="loginButton" layoutX="56.0" layoutY="356.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="270.0" style="-fx-background-color: #2F3A47;" text="Login" textFill="WHITE">
                             <font>
-                                <Font size="13.0" />
+                                <Font name="System Bold" size="13.0" />
                             </font>
                         </Button>
                         <Label layoutX="129.0" layoutY="515.0" onMouseClicked="#handleCreateAccountClick" text="Create new account " underline="true" />

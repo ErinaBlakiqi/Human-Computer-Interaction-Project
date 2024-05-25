@@ -58,7 +58,6 @@ CREATE TABLE Profiles(
     ContactNumber VARCHAR(15),
     ContactEmail VARCHAR(255),
     Bio TEXT,
-    PictureURL VARCHAR(255),
     FOREIGN KEY (UserId) REFERENCES Users(UserId)
 );
 

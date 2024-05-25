@@ -19,13 +19,7 @@ public class editAccountController {
     private TextArea bioField;
 
     @FXML
-    private Button changeProfilePictureButton;
-
-    @FXML
     private TextField contactNumberField;
-
-    @FXML
-    private ImageView profileImageView;
 
     @FXML
     private Button saveButton;
@@ -47,10 +41,6 @@ public class editAccountController {
     public void setProfileId(int profileId) {
         this.currentProfileId = profileId;
     }
-    @FXML
-    void handleChangeProfilePicture(ActionEvent event) {
-
-    }
 
     @FXML
     void handleEditAccountSave(ActionEvent event) {
@@ -61,7 +51,6 @@ public class editAccountController {
             String contactNumber = contactNumberField.getText();
             String bio = bioField.getText();
             String contactEmail = contactEmailField.getText();
-            String pictureURL = "path/to/profile/picture";
 
             // Validate input data
             if (username == null || username.isEmpty()) {
@@ -74,7 +63,7 @@ public class editAccountController {
                 throw new IllegalArgumentException("Invalid email format");
             }
             // Create DTO for editing profile
-            EditProfileDto editProfileDto = new EditProfileDto(currentUserId, username, address, contactNumber, bio, contactEmail, pictureURL);
+            EditProfileDto editProfileDto = new EditProfileDto(currentUserId, username, address, contactNumber, bio, contactEmail);
             // Call the service to update the profile
             boolean isUpdated = profileService.updateProfile(editProfileDto);
 

@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import model.dto.AdminProductDTO;
 import model.dto.SellItemDto;
 import services.SellItemService;
 
@@ -95,5 +96,8 @@ public class SellItemController {
     private void loadProducts() {
         productList.clear();
         productList.addAll(sellItemService.getAllItems());
+    }
+
+    public void setProductDetails(AdminProductDTO productDTO) {
     }
 }

@@ -17,23 +17,23 @@
     <left>
         <HBox>
             <VBox prefWidth="200" style="-fx-background-color: #2F3A47;">
-                <VBox alignment="CENTER" spacing="10" style="-fx-padding: 20;">
+                <VBox alignment="CENTER" spacing="10" style="-fx-padding: 80 20 20 20;">
                     <Label style="-fx-text-fill: white; -fx-font-size: 14;" text="Welcome," />
                     <Label style="-fx-text-fill: white; -fx-font-size: 18;" text="Admin" />
                     <Rectangle height="2" style="-fx-fill: #A4A4A4;" width="160" />
                 </VBox>
-                <VBox spacing="10" style="-fx-padding: 20;">
-                    <Button fx:id="btnHome" mnemonicParsing="false" onAction="#handleHome" prefHeight="26.0" prefWidth="160.0" text="Home" />
-                    <Button fx:id="btnProducts" mnemonicParsing="false" onAction="#handleProducts" prefHeight="26.0" prefWidth="160.0" text="Products" />
-                    <Button fx:id="btnOrders" mnemonicParsing="false" onAction="#handleOrders" prefHeight="26.0" prefWidth="160.0" text="Orders" />
-                    <Button fx:id="btnSignOut" mnemonicParsing="false" onAction="#handleSignOut" prefHeight="26.0" prefWidth="160.0" text="Sign Out" />
+                <VBox spacing="10" style="-fx-padding: 40 20 20 20;">
+                    <Button fx:id="btnHome" mnemonicParsing="false" onAction="#handleHome" prefHeight="26.0" prefWidth="160.0" style="-fx-background-color: #2F3A47;" text="Home" textFill="WHITE" />
+                    <Button fx:id="btnProducts" mnemonicParsing="false" onAction="#handleProducts" prefHeight="26.0" prefWidth="160.0" style="-fx-background-color: #2F3A47;" text="Products" textFill="WHITE" />
+                    <Button fx:id="btnOrders" mnemonicParsing="false" onAction="#handleOrders" prefHeight="26.0" prefWidth="160.0" style="-fx-background-color: #2F3A47;" text="Orders" textFill="WHITE" />
+                    <Button fx:id="btnSignOut" mnemonicParsing="false" onAction="#handleSignOut" prefHeight="26.0" prefWidth="160.0" style="-fx-background-color: #2F3A47;" text="Sign Out" textFill="WHITE" />
                 </VBox>
                 <VBox style="-fx-padding: 20; -fx-alignment: bottom-left;">
                 </VBox>
             </VBox>
             <Pane prefHeight="495.0" prefWidth="650.0" style="-fx-background-color: white;">
                 <children>
-                    <AnchorPane layoutX="14.0" layoutY="16.0" prefHeight="465.0" prefWidth="621.0" style="-fx-background-color: white;" stylesheets="@../css/mainFormDesign.css">
+                    <AnchorPane layoutX="15.0" layoutY="14.0" prefHeight="465.0" prefWidth="621.0" style="-fx-background-color: white;" stylesheets="@../css/mainFormDesign.css">
                         <styleClass>
                             <String fx:value="white-bg" />
                             <String fx:value="radius" />

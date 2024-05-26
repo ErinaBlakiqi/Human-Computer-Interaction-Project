@@ -8,7 +8,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
@@ -21,53 +20,22 @@
         <left>
             <HBox>
                 <VBox prefHeight="602.0" prefWidth="200" style="-fx-background-color: #2F3A47;">
-                    <VBox alignment="CENTER" spacing="10" style="-fx-padding: 20;">
+                    <VBox alignment="CENTER" spacing="10" style="-fx-padding: 80 20 20 20;">
                         <Label style="-fx-text-fill: white; -fx-font-size: 14;" text="Welcome," />
                         <Label style="-fx-text-fill: white; -fx-font-size: 18;" text="Admin" />
                         <Rectangle height="2" style="-fx-fill: #A4A4A4;" width="160" />
                     </VBox>
-                    <VBox style="-fx-padding: 20;">
-                        <Button fx:id="productsButton" onMouseClicked="#handleProducts" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16;" text="Products">
-                            <graphic>
-                                <ImageView fitHeight="20" fitWidth="20">
-                                    <!-- Add your products icon path here -->
-                                    <!-- <Image url="@../../Downloads/path/to/products/icon.png" /> -->
-                                </ImageView>
-                            </graphic>
-                        </Button>
-                        <Button fx:id="sellButton" onMouseClicked="#handleSell" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16;" text="Sell">
-                            <graphic>
-                                <ImageView fitHeight="20" fitWidth="20">
-                                    <!-- Add your sell icon path here -->
-                                    <!-- <Image url="@../../Downloads/path/to/sell/icon.png" /> -->
-                                </ImageView>
-                            </graphic>
-                        </Button>
-                        <Button fx:id="userButton" onMouseClicked="#handleUser" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16;" text="Profile">
-                            <graphic>
-                                <ImageView fitHeight="20" fitWidth="20">
-                                    <!-- Add your profile icon path here -->
-                                    <!-- <Image url="@../../Downloads/path/to/profile/icon.png" /> -->
-                                </ImageView>
-                            </graphic>
-                        </Button>
-                        <Button fx:id="adminButton" onMouseClicked="#handleAdmin" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16;" text="Admin">
-                            <graphic>
-                                <ImageView fitHeight="20" fitWidth="20">
-                                    <!-- Add your admin icon path here -->
-                                    <!-- <Image url="@../../Downloads/path/to/admin/icon.png" /> -->
-                                </ImageView>
-                            </graphic>
-                        </Button>
-                        <Button fx:id="signoutButton" onMouseClicked="#handleSignOut" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16;" text="Sign Out">
-                            <graphic>
-                                <ImageView fitHeight="20" fitWidth="20">
-                                    <!-- Add your signout icon path here -->
-                                    <!-- <Image url="@../../Downloads/path/to/signout/icon.png" /> -->
-                                </ImageView>
-                            </graphic>
-                        </Button>
-                    </VBox>
+               <VBox prefHeight="325.0" prefWidth="200.0" spacing="10" style="-fx-padding: 40 20 20 20;">
+                  <children>
+                     <Button fx:id="btnProducts" mnemonicParsing="false" onAction="#navigateToProducts" prefHeight="26.0" prefWidth="160.0" style="-fx-background-color: #2F3A47;" text="Products" textFill="WHITE" />
+                     <Button fx:id="btnSell" mnemonicParsing="false" prefHeight="26.0" prefWidth="160.0" style="-fx-background-color: #2F3A47;" text="Sell" textFill="WHITE" />
+                     <Button fx:id="btnProfile" layoutX="30.0" layoutY="87.0" mnemonicParsing="false" onAction="#navigateToSell" prefHeight="26.0" prefWidth="160.0" style="-fx-background-color: #2F3A47;" text="Profile" textFill="WHITE" />
+                     <Button fx:id="btnSignOut" mnemonicParsing="false" onAction="#handleSignOut" prefHeight="26.0" prefWidth="160.0" style="-fx-background-color: #2F3A47;" text="Sign Out" textFill="WHITE" />
+                     <HBox alignment="BOTTOM_CENTER" prefHeight="58.0" prefWidth="160.0" />
+                     <Button fx:id="btnChangeGjuhen" mnemonicParsing="false" onAction="#handleChange" prefHeight="23.0" prefWidth="160.0" style="-fx-background-color: #2F3A47;" text="EN | SQ" textFill="WHITE" />
+                     <Button fx:id="btnHelp" mnemonicParsing="false" onAction="#handleHelp" prefHeight="26.0" prefWidth="160.0" style="-fx-background-color: #2F3A47;" text="Help" textFill="WHITE" />
+                  </children>
+               </VBox>
                 </VBox>
             </HBox>
         </left>

@@ -171,10 +171,7 @@ public class AccountController {
         Navigator.navigate("/views/sellitem.fxml");
     }
 
-    @FXML
-    void handleSignOut(MouseEvent event) {
-        Navigator.navigate("/views/SignIn.fxml");
-    }
+
 
     @FXML
     void handleUser(MouseEvent event) {
@@ -283,5 +280,20 @@ public class AccountController {
         } catch (Exception e) {
             showAlert("Error", "An unexpected error occurred: " + e.getMessage());
         }
+    }
+
+    public void navigateToProducts(ActionEvent actionEvent) {Navigator.navigate(Navigator.PRODUCTS_PAGE);
+    }
+
+    public void navigateToSell(ActionEvent actionEvent) { Navigator.navigate(Navigator.SELL_PAGE);
+    }
+
+    public void handleChange(ActionEvent actionEvent) {
+    }
+
+    public void handleHelp(ActionEvent actionEvent) {
+    }
+
+    public void handleSignOut(ActionEvent actionEvent) {
     }
 }

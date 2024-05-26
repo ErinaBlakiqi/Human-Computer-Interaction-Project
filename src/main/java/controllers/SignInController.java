@@ -4,6 +4,8 @@ import application.Navigator;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import model.dto.LoginUserDto;
@@ -47,6 +49,29 @@ public class SignInController {
                 txtPassword.setVisible(false);
             }
         });
+    }
+
+    @FXML
+    public void onPressLogIn(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+
+            String username = txtUsername.getText();
+            String password = pwdPassword.getText();
+
+            LoginUserDto loginUserDto = new LoginUserDto(username, password);
+            boolean success = UserService.login(loginUserDto);
+
+            if (success) {
+                if (SessionManager.isAdmin()) {
+                    Navigator.navigate(Navigator.ADMIN_DASHBOARD_PAGE);
+                } else {
+                    Navigator.navigate(Navigator.PRODUCTS_PAGE);
+                }
+                showAlert(Alert.AlertType.INFORMATION, "Login Successful!", "Welcome " + username);
+            } else {
+                loginMessageLabel.setText("Invalid username or password.");
+            }
+        }
     }
 
     @FXML

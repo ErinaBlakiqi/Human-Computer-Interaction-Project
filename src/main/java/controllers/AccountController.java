@@ -42,7 +42,10 @@ public class AccountController {
     private NumberAxis boughtYAxis;
 
     @FXML
-    private Label contactLabel;
+    private Label contactNumberLabel;
+
+    @FXML
+    private Label contactEmailLabel;
 
     @FXML
     private TableColumn<?, ?> dateBoughtColumn;
@@ -52,7 +55,8 @@ public class AccountController {
 
     @FXML
     private Button editAccountButton;
-
+    @FXML
+    private Button changePasswordButton;
     @FXML
     private Button homeButton;
 
@@ -101,10 +105,13 @@ public class AccountController {
     @FXML
     private Label usernameLabel;
 
+    private ProfileRepository profileRepository = new ProfileRepository();
+
     public void setProfileData(ProfileDto profile) {
         usernameLabel.setText(profile.getUserName());
         locationLabel.setText(profile.getLocation());
-        contactLabel.setText(profile.getContactEmail() + "\n" + profile.getContactNumber());
+        contactNumberLabel.setText(profile.getContactNumber());
+        contactEmailLabel.setText(profile.getContactEmail());
         bioLabel.setText(profile.getBio());
     }
     @FXML
@@ -118,6 +125,13 @@ public class AccountController {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/editAccount.fxml"));
             Parent editAccountRoot = fxmlLoader.load();
 
+            editAccountController controller = fxmlLoader.getController();
+            int userId = getCurrentUserId();
+            ProfileDto profile = profileRepository.fetchProfileData(userId);
+            if (profile != null) {
+                controller.setUserId(userId);
+                controller.setProfileData(profile);
+            }
             Stage editAccountStage = new Stage();
             editAccountStage.setTitle("Edit Account");
             editAccountStage.setScene(new Scene(editAccountRoot));
@@ -131,6 +145,9 @@ public class AccountController {
 
             // Show the new window and wait until it is closed
             editAccountStage.showAndWait();
+
+            // Refresh the profile data after the edit window is closed
+            refreshProfileData();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -157,22 +174,39 @@ public class AccountController {
     }
 
     public void handleChangePassword(ActionEvent actionEvent) {
-        Navigator.navigate("/views/ChangePassword.fxml");
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/ChangePassword.fxml"));
+            Parent changePasswordRoot = fxmlLoader.load();
+
+            Stage changePasswordStage = new Stage();
+            changePasswordStage.setScene(new Scene(changePasswordRoot));
+
+            // Set the new window as a modal dialog
+            changePasswordStage.initModality(Modality.WINDOW_MODAL);
+
+            // Set the owner of the new window
+            Stage primaryStage = (Stage) changePasswordButton.getScene().getWindow();
+            changePasswordStage.initOwner(primaryStage);
+
+            // Show the new window and wait until it is closed
+            changePasswordStage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     @FXML
     public void initialize() {
         try {
             int userId = getCurrentUserId();
-            ProfileRepository profileService = null;
-            ProfileDto profile = profileService.fetchProfileData(userId);
+            ProfileDto profile = profileRepository.fetchProfileData(userId);
             if (profile != null) {
                 setProfileData(profile);
             } else {
                 showAlert("Profile Data Not Found", "No profile data found for the current user.");
             }
 
-            List<DailyChartDto> boughtData = profileService.fetchBoughtProductsData(userId);
-            List<DailyChartDto> soldData = profileService.fetchSoldProductsData(userId);
+            List<DailyChartDto> boughtData = profileRepository.fetchBoughtProductsData(userId);
+            List<DailyChartDto> soldData = profileRepository.fetchSoldProductsData(userId);
 
             populateChart(boughtProductsChartProfile, boughtData);
             populateChart(soldProductsChartProfile, soldData);
@@ -206,5 +240,29 @@ public class AccountController {
             series.getData().add(new XYChart.Data<>(item.getDay(), item.getCount()));
         }
         chart.getData().add(series);
+    }
+
+    private void refreshProfileData() {
+        try {
+            int userId = getCurrentUserId();
+            ProfileRepository profileService = new ProfileRepository(); // Ensure ProfileRepository is initialized
+            ProfileDto profile = profileService.fetchProfileData(userId);
+            if (profile != null) {
+                setProfileData(profile);
+            } else {
+                showAlert("Profile Data Not Found", "No profile data found for the current user.");
+            }
+
+            List<DailyChartDto> boughtData = profileService.fetchBoughtProductsData(userId);
+            List<DailyChartDto> soldData = profileService.fetchSoldProductsData(userId);
+
+            populateChart(boughtProductsChartProfile, boughtData);
+            populateChart(soldProductsChartProfile, soldData);
+
+        } catch (IllegalStateException e) {
+            showAlert("User Not Logged In", "No user is currently logged in.");
+        } catch (Exception e) {
+            showAlert("Error", "An unexpected error occurred: " + e.getMessage());
+        }
     }
 }

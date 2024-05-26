@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
+import javafx.stage.Stage;
 import model.User;
 import model.dto.UpdateUserDto;
 import services.ChangePasswordService;
@@ -65,15 +66,21 @@ public class ChangePasswordController {
             currentPasswordField.clear();
             newPasswordField.clear();
             confirmNewPasswordField.clear();
+
+            // Close the current window
+            Stage stage = (Stage) changePasswordButton.getScene().getWindow();
+            stage.close();
         } else {
             showAlert(Alert.AlertType.ERROR, "Error", "Failed to update password.");
         }
     }
 
-//    @FXML
-//    private void handleCancel(ActionEvent event) {
-//        Navigator.navigate(event, Navigator.USER_PAGE); // e ndrron me shku te prfile page
-//    }
+    @FXML
+    private void handleCancel(ActionEvent event) {
+        // Close the current window
+        Stage stage = (Stage) cancelButton.getScene().getWindow();
+        stage.close();
+    }
 
     private void showAlert(Alert.AlertType alertType, String title, String message) {
         Alert alert = new Alert(alertType);

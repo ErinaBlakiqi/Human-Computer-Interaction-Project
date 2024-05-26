@@ -7,8 +7,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 import model.dto.EditProfileDto;
+import model.dto.ProfileDto;
 import services.ProfileService;
+
+import java.sql.SQLException;
 
 public class editAccountController {
 
@@ -19,6 +23,9 @@ public class editAccountController {
     private TextArea bioField;
 
     @FXML
+    private TextField contactEmailField;
+
+    @FXML
     private TextField contactNumberField;
 
     @FXML
@@ -26,8 +33,6 @@ public class editAccountController {
 
     @FXML
     private TextField usernameField;
-    @FXML
-    private TextField contactEmailField;
 
     private ProfileService profileService = new ProfileService();
     // Dynamic user and profile IDs
@@ -42,6 +47,13 @@ public class editAccountController {
         this.currentProfileId = profileId;
     }
 
+    public void setProfileData(ProfileDto profile) {
+        usernameField.setText(profile.getUserName());
+        addressField.setText(profile.getLocation());
+        contactNumberField.setText(profile.getContactNumber());
+        contactEmailField.setText(profile.getContactEmail());
+        bioField.setText(profile.getBio());
+    }
     @FXML
     void handleEditAccountSave(ActionEvent event) {
         try {
@@ -63,20 +75,27 @@ public class editAccountController {
                 throw new IllegalArgumentException("Invalid email format");
             }
             // Create DTO for editing profile
-            EditProfileDto editProfileDto = new EditProfileDto(currentUserId, username, address, contactNumber, bio, contactEmail);
+            EditProfileDto editProfileDto = new EditProfileDto(currentUserId, username, address, contactNumber, contactEmail, bio);
             // Call the service to update the profile
             boolean isUpdated = profileService.updateProfile(editProfileDto);
 
             // Provide feedback to user
             if (isUpdated) {
                 showAlert(Alert.AlertType.INFORMATION, "Success", "Profile updated successfully.");
+
+                Stage stage = (Stage) saveButton.getScene().getWindow();
+                stage.close();
             } else {
                 showAlert(Alert.AlertType.ERROR, "Error", "Failed to update profile.");
             }
         } catch (IllegalArgumentException e) {
             showAlert(Alert.AlertType.ERROR, "Validation Error", e.getMessage());
-        } catch (Exception e) {
+        } catch (SQLException e) {
+             showAlert(Alert.AlertType.ERROR, "Database Error", "Database error occurred: " + e.getMessage());
+             e.printStackTrace();
+        }catch (Exception e) {
             showAlert(Alert.AlertType.ERROR, "Error", "An unexpected error occurred.");
+            e.printStackTrace();
         }
     }
     private void showAlert(Alert.AlertType alertType, String title, String message) {

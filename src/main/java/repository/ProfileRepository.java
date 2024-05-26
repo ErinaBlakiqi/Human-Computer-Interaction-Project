@@ -15,7 +15,7 @@ import java.util.List;
 public class ProfileRepository {
 
     public static ProfileDto fetchProfileData(int userId) {
-        String sql = "SELECT UserId, UserName, Location, ContactNumber, ContactEmail, Bio, ProfileImageUrl FROM Profiles WHERE UserId = ?";
+        String sql = "SELECT UserId, UserName, Location, ContactNumber, ContactEmail, Bio FROM Profiles WHERE UserId = ?";
         try (Connection conn = DBConnector.getConnection();
              PreparedStatement pst = conn.prepareStatement(sql)) {
             pst.setInt(1, userId);
@@ -52,9 +52,14 @@ public class ProfileRepository {
             pst.setInt(6, editProfileDto.getUserId());
 
             int affectedRows = pst.executeUpdate();
-            return affectedRows > 0;
-
+            if (affectedRows > 0) {
+                return true;
+            } else {
+                System.err.println("No rows affected during profile update for user ID: " + editProfileDto.getUserId());
+                return false;
+            }
         } catch (SQLException e) {
+            System.err.println("SQL error during profile update: " + e.getMessage());
             e.printStackTrace();
             return false;
         }

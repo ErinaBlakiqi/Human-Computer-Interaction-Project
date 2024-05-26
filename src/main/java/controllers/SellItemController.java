@@ -4,10 +4,19 @@ import application.Navigator;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.HBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.util.Callback;
 import model.dto.SellItemDto;
 import services.SellItemService;
 
+import java.io.IOException;
 import java.util.List;
 
 public class SellItemController {
@@ -29,6 +38,8 @@ public class SellItemController {
     private TableColumn<SellItemDto, Integer> quantityColumn;
     @FXML
     private TableColumn<SellItemDto, Double> priceColumn;
+    @FXML
+    private TableColumn<SellItemDto, Void> actionColumn; // Add action column
     @FXML
     private Button homeButton;
     @FXML
@@ -76,6 +87,9 @@ public class SellItemController {
                 "Pets",
                 "Office Supplies"
         ));
+
+        // Add action buttons in the table column
+        actionColumn.setCellFactory(createActionCellFactory());
 
         // Log in a user programmatically for testing
         setCurrentUserId(1); // Replace with a valid user ID from your database
@@ -142,6 +156,71 @@ public class SellItemController {
         List<SellItemDto> items = sellItemService.getItemsByUserId(currentUserId);
         if (items != null) {
             productList.addAll(items);
+        }
+    }
+
+    private Callback<TableColumn<SellItemDto, Void>, TableCell<SellItemDto, Void>> createActionCellFactory() {
+        return new Callback<TableColumn<SellItemDto, Void>, TableCell<SellItemDto, Void>>() {
+            @Override
+            public TableCell<SellItemDto, Void> call(final TableColumn<SellItemDto, Void> param) {
+                final TableCell<SellItemDto, Void> cell = new TableCell<SellItemDto, Void>() {
+
+                    private final Button btnEdit = new Button("Edit");
+                    private final Button btnDelete = new Button("Delete");
+
+                    {
+                        btnEdit.setOnAction(event -> {
+                            SellItemDto product = getTableView().getItems().get(getIndex());
+                            handleEditProduct(product);
+                        });
+                        btnDelete.setOnAction(event -> {
+                            SellItemDto product = getTableView().getItems().get(getIndex());
+                            handleDeleteProduct(product);
+                        });
+                    }
+
+                    @Override
+                    public void updateItem(Void item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                        } else {
+                            HBox buttons = new HBox(btnEdit, btnDelete);
+                            setGraphic(buttons);
+                        }
+                    }
+                };
+                return cell;
+            }
+        };
+    }
+
+    private void handleEditProduct(SellItemDto product) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/SellItemEdit.fxml"));
+            Parent root = loader.load();
+
+            SellItemEditController controller = loader.getController();
+            controller.setProductDetails(product, sellItemService);
+
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Edit Product");
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
+
+            loadProducts();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void handleDeleteProduct(SellItemDto product) {
+        try {
+            sellItemService.deleteItem(product.getProductId());
+            productTableView.getItems().remove(product);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

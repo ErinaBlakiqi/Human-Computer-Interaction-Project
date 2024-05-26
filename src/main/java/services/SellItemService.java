@@ -37,4 +37,20 @@ public class SellItemService {
             e.printStackTrace();
         }
     }
+
+    public void updateItem(SellItemDto item) {
+        try {
+            repository.updateItem(item);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteItem(int itemId) {
+        try {
+            repository.deleteItem(itemId);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

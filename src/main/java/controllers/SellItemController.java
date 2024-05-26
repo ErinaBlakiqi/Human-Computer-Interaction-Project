@@ -217,13 +217,16 @@ public class SellItemController {
 
     private void handleDeleteProduct(SellItemDto product) {
         try {
+            System.out.println("Attempting to delete product with ID: " + product.getProductId());
             sellItemService.deleteItem(product.getProductId());
             productTableView.getItems().remove(product);
+            System.out.println("Product deleted successfully");
         } catch (Exception e) {
             e.printStackTrace();
             showAlert("Error", "Unable to delete product: " + e.getMessage());
         }
     }
+
 
     private void onEdit() {
         if (productTableView.getSelectionModel().getSelectedItem() != null) {

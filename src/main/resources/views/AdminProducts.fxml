@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
@@ -11,7 +12,6 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
-<?import javafx.scene.control.cell.PropertyValueFactory?>
 
 <BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AdminProductsController">
     <left>
@@ -21,22 +21,30 @@
                     <Label style="-fx-text-fill: white; -fx-font-size: 14;" text="Welcome," />
                     <Label style="-fx-text-fill: white; -fx-font-size: 18;" text="Admin" />
                     <Rectangle height="2" style="-fx-fill: #A4A4A4;" width="160" />
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
                 </VBox>
-                <VBox style="-fx-padding: 20;">
-                    <Button contentDisplay="CENTER" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16;" text="Dashboard" onAction="#navigateToDashboard"/>
-                    <Button style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16;" text="Products" />
-                    <Button alignment="TOP_LEFT" minWidth="42.0" prefHeight="36.0" prefWidth="55.0" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16;" text="Sell" onAction="#navigateToSell"/>
-                    <Button style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16;" text="Profile" onAction="#navigateToProfile"/>
-                </VBox>
-                <VBox style="-fx-padding: 20; -fx-alignment: bottom-left;">
-                    <Button prefHeight="33.0" prefWidth="118.0" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16;" text="Sign Out" />
-                </VBox>
+            <VBox prefHeight="380.0" prefWidth="200.0" spacing="10" style="-fx-padding: 40 20 20 20;">
+               <children>
+                  <Button fx:id="btnDashboard" mnemonicParsing="false" onAction="#navigateToDashboard" prefHeight="26.0" prefWidth="160.0" style="-fx-background-color: #2F3A47;" text="Dashboard" textFill="WHITE" />
+                  <Button fx:id="btnProducts" mnemonicParsing="false" prefHeight="26.0" prefWidth="160.0" style="-fx-background-color: #2F3A47;" text="Products" textFill="WHITE" />
+                  <Button fx:id="btnOrders" mnemonicParsing="false" onAction="#navigateToOrders" prefHeight="26.0" prefWidth="160.0" style="-fx-background-color: #2F3A47;" text="Orders" textFill="WHITE" />
+                  <Button fx:id="btnSignOut" mnemonicParsing="false" onAction="#handleSignOut" prefHeight="26.0" prefWidth="160.0" style="-fx-background-color: #2F3A47;" text="Sign Out" textFill="WHITE" />
+                  <HBox alignment="BOTTOM_CENTER" prefHeight="73.0" prefWidth="160.0" />
+                  <Button fx:id="btnChangeGjuhen" mnemonicParsing="false" onAction="#handleChange" prefHeight="26.0" prefWidth="166.0" style="-fx-background-color: #2F3A47;" text="EN | SQ" textFill="WHITE" />
+                  <Button fx:id="btnHelp" mnemonicParsing="false" onAction="#handleHelp" prefHeight="26.0" prefWidth="160.0" style="-fx-background-color: #2F3A47;" text="Help" textFill="WHITE" />
+               </children>
+            </VBox>
+            <HBox.margin>
+               <Insets />
+            </HBox.margin>
             </VBox>
             <Pane fx:id="pane_Products" prefHeight="495.0" prefWidth="650.0" style="-fx-background-color: white;">
                 <children>
                     <AnchorPane layoutX="3.0" layoutY="3.0" prefHeight="488.0" prefWidth="644.0" style="-fx-border-radius: 5; -fx-border-color: #2F3A47;">
                         <children>
-                            <TableView fx:id="tableProductsPage" layoutX="2.0" layoutY="45.0" prefHeight="439.0" prefWidth="632.0">
+                            <TableView fx:id="tableProductsPage" layoutX="6.0" layoutY="48.0" prefHeight="439.0" prefWidth="632.0">
                                 <columns>
                                     <TableColumn fx:id="colProductName_products" prefWidth="135.99993896484375" text="Product Name" />
                                     <TableColumn fx:id="colSeller_products" prefWidth="138.4000244140625" text="Seller" />

@@ -176,4 +176,16 @@ public class AdminProductsController {
     private void navigateToProfile(ActionEvent actionEvent) {
         Navigator.navigate(Navigator.USER_PAGE);
     }
+
+    public void navigateToOrders(ActionEvent actionEvent) {Navigator.navigate(Navigator.ADMIN_ORDERS_PAGE);
+    }
+
+    public void handleSignOut(ActionEvent actionEvent) {
+    }
+
+    public void handleHelp(ActionEvent actionEvent) {
+    }
+
+    public void handleChange(ActionEvent actionEvent) {
+    }
 }

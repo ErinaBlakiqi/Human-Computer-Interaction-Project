@@ -3,6 +3,9 @@ package services;
 import model.dto.SellItemDto;
 import repository.SellItemRepository;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Collections;
 import java.util.List;
@@ -41,6 +44,20 @@ public class SellItemService {
             repository.deleteItem(productId);
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+    }
+
+    public boolean isUserExistsAndIsSeller(int userId) {
+        // Implement database check to see if user exists and is a seller
+        try (Connection conn = DBConnector.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement("SELECT 1 FROM Users WHERE UserId = ? AND Roli = 'Seller'")) {
+            pstmt.setInt(1, userId);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                return rs.next();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
         }
     }
 }

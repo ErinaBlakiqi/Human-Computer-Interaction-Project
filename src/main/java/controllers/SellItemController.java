@@ -4,7 +4,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import model.dto.AdminProductDTO;
 import model.dto.SellItemDto;
 import services.SellItemService;
 
@@ -29,6 +28,8 @@ public class SellItemController {
     private TableColumn<SellItemDto, Integer> quantityColumn;
     @FXML
     private TableColumn<SellItemDto, Double> priceColumn;
+    @FXML
+    private TableColumn<SellItemDto, Void> actionColumn;
 
     private final ObservableList<SellItemDto> productList = FXCollections.observableArrayList();
     private final SellItemService sellItemService = new SellItemService();
@@ -65,9 +66,15 @@ public class SellItemController {
                 newItem.setCategoryId(typeComboBox.getSelectionModel().getSelectedIndex() + 1);
                 newItem.setSellerId(currentUserId); // Set the current user ID
 
-                sellItemService.addItem(newItem);
-                loadProducts(); // Reload the table to include the new item
-                clearInputFields();
+                System.out.println("Adding item for SellerId: " + currentUserId); // Add logging
+
+                if (sellItemService.isUserExistsAndIsSeller(currentUserId)) {
+                    sellItemService.addItem(newItem);
+                    loadProducts(); // Reload the table to include the new item
+                    clearInputFields();
+                } else {
+                    showAlert("Error", "Seller ID does not exist or is not a seller.");
+                }
             }
         } catch (NumberFormatException e) {
             showAlert("Invalid Input", "Price and Quantity must be numbers.");
@@ -77,46 +84,12 @@ public class SellItemController {
         }
     }
 
-    @FXML
-    private void handleUpdate() {
-        try {
-            if (isInputValid()) {
-                SellItemDto selectedItem = productTableView.getSelectionModel().getSelectedItem();
-                if (selectedItem != null) {
-                    selectedItem.setProductName(productNameField.getText());
-                    selectedItem.setPrice(Double.parseDouble(priceField.getText()));
-                    selectedItem.setQuantity(Integer.parseInt(quantityField.getText()));
-                    selectedItem.setCategoryId(typeComboBox.getSelectionModel().getSelectedIndex() + 1);
-
-                    sellItemService.updateItem(selectedItem);
-                    loadProducts(); // Reload the table to reflect the updated item
-                    clearInputFields();
-                }
-            }
-        } catch (NumberFormatException e) {
-            showAlert("Invalid Input", "Price and Quantity must be numbers.");
-        } catch (Exception e) {
-            showAlert("Error", "An error occurred while updating the item.");
-            e.printStackTrace();
-        }
-    }
-
-    @FXML
-    private void handleDelete() {
-        SellItemDto selectedItem = productTableView.getSelectionModel().getSelectedItem();
-        if (selectedItem != null) {
-            sellItemService.deleteItem(selectedItem.getProductId());
-            loadProducts(); // Reload the table to remove the deleted item
-        }
-    }
-
-    private void onEdit() {
-        if (productTableView.getSelectionModel().getSelectedItem() != null) {
-            SellItemDto selectedItem = productTableView.getSelectionModel().getSelectedItem();
-            productNameField.setText(selectedItem.getProductName());
-            priceField.setText(String.valueOf(selectedItem.getPrice()));
-            quantityField.setText(String.valueOf(selectedItem.getQuantity()));
-            typeComboBox.getSelectionModel().select(selectedItem.getCategoryId() - 1);
+    public void setCurrentUserId(int userId) {
+        if (sellItemService.isUserExistsAndIsSeller(userId)) {
+            this.currentUserId = userId;
+            loadProducts(); // Reload products for the new user ID
+        } else {
+            throw new IllegalArgumentException("User ID does not exist or is not a seller.");
         }
     }
 
@@ -128,12 +101,14 @@ public class SellItemController {
         }
     }
 
-    public void setCurrentUserId(int userId) {
-        this.currentUserId = userId;
-        loadProducts(); // Reload products for the new user ID
-    }
-
-    public void setProductDetails(AdminProductDTO productDTO) {
+    private void onEdit() {
+        if (productTableView.getSelectionModel().getSelectedItem() != null) {
+            SellItemDto selectedItem = productTableView.getSelectionModel().getSelectedItem();
+            productNameField.setText(selectedItem.getProductName());
+            priceField.setText(String.valueOf(selectedItem.getPrice()));
+            quantityField.setText(String.valueOf(selectedItem.getQuantity()));
+            typeComboBox.getSelectionModel().select(selectedItem.getCategoryId() - 1);
+        }
     }
 
     private boolean isInputValid() {

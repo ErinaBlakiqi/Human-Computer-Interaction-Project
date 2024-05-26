@@ -13,6 +13,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -50,6 +52,9 @@ public class AdminProductsController {
     @FXML
     private TextField fieldProductSearch;
 
+    @FXML
+    private Button btnHelp;
+
     private AdminProductService adminProductService;
     private ObservableList<AdminProductDTO> masterData = FXCollections.observableArrayList();
     private Filter<AdminProductDTO> productFilter = new ProductFilter();
@@ -76,6 +81,18 @@ public class AdminProductsController {
             ObservableList<AdminProductDTO> filteredList = productFilter.filter(masterData, newValue);
             tableProductsPage.setItems(filteredList);
             colAction_products.setCellFactory(createActionCellFactory()); // Re-apply cell factory
+        });
+
+        // Set up key event filter to detect F1 key press on the parent node
+        tableProductsPage.sceneProperty().addListener((observable, oldScene, newScene) -> {
+            if (newScene != null) {
+                newScene.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+                    if (event.getCode() == KeyCode.F1) {
+                        handleHelp();
+                        event.consume();
+                    }
+                });
+            }
         });
     }
 
@@ -185,8 +202,33 @@ public class AdminProductsController {
         Navigator.navigate(Navigator.SIGNIN_PAGE);
     }
 
-    public void handleHelp(ActionEvent actionEvent) {
+
+    @FXML
+    private void handleHelp() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/HelpPopUp.fxml"));
+            Parent root = loader.load();
+
+            HelpPopUpController controller = loader.getController();
+            controller.setHelpText("This is the Admin Products page.\n\n" +
+                    "You can perform the following actions:\n" +
+                    "- **Add a new product**: Fill in the product details and click 'Add'.\n" +
+                    "- **Edit a product**: Click the 'Edit' button next to the product you want to edit.\n" +
+                    "- **Delete a product**: Click the 'Delete' button next to the product you want to delete.\n" +
+                    "- **Search for products**: Use the search bar to filter products by name.\n" +
+                    "- **Navigate to other pages**: Use the navigation buttons on the left.\n" +
+                    "\nUse F1 to open this help dialog.");
+
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Help");
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+
 
     public void handleChange(ActionEvent actionEvent) {
     }

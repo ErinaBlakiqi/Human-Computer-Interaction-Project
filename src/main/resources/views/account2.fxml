@@ -8,115 +8,112 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 
-<AnchorPane maxHeight="-Infinity" prefHeight="490.0" prefWidth="827.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AccountController">
-    <BorderPane prefHeight="573.0" prefWidth="825.0">
-        <left>
-            <HBox>
-                <VBox prefHeight="602.0" prefWidth="200" style="-fx-background-color: #2F3A47;">
-                    <VBox alignment="CENTER" spacing="10" style="-fx-padding: 80 20 20 20;">
+<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AccountController">
+   <left>
+      <HBox>
+         <children>
+            <VBox prefWidth="200.0" style="-fx-background-color: #2F3A47;">
+               <children>
+                  <VBox alignment="CENTER" spacing="10" style="-fx-padding: 80 20 20 20;">
+                     <children>
                         <Label style="-fx-text-fill: white; -fx-font-size: 14;" text="Welcome," />
                         <Label style="-fx-text-fill: white; -fx-font-size: 18;" text="Admin" />
                         <Rectangle height="2" style="-fx-fill: #A4A4A4;" width="160" />
-                    </VBox>
-               <VBox prefHeight="325.0" prefWidth="200.0" spacing="10" style="-fx-padding: 40 20 20 20;">
-                  <children>
-                     <Button fx:id="btnProducts" mnemonicParsing="false" onAction="#navigateToProducts" prefHeight="26.0" prefWidth="160.0" style="-fx-background-color: #2F3A47;" text="Products" textFill="WHITE" />
-                     <Button fx:id="btnSell" mnemonicParsing="false" onAction="#navigateToSell" prefHeight="26.0" prefWidth="160.0" style="-fx-background-color: #2F3A47;" text="Sell" textFill="WHITE" />
-                     <Button fx:id="btnProfile" layoutX="30.0" layoutY="87.0" mnemonicParsing="false"  prefHeight="26.0" prefWidth="160.0" style="-fx-background-color: #2F3A47;" text="Profile" textFill="WHITE" />
-                     <Button fx:id="btnSignOut" mnemonicParsing="false" onAction="#handleSignOut" prefHeight="26.0" prefWidth="160.0" style="-fx-background-color: #2F3A47;" text="Sign Out" textFill="WHITE" />
-                     <HBox alignment="BOTTOM_CENTER" prefHeight="58.0" prefWidth="160.0" />
-                     <Button fx:id="btnChangeGjuhen" mnemonicParsing="false" onAction="#handleChange" prefHeight="23.0" prefWidth="160.0" style="-fx-background-color: #2F3A47;" text="EN | SQ" textFill="WHITE" />
-                     <Button fx:id="btnHelp" mnemonicParsing="false" onAction="#handleHelp" prefHeight="26.0" prefWidth="160.0" style="-fx-background-color: #2F3A47;" text="Help" textFill="WHITE" />
-                  </children>
-               </VBox>
-                </VBox>
-            </HBox>
-        </left>
-        <center>
-            <VBox spacing="20">
-                <padding>
-                    <Insets bottom="10" left="10" right="10" top="10" />
-                </padding>
-                <HBox alignment="CENTER_LEFT" prefHeight="144.0" prefWidth="619.0" spacing="10">
-                    <padding>
-                        <Insets bottom="10" left="10" right="10" top="10" />
-                    </padding>
-                    <VBox prefHeight="100.0" prefWidth="235.0" spacing="5">
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="325.0" prefWidth="200.0" spacing="10" style="-fx-padding: 40 20 20 20;">
+                     <children>
+                        <Button fx:id="btnProducts" mnemonicParsing="false" onAction="#navigateToProducts" prefHeight="26.0" prefWidth="160.0" style="-fx-background-color: #2F3A47;" text="Products" textFill="WHITE" />
+                        <Button fx:id="btnSell" mnemonicParsing="false" onAction="#navigateToSell" prefHeight="26.0" prefWidth="160.0" style="-fx-background-color: #2F3A47;" text="Sell" textFill="WHITE" />
+                        <Button fx:id="btnProfile" layoutX="30.0" layoutY="87.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="160.0" style="-fx-background-color: #2F3A47;" text="Profile" textFill="WHITE" />
+                        <Button fx:id="btnSignOut" mnemonicParsing="false" onAction="#handleSignOut" prefHeight="26.0" prefWidth="160.0" style="-fx-background-color: #2F3A47;" text="Sign Out" textFill="WHITE" />
+                        <HBox alignment="BOTTOM_CENTER" prefHeight="58.0" prefWidth="160.0" />
+                        <Button fx:id="btnChangeGjuhen" mnemonicParsing="false" onAction="#handleChange" prefHeight="23.0" prefWidth="160.0" style="-fx-background-color: #2F3A47;" text="EN | SQ" textFill="WHITE" />
+                        <Button fx:id="btnHelp" mnemonicParsing="false" onAction="#handleHelp" prefHeight="26.0" prefWidth="160.0" style="-fx-background-color: #2F3A47;" text="Help" textFill="WHITE" />
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </left>
+   <center>
+      <VBox spacing="20">
+         <padding>
+            <Insets bottom="10" left="10" right="10" top="10" />
+         </padding>
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="144.0" prefWidth="619.0" spacing="10">
+               <padding>
+                  <Insets bottom="10" left="10" right="10" top="10" />
+               </padding>
+               <children>
+                  <VBox prefHeight="100.0" prefWidth="235.0" spacing="5">
+                     <children>
                         <Label fx:id="usernameLabel" style="-fx-font-weight: bold;" text="Username" />
                         <Label fx:id="locationLabel" text="London, UK" />
                         <HBox>
-                            <Label fx:id="contactNumberLabel" text="Contact number" />
+                           <children>
+                              <Label fx:id="contactNumberLabel" text="Contact number" />
+                           </children>
                         </HBox>
                         <Label fx:id="contactEmailLabel" text="Contact email" />
                         <Label fx:id="bioLabel" text="Bio" />
                         <HBox prefHeight="100.0" prefWidth="200.0" />
-                    </VBox>
-                    <Pane HBox.hgrow="ALWAYS" />
-                    <VBox layoutX="113.0" layoutY="9.0" prefHeight="104.0" prefWidth="125.0" spacing="10">
-                        <children>
-                            <Button fx:id="editAccountButton" alignment="BOTTOM_CENTER" contentDisplay="CENTER" onAction="#handleEditAccount" text="Edit Account" />
-                            <Button fx:id="changePasswordButton" mnemonicParsing="false" onAction="#handleChangePassword" prefHeight="25.0" prefWidth="117.0" text="Change Password" />
-                        </children>
-                    </VBox>
-                </HBox>
-                <HBox spacing="20">
-                    <VBox>
-                  <Label text="Last Items Bought" />
-                        <!-- Table for Last Items Bought -->
+                     </children>
+                  </VBox>
+                  <Pane HBox.hgrow="ALWAYS" />
+                  <VBox layoutX="113.0" layoutY="9.0" prefHeight="104.0" prefWidth="125.0" spacing="10">
+                     <children>
+                        <Button fx:id="editAccountButton" alignment="BOTTOM_CENTER" contentDisplay="CENTER" onAction="#handleEditAccount" text="Edit Account" />
+                        <Button fx:id="changePasswordButton" mnemonicParsing="false" onAction="#handleChangePassword" prefHeight="25.0" prefWidth="117.0" text="Change Password" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <Pane prefHeight="24.0" prefWidth="605.0" />
+            <HBox spacing="20">
+               <children>
+                  <VBox>
+                     <children>
+                        <Label text="Last Items Bought" />
                         <TableView fx:id="lastItemsBoughtTableProfile" prefHeight="200" prefWidth="300">
-                            <columns>
-                                <TableColumn fx:id="itemBoughtColumn" prefWidth="127.11107885837555" text="Item" />
-                                <TableColumn fx:id="priceBoughtColumn" prefWidth="82.888916015625" text="Price" />
-                                <TableColumn fx:id="dateBoughtColumn" prefWidth="82.88893127441406" text="Date Bought" />
-                            </columns>
+                           <columns>
+                              <TableColumn fx:id="itemBoughtColumn" prefWidth="110.4444580078125" text="Item" />
+                              <TableColumn fx:id="priceBoughtColumn" prefWidth="76.66665649414062" text="Price" />
+                              <TableColumn fx:id="dateBoughtColumn" prefWidth="107.33334350585938" text="Date Bought" />
+                           </columns>
                         </TableView>
-                    </VBox>
-                    <VBox>
-                        <Label text="Last Items Sold" />
-                        <!-- Table for Last Items Sold -->
-                        <TableView fx:id="lastItemsSoldTableProfile" prefHeight="200" prefWidth="300">
-                            <columns>
-                                <TableColumn fx:id="itemSoldColumn" prefWidth="133.33340454101562" text="Item" />
-                                <TableColumn fx:id="priceSoldColumn" prefWidth="77.33331298828125" text="Price" />
-                                <TableColumn fx:id="dateSoldColumn" prefWidth="80.66665649414062" text="Date Sold" />
-                            </columns>
-                        </TableView>
-                    </VBox>
-                </HBox>
-                <HBox spacing="20">
-                    <VBox>
+                     </children>
+                  </VBox>
+                  <VBox>
+                     <children>
                         <Label text="Products Bought" />
-                        <!-- Area Chart for Bought Products -->
-                        <AreaChart fx:id="boughtProductsChartProfile" prefHeight="200" prefWidth="300">
-                            <xAxis>
-                                <CategoryAxis fx:id="boughtXAxis" />
-                            </xAxis>
-                            <yAxis>
-                                <NumberAxis fx:id="boughtYAxis" />
-                            </yAxis>
+                        <AreaChart fx:id="boughtProductsChartProfile" prefHeight="207.0" prefWidth="318.0">
+                           <xAxis>
+                              <CategoryAxis fx:id="boughtXAxis" />
+                           </xAxis>
+                           <yAxis>
+                              <NumberAxis fx:id="boughtYAxis" />
+                           </yAxis>
                         </AreaChart>
-                    </VBox>
-                    <VBox>
-                        <Label text="Products Sold" />
-                        <!-- Area Chart for Sold Products -->
-                        <AreaChart fx:id="soldProductsChartProfile" prefHeight="200" prefWidth="300">
-                            <xAxis>
-                                <CategoryAxis fx:id="soldXAxis" />
-                            </xAxis>
-                            <yAxis>
-                                <NumberAxis fx:id="soldYAxis" />
-                            </yAxis>
-                        </AreaChart>
-                    </VBox>
-                </HBox>
-            </VBox>
-        </center>
-    </BorderPane>
-</AnchorPane>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox spacing="20">
+               <children>
+                  <VBox />
+                  <VBox />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>

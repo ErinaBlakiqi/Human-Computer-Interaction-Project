@@ -259,24 +259,4 @@ public class AccountController {
             showAlert("Error", "An unexpected error occurred: " + e.getMessage());
         }
     }
-<<<<<<< Updated upstream
-
-    public void navigateToProducts(ActionEvent actionEvent) {Navigator.navigate(Navigator.PRODUCTS_PAGE);
-    }
-
-    public void navigateToSell(ActionEvent actionEvent) { Navigator.navigate(Navigator.SELL_PAGE);
-    }
-
-    public void handleChange(ActionEvent actionEvent) {
-    }
-
-    public void handleHelp(ActionEvent actionEvent) {
-    }
-
-    @FXML
-    private void handleSignOut(ActionEvent event) {
-        Navigator.navigate(Navigator.SIGNIN_PAGE);
-    }
-=======
->>>>>>> Stashed changes
 }

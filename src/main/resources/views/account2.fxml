@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 
-<AnchorPane maxHeight="-Infinity" prefHeight="495.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AccountController">
+<AnchorPane maxHeight="-Infinity" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AccountController">
     <BorderPane prefHeight="573.0" prefWidth="825.0">
         <left>
             <HBox>
@@ -66,22 +66,23 @@
                         </children>
                     </VBox>
                 </HBox>
+            <Pane prefHeight="24.0" prefWidth="605.0" />
                 <HBox spacing="20">
                     <VBox>
                   <Label text="Last Items Bought" />
                         <!-- Table for Last Items Bought -->
-                        <TableView fx:id="lastItemsBoughtTableProfile" prefHeight="196.0" prefWidth="301.0">
+                        <TableView fx:id="lastItemsBoughtTableProfile" prefHeight="200" prefWidth="300">
                             <columns>
-                                <TableColumn fx:id="itemBoughtColumn" prefWidth="127.11107885837555" text="Item" />
-                                <TableColumn fx:id="priceBoughtColumn" prefWidth="82.888916015625" text="Price" />
-                                <TableColumn fx:id="dateBoughtColumn" prefWidth="82.88893127441406" text="Date Bought" />
+                                <TableColumn fx:id="itemBoughtColumn" prefWidth="110.4444580078125" text="Item" />
+                                <TableColumn fx:id="priceBoughtColumn" prefWidth="76.66665649414062" text="Price" />
+                                <TableColumn fx:id="dateBoughtColumn" prefWidth="107.33334350585938" text="Date Bought" />
                             </columns>
                         </TableView>
                     </VBox>
                     <VBox>
                         <Label text="Products Bought" />
                         <!-- Area Chart for Bought Products -->
-                        <AreaChart fx:id="boughtProductsChartProfile" prefHeight="215.0" prefWidth="300">
+                        <AreaChart fx:id="boughtProductsChartProfile" prefHeight="207.0" prefWidth="318.0">
                             <xAxis>
                                 <CategoryAxis fx:id="boughtXAxis" />
                             </xAxis>

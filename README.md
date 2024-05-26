@@ -4,14 +4,9 @@ This repository contains the code for an interactive online sales and purchases 
 
 ### Contributors
 Erina Blakiqi  
-
 Roni Veseli  
-
 Lyra Bullaku  
-
 Erea Blakaj  
-
 Gerta Hodolli  
-
 Aulona Livoreka  
 

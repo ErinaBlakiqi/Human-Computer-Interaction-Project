@@ -23,9 +23,10 @@
                     <Rectangle height="2" style="-fx-fill: #A4A4A4;" width="160" />
                 </VBox>
                 <VBox spacing="10" style="-fx-padding: 40 20 20 20;">
-                    <Button fx:id="btnHome" mnemonicParsing="false" onAction="#handleHome" prefHeight="26.0" prefWidth="160.0" style="-fx-background-color: #2F3A47;" text="Home" textFill="WHITE" />
+                    <Button fx:id="btnDashboard" mnemonicParsing="false" onAction="#handleDashboard" prefHeight="26.0" prefWidth="160.0" style="-fx-background-color: #2F3A47;" text="Dashboard" textFill="WHITE" />
                     <Button fx:id="btnProducts" mnemonicParsing="false" onAction="#handleProducts" prefHeight="26.0" prefWidth="160.0" style="-fx-background-color: #2F3A47;" text="Products" textFill="WHITE" />
                     <Button fx:id="btnOrders" mnemonicParsing="false" onAction="#handleOrders" prefHeight="26.0" prefWidth="160.0" style="-fx-background-color: #2F3A47;" text="Orders" textFill="WHITE" />
+                    <Button fx:id="btnSell" mnemonicParsing="false" onAction="#handleSell" prefHeight="26.0" prefWidth="160.0" style="-fx-background-color: #2F3A47;" text="Sell" textFill="WHITE" />
                     <Button fx:id="btnSignOut" mnemonicParsing="false" onAction="#handleSignOut" prefHeight="26.0" prefWidth="160.0" style="-fx-background-color: #2F3A47;" text="Sign Out" textFill="WHITE" />
                 </VBox>
                 <VBox style="-fx-padding: 20; -fx-alignment: bottom-left;">

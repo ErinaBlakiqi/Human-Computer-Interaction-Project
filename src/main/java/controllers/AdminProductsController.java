@@ -1,17 +1,25 @@
 package controllers;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableCell;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import model.dto.AdminProductDTO;
+import model.filter.Filter;
+import model.filter.ProductFilter;
 import services.AdminProductService;
 import application.Navigator;
 
@@ -43,9 +51,8 @@ public class AdminProductsController {
     private TextField fieldProductSearch;
 
     private AdminProductService adminProductService;
-
-
-
+    private ObservableList<AdminProductDTO> masterData = FXCollections.observableArrayList();
+    private Filter<AdminProductDTO> productFilter = new ProductFilter();
 
     public AdminProductsController() throws SQLException {
         adminProductService = new AdminProductService();
@@ -63,6 +70,19 @@ public class AdminProductsController {
 
         // Load all products
         loadProducts();
+
+        // Add listener to the search field
+        fieldProductSearch.textProperty().addListener((observable, oldValue, newValue) -> {
+            ObservableList<AdminProductDTO> filteredList = productFilter.filter(masterData, newValue);
+            tableProductsPage.setItems(filteredList);
+            colAction_products.setCellFactory(createActionCellFactory()); // Re-apply cell factory
+        });
+    }
+
+    @FXML
+    private void onActionSearch(ActionEvent actionEvent) {
+        String searchQuery = fieldProductSearch.getText();
+        tableProductsPage.setItems(productFilter.filter(masterData, searchQuery));
     }
 
     private Callback<TableColumn<AdminProductDTO, Void>, TableCell<AdminProductDTO, Void>> createActionCellFactory() {
@@ -126,10 +146,7 @@ public class AdminProductsController {
     private void handleDeleteProduct(AdminProductDTO product) {
         try {
             adminProductService.deleteProduct(product.getProductId());
-            // Remove the product from the TableView
             tableProductsPage.getItems().remove(product);
-            // Optionally, reload the products from the database
-            // loadProducts();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -137,17 +154,9 @@ public class AdminProductsController {
 
     private void loadProducts() {
         try {
-            tableProductsPage.getItems().setAll(adminProductService.getAllAdminProductDTOs());
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void onActionSearch(ActionEvent actionEvent) {
-        String searchQuery = fieldProductSearch.getText();
-        try {
-            List<AdminProductDTO> filteredProducts = adminProductService.searchAdminProductDTOsByName(searchQuery);
-            tableProductsPage.getItems().setAll(filteredProducts);
+            List<AdminProductDTO> products = adminProductService.getAllAdminProductDTOs();
+            masterData.setAll(products);
+            tableProductsPage.setItems(masterData);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -167,6 +176,4 @@ public class AdminProductsController {
     private void navigateToProfile(ActionEvent actionEvent) {
         Navigator.navigate(Navigator.USER_PAGE);
     }
-
-
 }

@@ -12,6 +12,7 @@ public class ProfileService {
     public ProfileDto fetchProfileData(int userId) {
         return profileRepository.fetchProfileData(userId);
     }
+
     public boolean updateProfile(EditProfileDto editProfileDto) throws SQLException {
         return profileRepository.updateProfile(editProfileDto);
     }

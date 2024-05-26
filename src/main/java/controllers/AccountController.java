@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 import model.User;
 import model.dto.DailyChartDto;
 import model.dto.ProfileDto;
+import model.dto.ProfileOrderDto;
 import repository.ProfileRepository;
 import utils.SessionManager;
 
@@ -48,10 +49,10 @@ public class AccountController {
     private Label contactEmailLabel;
 
     @FXML
-    private TableColumn<?, ?> dateBoughtColumn;
+    private TableColumn<ProfileOrderDto, String> dateBoughtColumn;
 
     @FXML
-    private TableColumn<?, ?> dateSoldColumn;
+    private TableColumn<ProfileOrderDto, String> dateSoldColumn;
 
     @FXML
     private Button editAccountButton;
@@ -61,13 +62,13 @@ public class AccountController {
     private Button homeButton;
 
     @FXML
-    private TableColumn<?, ?> itemBoughtColumn;
+    private TableColumn<ProfileOrderDto, String> itemBoughtColumn;
 
     @FXML
     private TableColumn<?, ?> itemSoldColumn;
 
     @FXML
-    private TableView<?> lastItemsBoughtTableProfile;
+    private TableView<ProfileOrderDto> lastItemsBoughtTableProfile;
 
     @FXML
     private TableView<?> lastItemsSoldTableProfile;
@@ -76,7 +77,7 @@ public class AccountController {
     private Label locationLabel;
 
     @FXML
-    private TableColumn<?, ?> priceBoughtColumn;
+    private TableColumn<ProfileOrderDto, Integer> priceBoughtColumn;
 
     @FXML
     private TableColumn<?, ?> priceSoldColumn;
@@ -108,11 +109,13 @@ public class AccountController {
     private ProfileRepository profileRepository = new ProfileRepository();
 
     public void setProfileData(ProfileDto profile) {
-        usernameLabel.setText(profile.getUserName());
-        locationLabel.setText(profile.getLocation());
-        contactNumberLabel.setText(profile.getContactNumber());
-        contactEmailLabel.setText(profile.getContactEmail());
-        bioLabel.setText(profile.getBio());
+        if (profile != null) {
+            usernameLabel.setText(profile.getUserName() != null ? profile.getUserName() : "");
+            locationLabel.setText(profile.getLocation() != null ? profile.getLocation() : "");
+            contactNumberLabel.setText(profile.getContactNumber() != null ? profile.getContactNumber() : "");
+            contactEmailLabel.setText(profile.getContactEmail() != null ? profile.getContactEmail() : "");
+            bioLabel.setText(profile.getBio() != null ? profile.getBio() : "");
+        }
     }
     @FXML
     void handleAdmin(MouseEvent event) {
@@ -127,11 +130,16 @@ public class AccountController {
 
             editAccountController controller = fxmlLoader.getController();
             int userId = getCurrentUserId();
+            System.out.println("Passing userId to editAccountController: " + userId);  // Debug print
+
             ProfileDto profile = profileRepository.fetchProfileData(userId);
             if (profile != null) {
                 controller.setUserId(userId);
                 controller.setProfileData(profile);
+            }else {
+                System.err.println("Profile data not found for user ID: " + userId);
             }
+
             Stage editAccountStage = new Stage();
             editAccountStage.setTitle("Edit Account");
             editAccountStage.setScene(new Scene(editAccountRoot));
@@ -196,6 +204,10 @@ public class AccountController {
     }
     @FXML
     public void initialize() {
+        dateBoughtColumn.setCellValueFactory(cellData -> cellData.getValue().dateProperty());
+        itemBoughtColumn.setCellValueFactory(cellData -> cellData.getValue().itemProperty());
+        priceBoughtColumn.setCellValueFactory(cellData -> cellData.getValue().priceProperty().asObject());
+
         try {
             int userId = getCurrentUserId();
             ProfileDto profile = profileRepository.fetchProfileData(userId);
@@ -207,9 +219,11 @@ public class AccountController {
 
             List<DailyChartDto> boughtData = profileRepository.fetchBoughtProductsData(userId);
             List<DailyChartDto> soldData = profileRepository.fetchSoldProductsData(userId);
+            List<ProfileOrderDto> lastBoughtItems = profileRepository.fetchLastBoughtItems(userId);
 
             populateChart(boughtProductsChartProfile, boughtData);
             populateChart(soldProductsChartProfile, soldData);
+            populateBoughtItemsTable(lastItemsBoughtTableProfile, lastBoughtItems);
 
         } catch (IllegalStateException e) {
             showAlert("User Not Logged In", "No user is currently logged in.");
@@ -219,8 +233,8 @@ public class AccountController {
     }
 
     private int getCurrentUserId() {
-        SessionManager SessionManager = new SessionManager();
-        User currentUser = SessionManager.getLoggedInUser();
+        SessionManager sessionManager = new SessionManager();
+        User currentUser = sessionManager.getLoggedInUser();
         if (currentUser != null) {
             return currentUser.getId();
         } else {
@@ -242,19 +256,24 @@ public class AccountController {
         chart.getData().add(series);
     }
 
+    private void populateBoughtItemsTable(TableView<ProfileOrderDto> table, List<ProfileOrderDto> data) {
+        System.out.println("Populating table with data: "+data);
+        table.getItems().clear();
+        table.getItems().addAll(data);
+    }
+
     private void refreshProfileData() {
         try {
             int userId = getCurrentUserId();
-            ProfileRepository profileService = new ProfileRepository(); // Ensure ProfileRepository is initialized
-            ProfileDto profile = profileService.fetchProfileData(userId);
+            ProfileDto profile = profileRepository.fetchProfileData(userId);
             if (profile != null) {
                 setProfileData(profile);
             } else {
                 showAlert("Profile Data Not Found", "No profile data found for the current user.");
             }
 
-            List<DailyChartDto> boughtData = profileService.fetchBoughtProductsData(userId);
-            List<DailyChartDto> soldData = profileService.fetchSoldProductsData(userId);
+            List<DailyChartDto> boughtData = profileRepository.fetchBoughtProductsData(userId);
+            List<DailyChartDto> soldData = profileRepository.fetchSoldProductsData(userId);
 
             populateChart(boughtProductsChartProfile, boughtData);
             populateChart(soldProductsChartProfile, soldData);

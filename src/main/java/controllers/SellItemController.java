@@ -1,9 +1,16 @@
 package controllers;
 
+import application.Navigator;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import model.dto.SellItemDto;
 import services.SellItemService;
 
@@ -30,6 +37,18 @@ public class SellItemController {
     private TableColumn<SellItemDto, Double> priceColumn;
     @FXML
     private TableColumn<SellItemDto, Void> actionColumn;
+    @FXML
+    private Button homeButton;
+    @FXML
+    private Button productsButton;
+    @FXML
+    private Button sellButton;
+    @FXML
+    private Button userButton;
+    @FXML
+    private Button adminButton;
+    @FXML
+    private Button signoutButton;
 
     private final ObservableList<SellItemDto> productList = FXCollections.observableArrayList();
     private final SellItemService sellItemService = new SellItemService();
@@ -49,11 +68,26 @@ public class SellItemController {
             }
         });
 
-        // Populate typeComboBox with data
-        typeComboBox.setItems(FXCollections.observableArrayList("Type1", "Type2", "Type3")); // Adjust this to your actual data
+        // Populate typeComboBox with actual categories
+        typeComboBox.setItems(FXCollections.observableArrayList(
+                "Electronics",
+                "Fashion",
+                "Home & Garden",
+                "Sports & Outdoors",
+                "Toys & Games",
+                "Health & Beauty",
+                "Automotive",
+                "Books",
+                "Music",
+                "Movies & TV",
+                "Groceries",
+                "Pets",
+                "Office Supplies"
+        ));
 
         loadProducts();
     }
+
 
     @FXML
     private void handleAddItem() {
@@ -82,6 +116,31 @@ public class SellItemController {
             showAlert("Error", "An error occurred while adding the item.");
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    void handleProducts() {
+        Navigator.navigate("/views/products.fxml");
+    }
+
+    @FXML
+    void handleSell() {
+        Navigator.navigate("/views/sellitem.fxml");
+    }
+
+    @FXML
+    void handleSignOut() {
+        Navigator.navigate("/views/SignIn.fxml");
+    }
+
+    @FXML
+    void handleUser() {
+        Navigator.navigate("/views/account2.fxml");
+    }
+
+    @FXML
+    void handleAdmin() {
+        Navigator.navigate("/views/AdminDashboard.fxml");
     }
 
     public void setCurrentUserId(int userId) {

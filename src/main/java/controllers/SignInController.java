@@ -3,7 +3,12 @@ package controllers;
 import application.Navigator;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -13,6 +18,7 @@ import services.UserService;
 import utils.SessionManager;
 
 import java.io.IOException;
+import java.util.Locale;
 
 public class SignInController {
 
@@ -30,6 +36,8 @@ public class SignInController {
     private TextField txtPassword;
     @FXML
     private Label loginMessageLabel;
+    @FXML
+    private Button btnChangeGjuhen;
 
     @FXML
     void handleCreateAccountClick(MouseEvent me) throws IOException {
@@ -54,16 +62,12 @@ public class SignInController {
     @FXML
     public void onPressLogIn(KeyEvent event) {
         if (event.getCode() == KeyCode.ENTER) {
-            handleLogin();
+            handleLogin(new ActionEvent());
         }
     }
 
     @FXML
     private void handleLogin(ActionEvent event) {
-        handleLogin();
-    }
-
-    private void handleLogin() {
         String username = txtUsername.getText();
         String password = pwdPassword.getText();
 
@@ -71,14 +75,12 @@ public class SignInController {
         boolean success = UserService.login(loginUserDto);
 
         if (success) {
-            int userId = SessionManager.getCurrentUserId();
             if (SessionManager.isAdmin()) {
                 Navigator.navigate(Navigator.ADMIN_DASHBOARD_PAGE);
             } else {
-                System.out.println(SessionManager.getCurrentUserId());
                 Navigator.navigate(Navigator.PRODUCTS_PAGE);
             }
-            showAlert(Alert.AlertType.INFORMATION, "Login Successful!", "Welcome " + username + ".");
+            showAlert(Alert.AlertType.INFORMATION, "Login Successful!", "Welcome " + username);
         } else {
             loginMessageLabel.setText("Invalid username or password.");
         }
@@ -90,14 +92,20 @@ public class SignInController {
         stage.close();
     }
 
+    @FXML
+    private void handleChange(ActionEvent event) {
+        if (Locale.getDefault().getLanguage().equals("en")) {
+            Navigator.changeLanguage(new Locale("sq"), Navigator.SIGNIN_PAGE);
+        } else {
+            Navigator.changeLanguage(new Locale("en"), Navigator.SIGNIN_PAGE);
+        }
+    }
+
     private void showAlert(Alert.AlertType alertType, String title, String message) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
-    }
-
-    public void handleChange(ActionEvent actionEvent) {
     }
 }

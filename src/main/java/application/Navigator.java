@@ -6,6 +6,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class Navigator {
 
@@ -31,13 +33,18 @@ public class Navigator {
             throw new IllegalStateException("Stage is not set. Call Navigator.setStage() before navigating.");
         }
         try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Navigator.class.getResource(fxmlFile));
+            ResourceBundle bundle = ResourceBundle.getBundle("translations.content", Locale.getDefault());
+            FXMLLoader loader = new FXMLLoader(Navigator.class.getResource(fxmlFile), bundle);
             Parent root = loader.load();
             stage.setScene(new Scene(root));
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void changeLanguage(Locale locale, String currentFxmlFile) {
+        Locale.setDefault(locale);
+        navigate(currentFxmlFile); // Reload the current page to apply the language change
     }
 }

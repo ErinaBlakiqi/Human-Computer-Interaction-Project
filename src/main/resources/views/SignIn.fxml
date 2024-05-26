@@ -15,22 +15,22 @@
             <children>
                 <AnchorPane layoutX="9.0" layoutY="9.0" prefHeight="586.0" prefWidth="366.0">
                     <children>
-                        <Label layoutX="111.0" layoutY="150.0" text="Sign In Account" textAlignment="CENTER" textFill="#2f3a47">
+                        <Label layoutX="111.0" layoutY="150.0" text="%sign_in_account" textAlignment="CENTER" textFill="#2f3a47">
                             <font>
                                 <Font name="Franklin Gothic Heavy Italic" size="20.0" />
                             </font>
                         </Label>
-                        <TextField fx:id="txtUsername" layoutX="56.0" layoutY="208.0" prefHeight="36.0" prefWidth="270.0" promptText="Username" />
-                        <PasswordField fx:id="pwdPassword" layoutX="56.0" layoutY="261.0" onKeyPressed="#onPressLogIn" prefHeight="36.0" prefWidth="270.0" promptText="Password" />
-                        <TextField fx:id="txtPassword" layoutX="56.0" layoutY="261.0" prefHeight="36.0" prefWidth="270.0" promptText="Password" visible="false" />
-                        <CheckBox fx:id="showpassword" layoutX="56.0" layoutY="307.0" mnemonicParsing="false" text="Show password" />
-                        <Button fx:id="loginButton" layoutX="56.0" layoutY="356.0" mnemonicParsing="false" onAction="#handleLogin" prefHeight="46.0" prefWidth="270.0" style="-fx-background-color: #2F3A47;" text="Login" textFill="WHITE">
+                        <TextField fx:id="txtUsername" layoutX="56.0" layoutY="208.0" prefHeight="36.0" prefWidth="270.0" promptText="%username" />
+                        <PasswordField fx:id="pwdPassword" layoutX="56.0" layoutY="261.0" onKeyPressed="#onPressLogIn" prefHeight="36.0" prefWidth="270.0" promptText="%password" />
+                        <TextField fx:id="txtPassword" layoutX="56.0" layoutY="261.0" prefHeight="36.0" prefWidth="270.0" promptText="%password" visible="false" />
+                        <CheckBox fx:id="showpassword" layoutX="56.0" layoutY="307.0" mnemonicParsing="false" text="%show_password" />
+                        <Button fx:id="loginButton" layoutX="56.0" layoutY="356.0" mnemonicParsing="false" onAction="#handleLogin" prefHeight="46.0" prefWidth="270.0" style="-fx-background-color: #2F3A47;" text="%login" textFill="WHITE">
                             <font>
                                 <Font name="System Bold" size="13.0" />
                             </font>
                         </Button>
-                        <Label layoutX="129.0" layoutY="491.0" onMouseClicked="#handleCreateAccountClick" text="Create new account " underline="true" />
-                        <Button fx:id="cancelButton" layoutX="56.0" layoutY="422.0" mnemonicParsing="false" onAction="#handleCancel" prefHeight="46.0" prefWidth="270.0" style="-fx-background-color: #2F3A47;" text="Cancel" textFill="WHITE">
+                        <Label layoutX="129.0" layoutY="491.0" onMouseClicked="#handleCreateAccountClick" text="%create_new_account" underline="true" />
+                        <Button fx:id="cancelButton" layoutX="56.0" layoutY="422.0" mnemonicParsing="false" onAction="#handleCancel" prefHeight="46.0" prefWidth="270.0" style="-fx-background-color: #2F3A47;" text="%cancel" textFill="WHITE">
                             <font>
                                 <Font name="System Bold" size="13.0" />
                             </font>

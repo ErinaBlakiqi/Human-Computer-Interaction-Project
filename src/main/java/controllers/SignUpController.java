@@ -10,10 +10,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
-import model.dto.LoginUserDto;
 import model.dto.UserDto;
 import services.UserService;
-import utils.SessionManager;
+
+import java.util.Locale;
 
 public class SignUpController {
 
@@ -63,26 +63,7 @@ public class SignUpController {
     @FXML
     public void onPressSignUp(KeyEvent event) {
         if (event.getCode() == KeyCode.ENTER) {
-            String firstName = txtFirstname.getText();
-            String lastName = txtLastname.getText();
-            String username = txtUsername.getText();
-            String email = txtEmail.getText();
-            String password = pwdPassword.getText();
-            String confirmPassword = pwdConfirmPassword.getText();
-
-            if (password.equals(confirmPassword)) {
-                UserDto userDto = new UserDto(firstName, lastName, username, email, password, confirmPassword);
-                boolean success = UserService.signUp(userDto);
-
-                if (success) {
-                    showAlert(Alert.AlertType.INFORMATION, "Registration Successful!", "Welcome " + username);
-                    Navigator.navigate(Navigator.SIGNIN_PAGE);
-                } else {
-                    showAlert(Alert.AlertType.ERROR, "Registration Failed", "An error occurred while creating the account.");
-                }
-            } else {
-                showAlert(Alert.AlertType.ERROR, "Registration Failed", "Passwords do not match.");
-            }
+            handleSignUp(new ActionEvent());
         }
     }
 
@@ -97,14 +78,20 @@ public class SignUpController {
         stage.close();
     }
 
+    @FXML
+    private void handleChange(ActionEvent event) {
+        if (Locale.getDefault().getLanguage().equals("en")) {
+            Navigator.changeLanguage(new Locale("sq"), Navigator.SIGNUP_PAGE);
+        } else {
+            Navigator.changeLanguage(new Locale("en"), Navigator.SIGNUP_PAGE);
+        }
+    }
+
     private void showAlert(Alert.AlertType alertType, String title, String message) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
-    }
-
-    public void handleChange(ActionEvent actionEvent) {
     }
 }

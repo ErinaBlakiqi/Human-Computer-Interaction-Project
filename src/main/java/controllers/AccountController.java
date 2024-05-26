@@ -23,7 +23,6 @@ import utils.SessionManager;
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
-import java.util.ResourceBundle;
 
 public class AccountController {
 
@@ -101,9 +100,14 @@ public class AccountController {
             bioLabel.setText(profile.getBio() != null ? profile.getBio() : "");
         }
     }
-    @FXML
-    void handleChange(ActionEvent event) {
 
+    @FXML
+    private void handleChange(ActionEvent event) {
+        if (Locale.getDefault().getLanguage().equals("en")) {
+            Navigator.changeLanguage(new Locale("sq"), Navigator.USER_PAGE);
+        } else {
+            Navigator.changeLanguage(new Locale("en"), Navigator.USER_PAGE);
+        }
     }
 
     @FXML
@@ -171,14 +175,18 @@ public class AccountController {
     @FXML
     private void handleHelp() {
         try {
-            Locale locale = new Locale("en", "US"); // Or retrieve current locale
-            ResourceBundle bundle = ResourceBundle.getBundle("help", locale);
-
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/HelpPopUp.fxml"), bundle);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/HelpPopUp.fxml"));
             Parent root = loader.load();
 
             HelpPopUpController controller = loader.getController();
-            controller.setHelpText(bundle.getString("help_text"));
+            controller.setHelpText("This is the Admin Products page.\n\n" +
+                    "You can perform the following actions:\n" +
+                    "- **Add a new product**: Fill in the product details and click 'Add'.\n" +
+                    "- **Edit a product**: Click the 'Edit' button next to the product you want to edit.\n" +
+                    "- **Delete a product**: Click the 'Delete' button next to the product you want to delete.\n" +
+                    "- **Search for products**: Use the search bar to filter products by name.\n" +
+                    "- **Navigate to other pages**: Use the navigation buttons on the left.\n" +
+                    "\nUse F1 to open this help dialog.");
 
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
@@ -204,6 +212,7 @@ public class AccountController {
     void navigateToSell(ActionEvent event) {
         Navigator.navigate("/views/sellitem.fxml");
     }
+
     @FXML
     public void initialize() {
         dateBoughtColumn.setCellValueFactory(cellData -> cellData.getValue().dateProperty());
@@ -243,6 +252,7 @@ public class AccountController {
             throw new IllegalStateException("No user is currently logged in.");
         }
     }
+
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);
@@ -259,11 +269,13 @@ public class AccountController {
         }
         chart.getData().add(series);
     }
+
     private void populateBoughtItemsTable(TableView<ProfileOrderDto> table, List<ProfileOrderDto> data) {
-        System.out.println("Populating table with data: "+data);
+        System.out.println("Populating table with data: " + data);
         table.getItems().clear();
         table.getItems().addAll(data);
     }
+
     private void refreshProfileData() {
         try {
             int userId = getCurrentUserId();

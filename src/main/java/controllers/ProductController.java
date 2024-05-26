@@ -279,9 +279,11 @@ public class ProductController {
         Navigator.navigate(Navigator.SIGNIN_PAGE);
     }
 
+    @FXML
     public void handleChange(ActionEvent actionEvent) {
     }
 
+    @FXML
     public void handleHelp(ActionEvent actionEvent) {
     }
 }

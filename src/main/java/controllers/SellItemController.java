@@ -124,7 +124,7 @@ public class SellItemController {
 
     @FXML
     void handleProducts() {
-        Navigator.navigate(Navigator.ADMIN_DASHBOARD_PAGE);
+        Navigator.navigate(Navigator.PRODUCTS_PAGE);
     }
 
     @FXML
@@ -142,10 +142,6 @@ public class SellItemController {
         Navigator.navigate("/views/account2.fxml");
     }
 
-    @FXML
-    void handleAdmin() {
-        Navigator.navigate("/views/AdminDashboard.fxml");
-    }
 
     public void setCurrentUserId(int userId) {
         this.currentUserId = userId;
@@ -293,5 +289,13 @@ public class SellItemController {
 
     public void handleProfile(ActionEvent actionEvent) {
         Navigator.navigate(Navigator.USER_PAGE);
+    }
+
+    @FXML
+    public void handleChange(ActionEvent actionEvent) {
+    }
+
+    @FXML
+    public void handleHelp(ActionEvent actionEvent) {
     }
 }

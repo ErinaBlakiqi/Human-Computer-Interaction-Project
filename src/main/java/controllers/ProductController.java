@@ -13,14 +13,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.cell.PropertyValueFactory;
-import repository.ProductRepository;
 import services.CartService;
 import services.DBConnector;
 import services.OrderService;
 import services.ProductService;
-import repository.CartRepository;
 import model.Cart;
-import repository.OrderRepository;
+
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
@@ -96,7 +94,7 @@ public class ProductController {
         col_Quantity_Products.setCellValueFactory(new PropertyValueFactory<>("quantity"));
         col_Price_Products.setCellValueFactory(new PropertyValueFactory<>("price"));
         colAction_products.setCellFactory(param -> new TableCell<>() {
-            private final Button buyButton = new Button("Add");
+            private final Button buyButton = new Button("Buy");
 
             @Override
             protected void updateItem(String item, boolean empty) {
@@ -122,6 +120,7 @@ public class ProductController {
         loadProducts();
         loadCartItems();
     }
+
     private void loadCartItems() {
         try {
             List<Cart> cartItems = cartService.getCartItemsByUserId(currentUserId);
@@ -142,7 +141,6 @@ public class ProductController {
             e.printStackTrace();
         }
     }
-
 
     @FXML
     private void onActionSearch() {
@@ -193,6 +191,7 @@ public class ProductController {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
     @FXML
     private void onActionOrder() {
         try {
@@ -203,6 +202,7 @@ public class ProductController {
                 Order order = new Order();
                 order.setProductId(cartItem.getProductId());
                 order.setBuyerId(currentUserId);
+                order.setQuantity(cartItem.getQuantity());
                 order.setTotalPrice(cartItem.getQuantity() * cartItem.getPrice());
                 order.setOrderStatus("Pending");
                 order.setPaymentMethod(paymentMethod);
@@ -249,3 +249,5 @@ public class ProductController {
         Navigator.navigate(Navigator.USER_PAGE);
     }
 }
+
+

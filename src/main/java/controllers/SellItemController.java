@@ -30,8 +30,6 @@ public class SellItemController {
     @FXML
     private TableColumn<SellItemDto, Double> priceColumn;
     @FXML
-    private TableColumn<SellItemDto, Void> actionColumn;
-    @FXML
     private Button homeButton;
     @FXML
     private Button productsButton;
@@ -79,6 +77,9 @@ public class SellItemController {
                 "Office Supplies"
         ));
 
+        // Log in a user programmatically for testing
+        setCurrentUserId(1); // Replace with a valid user ID from your database
+
         loadProducts();
     }
 
@@ -90,17 +91,18 @@ public class SellItemController {
                 newItem.setProductName(productNameField.getText());
                 newItem.setPrice(Double.parseDouble(priceField.getText()));
                 newItem.setQuantity(Integer.parseInt(quantityField.getText()));
-                newItem.setCategoryId(typeComboBox.getSelectionModel().getSelectedIndex() + 1);
+                newItem.setCategoryId(typeComboBox.getSelectionModel().getSelectedIndex() + 1); // Ensure this matches your category IDs
                 newItem.setSellerId(currentUserId); // Set the current user ID
 
                 sellItemService.addItem(newItem);
                 loadProducts(); // Reload the table to include the new item
                 clearInputFields();
+                showAlert("Success", "Product added successfully.");
             }
         } catch (NumberFormatException e) {
             showAlert("Invalid Input", "Price and Quantity must be numbers.");
         } catch (Exception e) {
-            showAlert("Error", "An error occurred while adding the item.");
+            showAlert("Database Error", "Unable to add product: " + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -191,7 +193,7 @@ public class SellItemController {
     }
 
     private void showAlert(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(message);

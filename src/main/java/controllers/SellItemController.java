@@ -4,13 +4,7 @@ import application.Navigator;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import model.dto.SellItemDto;
 import services.SellItemService;
 
@@ -88,7 +82,6 @@ public class SellItemController {
         loadProducts();
     }
 
-
     @FXML
     private void handleAddItem() {
         try {
@@ -100,15 +93,9 @@ public class SellItemController {
                 newItem.setCategoryId(typeComboBox.getSelectionModel().getSelectedIndex() + 1);
                 newItem.setSellerId(currentUserId); // Set the current user ID
 
-                System.out.println("Adding item for SellerId: " + currentUserId); // Add logging
-
-                if (sellItemService.isUserExistsAndIsSeller(currentUserId)) {
-                    sellItemService.addItem(newItem);
-                    loadProducts(); // Reload the table to include the new item
-                    clearInputFields();
-                } else {
-                    showAlert("Error", "Seller ID does not exist or is not a seller.");
-                }
+                sellItemService.addItem(newItem);
+                loadProducts(); // Reload the table to include the new item
+                clearInputFields();
             }
         } catch (NumberFormatException e) {
             showAlert("Invalid Input", "Price and Quantity must be numbers.");
@@ -144,12 +131,8 @@ public class SellItemController {
     }
 
     public void setCurrentUserId(int userId) {
-        if (sellItemService.isUserExistsAndIsSeller(userId)) {
-            this.currentUserId = userId;
-            loadProducts(); // Reload products for the new user ID
-        } else {
-            throw new IllegalArgumentException("User ID does not exist or is not a seller.");
-        }
+        this.currentUserId = userId;
+        loadProducts(); // Reload products for the new user ID
     }
 
     private void loadProducts() {

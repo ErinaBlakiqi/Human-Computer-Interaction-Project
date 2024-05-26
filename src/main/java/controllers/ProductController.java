@@ -73,7 +73,7 @@ public class ProductController {
     @FXML
     private Label statusLabel;
 
-    private int timeRemaining = 5;
+    private int timeRemaining = 900;
     private Timeline timeline;
 
     private ProductService productService;
@@ -101,7 +101,7 @@ public class ProductController {
         col_Quantity_Products.setCellValueFactory(new PropertyValueFactory<>("quantity"));
         col_Price_Products.setCellValueFactory(new PropertyValueFactory<>("price"));
         colAction_products.setCellFactory(param -> new TableCell<>() {
-            private final Button buyButton = new Button("Buy");
+            private final Button buyButton = new Button("Add");
 
             @Override
             protected void updateItem(String item, boolean empty) {

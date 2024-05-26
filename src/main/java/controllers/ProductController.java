@@ -29,6 +29,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Locale;
 
 public class ProductController {
 
@@ -143,7 +144,7 @@ public class ProductController {
     private void startCountdown() {
         timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
             timeRemaining--;
-            statusLabel.setText("Active for " + timeRemaining + " seconds" );
+            statusLabel.setText("Active for " + timeRemaining + " seconds");
 
             if (timeRemaining <= 0) {
                 Navigator.navigate(Navigator.SIGNIN_PAGE);
@@ -174,6 +175,7 @@ public class ProductController {
             e.printStackTrace();
         }
     }
+
     @FXML
     public void handleKeyPress(KeyEvent event) {
         onActionSearch();
@@ -293,6 +295,11 @@ public class ProductController {
 
     @FXML
     public void handleChange(ActionEvent actionEvent) {
+        if (Locale.getDefault().getLanguage().equals("en")) {
+            Navigator.changeLanguage(new Locale("sq"), Navigator.PRODUCTS_PAGE);
+        } else {
+            Navigator.changeLanguage(new Locale("en"), Navigator.PRODUCTS_PAGE);
+        }
     }
 
     @FXML
@@ -321,5 +328,3 @@ public class ProductController {
         }
     }
 }
-
-

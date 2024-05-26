@@ -18,58 +18,58 @@
         <HBox>
             <VBox prefWidth="200" style="-fx-background-color: #2F3A47;">
                 <VBox alignment="CENTER" spacing="10" style="-fx-padding: 80 20 20 20;">
-                    <Label style="-fx-text-fill: white; -fx-font-size: 14;" text="Welcome," />
-                    <Label fx:id="userLabel" style="-fx-text-fill: white; -fx-font-size: 18;" text="Admin" />
+                    <Label style="-fx-text-fill: white; -fx-font-size: 14;" text="%welcome" />
+                    <Label fx:id="userLabel" style="-fx-text-fill: white; -fx-font-size: 18;" text="%admin" />
                     <Rectangle height="2" style="-fx-fill: #A4A4A4;" width="160" />
                 </VBox>
-            <VBox prefHeight="325.0" prefWidth="200.0" spacing="10" style="-fx-padding: 40 20 20 20;">
-               <children>
-                  <Button fx:id="btnProducts" mnemonicParsing="false" prefHeight="26.0" prefWidth="160.0" style="-fx-background-color: #2F3A47;" text="Products" textFill="WHITE" />
-                  <Button fx:id="btnSell" mnemonicParsing="false" onAction="#navigateToSell" prefHeight="26.0" prefWidth="160.0" style="-fx-background-color: #2F3A47;" text="Sell" textFill="WHITE" />
-                  <Button fx:id="btnProfile" layoutX="30.0" layoutY="87.0" mnemonicParsing="false" onAction="#navigateToProfile" prefHeight="26.0" prefWidth="160.0" style="-fx-background-color: #2F3A47;" text="Profile" textFill="WHITE" />
-                  <Button fx:id="btnSignOut" mnemonicParsing="false" onAction="#handleSignOut" prefHeight="26.0" prefWidth="160.0" style="-fx-background-color: #2F3A47;" text="Sign Out" textFill="WHITE" />
-                  <HBox alignment="BOTTOM_CENTER" prefHeight="36.0" prefWidth="160.0" />
-                  <Button fx:id="btnChangeGjuhen" mnemonicParsing="false" onAction="#handleChange" prefHeight="23.0" prefWidth="160.0" style="-fx-background-color: #2F3A47;" text="EN | SQ" textFill="WHITE" />
-                  <Button fx:id="btnHelp" mnemonicParsing="false" onAction="#handleHelp" prefHeight="26.0" prefWidth="160.0" style="-fx-background-color: #2F3A47;" text="Help" textFill="WHITE" />
-               </children>
-                <Label fx:id="statusLabel" style="-fx-text-fill: white; -fx-font-size: 14; -fx-background-color: #2F3A47; -fx-padding: 5;" text="Session time remaining: 300 seconds" />
-            </VBox>
+                <VBox prefHeight="325.0" prefWidth="200.0" spacing="10" style="-fx-padding: 40 20 20 20;">
+                    <children>
+                        <Button fx:id="btnProducts" mnemonicParsing="false" prefHeight="26.0" prefWidth="160.0" style="-fx-background-color: #2F3A47;" text="%products" textFill="WHITE" />
+                        <Button fx:id="btnSell" mnemonicParsing="false" onAction="#navigateToSell" prefHeight="26.0" prefWidth="160.0" style="-fx-background-color: #2F3A47;" text="%sell" textFill="WHITE" />
+                        <Button fx:id="btnProfile" layoutX="30.0" layoutY="87.0" mnemonicParsing="false" onAction="#navigateToProfile" prefHeight="26.0" prefWidth="160.0" style="-fx-background-color: #2F3A47;" text="%profile" textFill="WHITE" />
+                        <Button fx:id="btnSignOut" mnemonicParsing="false" onAction="#handleSignOut" prefHeight="26.0" prefWidth="160.0" style="-fx-background-color: #2F3A47;" text="%sign_out" textFill="WHITE" />
+                        <HBox alignment="BOTTOM_CENTER" prefHeight="36.0" prefWidth="160.0" />
+                        <Button fx:id="btnChangeGjuhen" mnemonicParsing="false" onAction="#handleChange" prefHeight="23.0" prefWidth="160.0" style="-fx-background-color: #2F3A47;" text="EN | SQ" textFill="WHITE" />
+                        <Button fx:id="btnHelp" mnemonicParsing="false" onAction="#handleHelp" prefHeight="26.0" prefWidth="160.0" style="-fx-background-color: #2F3A47;" text="%help" textFill="WHITE" />
+                    </children>
+                    <Label fx:id="statusLabel" style="-fx-text-fill: white; -fx-font-size: 14; -fx-background-color: #2F3A47; -fx-padding: 5;" text="%session_time_remaining" />
+                </VBox>
             </VBox>
             <Pane fx:id="pane_Products" prefHeight="495.0" prefWidth="650.0" style="-fx-background-color: white;">
-            <children>
-               <AnchorPane layoutX="425.0" layoutY="3.0" prefHeight="489.0" prefWidth="222.0" style="-fx-border-color: #2F3A47; -fx-border-radius: 5;">
-                  <children>
-                     <TableView fx:id="tableView_Products" layoutX="2.0" layoutY="3.0" prefHeight="285.0" prefWidth="217.0" style="-fx-border-color: #a3a1a1; -fx-border-radius: 5;" styleClass="custom-table">
-                       <columns>
-                         <TableColumn fx:id="col_Product_Products" prefWidth="72.0" text="Product" />
-                         <TableColumn fx:id="col_Quantity_Products" prefWidth="72.0" text="Quantity" />
-                           <TableColumn fx:id="col_Price_Products" prefWidth="72.0" text="Price" />
-                       </columns>
-                     </TableView>
-                     <Label fx:id="txtTotal_Products" layoutX="123.0" layoutY="317.0" text="0.0$" />
-                     <Label layoutX="78.0" layoutY="318.0" style="-fx-text-fill: #2F3A47;" text="Total:" textFill="#a3a1a1" />
-                     <Label layoutX="14.0" layoutY="347.0" style="-fx-text-fill: #2F3A47;" text="Payment Method:" />
-                     <ChoiceBox fx:id="listPayment_Products" layoutX="119.0" layoutY="343.0" prefHeight="27.0" prefWidth="92.0" />
-                     <Button fx:id="btnOrder_Products" layoutX="24.0" layoutY="399.0" mnemonicParsing="false" onAction="#onActionOrder" prefHeight="31.0" prefWidth="178.0" style="-fx-background-color: #2F3A47; -fx-border-radius: 5; -fx-text-fill: white;" text="Order" />
-                     <Button fx:id="btnRemove_Products" layoutX="24.0" layoutY="440.0" mnemonicParsing="false" onAction="#onActionRemove" prefHeight="31.0" prefWidth="177.0" style="-fx-background-color: #2F3A47; -fx-text-fill: white;" text="Remove" />
-                  </children>
-               </AnchorPane>
-               <AnchorPane layoutX="3.0" layoutY="3.0" prefHeight="488.0" prefWidth="420.0" style="-fx-border-radius: 5; -fx-border-color: #2F3A47;">
-                  <children>
-                     <TableView fx:id="tableProductsPage" layoutX="2.0" layoutY="45.0" prefHeight="439.0" prefWidth="415.0">
-                       <columns>
-                         <TableColumn fx:id="colProductName_products" prefWidth="92.66665649414062" text="Product Name" />
-                         <TableColumn fx:id="colSeller_products" prefWidth="83.33334350585938" text="Seller" />
-                           <TableColumn fx:id="colPrice_products" prefWidth="83.33334350585938" text="Price" />
-                           <TableColumn fx:id="colCategory_products" prefWidth="83.33334350585938" text="Category" />
-                           <TableColumn fx:id="colAction_products" prefWidth="69.33333333333331" text="Action" />
-                       </columns>
-                     </TableView>
-                     <TextField fx:id="fieldProductSearch" layoutX="11.0" layoutY="10.0" onKeyPressed="#handleKeyPress" promptText="Search products..." />
-                     <Button fx:id="btnSearch" layoutX="165.0" layoutY="10.0" mnemonicParsing="false" onAction="#onActionSearch" text="Search" />
-                  </children>
-               </AnchorPane>
-            </children></Pane>
+                <children>
+                    <AnchorPane layoutX="425.0" layoutY="3.0" prefHeight="489.0" prefWidth="222.0" style="-fx-border-color: #2F3A47; -fx-border-radius: 5;">
+                        <children>
+                            <TableView fx:id="tableView_Products" layoutX="2.0" layoutY="3.0" prefHeight="285.0" prefWidth="217.0" style="-fx-border-color: #a3a1a1; -fx-border-radius: 5;" styleClass="custom-table">
+                                <columns>
+                                    <TableColumn fx:id="col_Product_Products" prefWidth="72.0" text="%product" />
+                                    <TableColumn fx:id="col_Quantity_Products" prefWidth="72.0" text="%quantity" />
+                                    <TableColumn fx:id="col_Price_Products" prefWidth="72.0" text="%price" />
+                                </columns>
+                            </TableView>
+                            <Label fx:id="txtTotal_Products" layoutX="123.0" layoutY="317.0" text="0.0$" />
+                            <Label layoutX="78.0" layoutY="318.0" style="-fx-text-fill: #2F3A47;" text="%total" textFill="#a3a1a1" />
+                            <Label layoutX="14.0" layoutY="347.0" style="-fx-text-fill: #2F3A47;" text="%payment_method" />
+                            <ChoiceBox fx:id="listPayment_Products" layoutX="119.0" layoutY="343.0" prefHeight="27.0" prefWidth="92.0" />
+                            <Button fx:id="btnOrder_Products" layoutX="24.0" layoutY="399.0" mnemonicParsing="false" onAction="#onActionOrder" prefHeight="31.0" prefWidth="178.0" style="-fx-background-color: #2F3A47; -fx-border-radius: 5; -fx-text-fill: white;" text="%order" />
+                            <Button fx:id="btnRemove_Products" layoutX="24.0" layoutY="440.0" mnemonicParsing="false" onAction="#onActionRemove" prefHeight="31.0" prefWidth="177.0" style="-fx-background-color: #2F3A47; -fx-text-fill: white;" text="%remove" />
+                        </children>
+                    </AnchorPane>
+                    <AnchorPane layoutX="3.0" layoutY="3.0" prefHeight="488.0" prefWidth="420.0" style="-fx-border-radius: 5; -fx-border-color: #2F3A47;">
+                        <children>
+                            <TableView fx:id="tableProductsPage" layoutX="2.0" layoutY="45.0" prefHeight="439.0" prefWidth="415.0">
+                                <columns>
+                                    <TableColumn fx:id="colProductName_products" prefWidth="92.66665649414062" text="%product_name" />
+                                    <TableColumn fx:id="colSeller_products" prefWidth="83.33334350585938" text="%seller" />
+                                    <TableColumn fx:id="colPrice_products" prefWidth="83.33334350585938" text="%price" />
+                                    <TableColumn fx:id="colCategory_products" prefWidth="83.33334350585938" text="%category" />
+                                    <TableColumn fx:id="colAction_products" prefWidth="69.33333333333331" text="%action" />
+                                </columns>
+                            </TableView>
+                            <TextField fx:id="fieldProductSearch" layoutX="11.0" layoutY="10.0" onKeyPressed="#handleKeyPress" promptText="%search_products" />
+                            <Button fx:id="btnSearch" layoutX="165.0" layoutY="10.0" mnemonicParsing="false" onAction="#onActionSearch" text="%search" />
+                        </children>
+                    </AnchorPane>
+                </children></Pane>
         </HBox>
     </left>
     <center>

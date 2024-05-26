@@ -1,7 +1,7 @@
 package model.filter;
 
-public abstract class Filter {
-    // ...
+import javafx.collections.ObservableList;
 
-    public abstract String getBuildQuery();
+public abstract class Filter<T> {
+    public abstract ObservableList<T> filter(ObservableList<T> items, String searchText);
 }

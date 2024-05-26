@@ -95,10 +95,35 @@ public class AdminProductRepository {
     }
 
     public void deleteProduct(int productId) throws SQLException {
+        deleteOrdersByProductId(productId); // Delete related orders first
         String query = "DELETE FROM Products WHERE ProductId = ?";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setInt(1, productId);
             statement.executeUpdate();
         }
     }
+
+
+    public void deleteOrdersByProductId(int productId) throws SQLException {
+        String query = "DELETE FROM orders WHERE ProductId = ?";
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, productId);
+            statement.executeUpdate();
+        }
+    }
+
+    public int getCategoryIdByName(String categoryName) throws SQLException {
+        String query = "SELECT CategoryID FROM Categories WHERE CName = ?";
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, categoryName);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    return resultSet.getInt("CategoryID");
+                } else {
+                    throw new SQLException("Category not found");
+                }
+            }
+        }
+    }
+
 }

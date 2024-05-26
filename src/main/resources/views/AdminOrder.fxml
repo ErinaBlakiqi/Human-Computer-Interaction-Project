@@ -16,7 +16,7 @@
 <BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AdminOrderController">
     <left>
         <HBox>
-            <VBox prefWidth="200" style="-fx-background-color: #2F3A47;">
+            <VBox prefHeight="481.0" prefWidth="200" style="-fx-background-color: #2F3A47;">
                 <VBox alignment="CENTER" spacing="10" style="-fx-padding: 80 20 20 20;">
                     <Label style="-fx-text-fill: white; -fx-font-size: 14;" text="Welcome," />
                     <Label style="-fx-text-fill: white; -fx-font-size: 18;" text="Admin" />
@@ -27,8 +27,10 @@
                     <Button fx:id="btnProducts" mnemonicParsing="false" onAction="#handleProducts" prefHeight="26.0" prefWidth="160.0" style="-fx-background-color: #2F3A47;" text="Products" textFill="WHITE" />
                     <Button fx:id="btnOrders" mnemonicParsing="false" onAction="#handleOrders" prefHeight="26.0" prefWidth="160.0" style="-fx-background-color: #2F3A47;" text="Orders" textFill="WHITE" />
                     <Button fx:id="btnSignOut" mnemonicParsing="false" onAction="#handleSignOut" prefHeight="26.0" prefWidth="160.0" style="-fx-background-color: #2F3A47;" text="Sign Out" textFill="WHITE" />
+                   <VBox prefHeight="30.0" prefWidth="160.0" style="-fx-padding: 20; -fx-alignment: bottom-left;">
                 </VBox>
-                <VBox style="-fx-padding: 20; -fx-alignment: bottom-left;">
+               <Button fx:id="btnChangeGjuhen" mnemonicParsing="false" onAction="#handleChange" prefHeight="12.0" prefWidth="160.0" style="-fx-background-color: #2F3A47;" text="EN | SQ" textFill="WHITE" />
+               <Button fx:id="btnHelp" mnemonicParsing="false" onAction="#handleHelp" prefHeight="8.0" prefWidth="160.0" style="-fx-background-color: #2F3A47;" text="Help" textFill="WHITE" />
                 </VBox>
             </VBox>
             <Pane prefHeight="495.0" prefWidth="650.0" style="-fx-background-color: white;">

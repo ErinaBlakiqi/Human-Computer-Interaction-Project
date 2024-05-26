@@ -1,9 +1,7 @@
 package controllers;
 
 import application.Navigator;
-import javafx.animation.FadeTransition;
-import javafx.animation.PauseTransition;
-import javafx.animation.SequentialTransition;
+import javafx.animation.*;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
@@ -72,6 +70,12 @@ public class ProductController {
     @FXML
     private Button btnRemove_Products;
 
+    @FXML
+    private Label statusLabel;
+
+    private int timeRemaining = 900;
+    private Timeline timeline;
+
     private ProductService productService;
     private CartService cartService;
     private OrderService orderService;
@@ -87,6 +91,7 @@ public class ProductController {
 
     @FXML
     public void initialize() {
+        startCountdown();
         colProductName_products.setCellValueFactory(new PropertyValueFactory<>("productName"));
         colSeller_products.setCellValueFactory(new PropertyValueFactory<>("sellerName"));
         colPrice_products.setCellValueFactory(new PropertyValueFactory<>("price"));
@@ -96,7 +101,7 @@ public class ProductController {
         col_Quantity_Products.setCellValueFactory(new PropertyValueFactory<>("quantity"));
         col_Price_Products.setCellValueFactory(new PropertyValueFactory<>("price"));
         colAction_products.setCellFactory(param -> new TableCell<>() {
-            private final Button buyButton = new Button("Buy");
+            private final Button buyButton = new Button("Add");
 
             @Override
             protected void updateItem(String item, boolean empty) {
@@ -121,6 +126,20 @@ public class ProductController {
 
         loadProducts();
         loadCartItems();
+    }
+
+    private void startCountdown() {
+        timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
+            timeRemaining--;
+            statusLabel.setText("Sesioni perfundon per: " + timeRemaining + '"' );
+
+            if (timeRemaining <= 0) {
+                Navigator.navigate(Navigator.SIGNIN_PAGE);
+            }
+        }));
+
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
     }
 
     private void loadCartItems() {
@@ -255,7 +274,9 @@ public class ProductController {
         Navigator.navigate(Navigator.USER_PAGE);
     }
 
-    public void handleSignOut(ActionEvent actionEvent) {
+    @FXML
+    private void handleSignOut(ActionEvent event) {
+        Navigator.navigate(Navigator.SIGNIN_PAGE);
     }
 
     public void handleChange(ActionEvent actionEvent) {

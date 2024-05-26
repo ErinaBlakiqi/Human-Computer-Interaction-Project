@@ -308,6 +308,8 @@ public class AccountController {
     public void handleHelp(ActionEvent actionEvent) {
     }
 
-    public void handleSignOut(ActionEvent actionEvent) {
+    @FXML
+    private void handleSignOut(ActionEvent event) {
+        Navigator.navigate(Navigator.SIGNIN_PAGE);
     }
 }

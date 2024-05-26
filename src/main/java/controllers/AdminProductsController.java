@@ -180,7 +180,9 @@ public class AdminProductsController {
     public void navigateToOrders(ActionEvent actionEvent) {Navigator.navigate(Navigator.ADMIN_ORDERS_PAGE);
     }
 
-    public void handleSignOut(ActionEvent actionEvent) {
+    @FXML
+    private void handleSignOut(ActionEvent event) {
+        Navigator.navigate(Navigator.SIGNIN_PAGE);
     }
 
     public void handleHelp(ActionEvent actionEvent) {

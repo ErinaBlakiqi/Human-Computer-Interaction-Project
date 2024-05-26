@@ -42,7 +42,10 @@ public class SellItemRepository {
         try (Connection conn = DBConnector.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(query)) {
             pstmt.setInt(1, itemId);
-            pstmt.executeUpdate();
+            int affectedRows = pstmt.executeUpdate();
+            if (affectedRows == 0) {
+                throw new SQLException("Deleting product failed, no rows affected.");
+            }
         }
     }
 

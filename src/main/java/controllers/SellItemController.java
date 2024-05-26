@@ -221,6 +221,7 @@ public class SellItemController {
             productTableView.getItems().remove(product);
         } catch (Exception e) {
             e.printStackTrace();
+            showAlert("Error", "Unable to delete product: " + e.getMessage());
         }
     }
 

@@ -58,7 +58,7 @@ public class EditProfileDto {
     }
 
     public void setContactNumber(String contactNumber) {
-        if (!contactNumber.matches("\\+?[0-9]*")) {
+        if (contactNumber!=null && !contactNumber.matches("\\+?[0-9]*")) {
             throw new IllegalArgumentException("Invalid contact number format");
         }
         this.contactNumber = contactNumber;

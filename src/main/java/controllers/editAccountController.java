@@ -68,7 +68,7 @@ public class editAccountController {
             if (username == null || username.isEmpty()) {
                 throw new IllegalArgumentException("Username cannot be empty");
             }
-            if (!contactNumber.matches("\\+?[0-9]*")) {
+            if (contactNumber!=null && !contactNumber.matches("\\+?[0-9]*")) {
                 throw new IllegalArgumentException("Invalid contact number format");
             }
             if (!contactEmail.matches("^[A-Za-z0-9+_.-]+@(.+)$")) {

@@ -26,6 +26,26 @@ public class SellItemRepository {
         }
     }
 
+    public void updateItem(SellItemDto item) throws SQLException {
+        String query = "UPDATE Products SET Price = ?, Quantity = ? WHERE ProductId = ?";
+        try (Connection conn = DBConnector.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setDouble(1, item.getPrice());
+            pstmt.setInt(2, item.getQuantity());
+            pstmt.setInt(3, item.getProductId());
+            pstmt.executeUpdate();
+        }
+    }
+
+    public void deleteItem(int itemId) throws SQLException {
+        String query = "DELETE FROM Products WHERE ProductId = ?";
+        try (Connection conn = DBConnector.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setInt(1, itemId);
+            pstmt.executeUpdate();
+        }
+    }
+
     private boolean isCategoryValid(int categoryId) throws SQLException {
         String query = "SELECT 1 FROM Categories WHERE CategoryID = ?";
         try (Connection conn = DBConnector.getConnection();

@@ -74,4 +74,7 @@ public class SignUpController {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
+    public void handleChange(ActionEvent actionEvent) {
+    }
 }

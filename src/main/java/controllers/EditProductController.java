@@ -6,6 +6,8 @@ import javafx.stage.Stage;
 import model.dto.AdminProductDTO;
 import services.AdminProductService;
 
+import java.sql.SQLException;
+
 public class EditProductController {
 
     @FXML
@@ -53,8 +55,11 @@ public class EditProductController {
     }
 
     private int getCategoryIdFromName(String categoryName) {
-        // Implement this method to return categoryId based on categoryName
-        // This is a placeholder and should be replaced with actual logic to fetch categoryId
-        return 1; // Replace with actual implementation
+        try {
+            return adminProductService.getCategoryIdByName(categoryName);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return -1; // Handle error appropriately
+        }
     }
 }

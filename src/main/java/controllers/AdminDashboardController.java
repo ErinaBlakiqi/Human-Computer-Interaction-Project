@@ -102,4 +102,10 @@ public class AdminDashboardController {
     private void handleSignOut(ActionEvent event) {
         Navigator.navigate(Navigator.SIGNIN_PAGE);
     }
+
+    public void handleChange(ActionEvent actionEvent) {
+    }
+
+    public void handleHelp(ActionEvent actionEvent) {
+    }
 }

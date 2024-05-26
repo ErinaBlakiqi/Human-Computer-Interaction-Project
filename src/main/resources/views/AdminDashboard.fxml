@@ -32,6 +32,8 @@
                 </VBox>
                 <VBox style="-fx-padding: 20; -fx-alignment: bottom-left;">
                 </VBox>
+            <Button fx:id="btnChangeGjuhen" mnemonicParsing="false" onAction="#handleChange" prefHeight="34.0" prefWidth="200.0" style="-fx-background-color: #2F3A47;" text="EN | SQ" textFill="WHITE" />
+            <Button fx:id="btnHelp" mnemonicParsing="false" onAction="#handleHelp" prefHeight="33.0" prefWidth="200.0" style="-fx-background-color: #2F3A47;" text="Help" textFill="WHITE" />
             </VBox>
             <Pane prefHeight="495.0" prefWidth="650.0" style="-fx-background-color: white;">
                 <children>
@@ -120,4 +122,3 @@
         <Pane prefHeight="472.0" prefWidth="0.0" />
     </center>
 </BorderPane>
-

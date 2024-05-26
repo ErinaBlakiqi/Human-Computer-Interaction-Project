@@ -79,6 +79,7 @@ public class AdminRepository {
         return 0.0;
     }
 
+
     public List<DailyRevenueDto> getDailyRevenueData() {
         List<DailyRevenueDto> dailyRevenueData = new ArrayList<>();
         String query = "SELECT DATE(CreatedAt) AS date, SUM(TotalPrice) AS revenue FROM Orders GROUP BY DATE(CreatedAt)";
@@ -100,7 +101,7 @@ public class AdminRepository {
 
     public List<DailyRevenueDto> getMonthlyRevenueData() {
         List<DailyRevenueDto> monthlyRevenueData = new ArrayList<>();
-        String query = "SELECT DATE_FORMAT(CreatedAt, '%Y-%m') AS date, SUM(TotalPrice) AS revenue FROM Orders GROUP BY DATE_FORMAT(CreatedAt, '%Y-%m')";
+        String query = "SELECT DATE_FORMAT(CreatedAt, '%Y-%m-01') AS date, SUM(TotalPrice) AS revenue FROM Orders GROUP BY DATE_FORMAT(CreatedAt, '%Y-%m')";
         try (Connection connection = DBConnector.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query);
              ResultSet resultSet = preparedStatement.executeQuery()) {
@@ -116,4 +117,5 @@ public class AdminRepository {
         }
         return monthlyRevenueData;
     }
+
 }

@@ -2,11 +2,11 @@ package controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.chart.AreaChart;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import model.dto.DailyRevenueDto;
 import services.AdminService;
 import application.Navigator;
@@ -61,6 +61,7 @@ public class AdminDashboardController {
         updateDailyIncomeChart();
         updateMonthlyIncomeChart();
     }
+
 
     private void updateDailyIncomeChart() {
         List<DailyRevenueDto> dailyRevenues = adminService.getDailyRevenueData();

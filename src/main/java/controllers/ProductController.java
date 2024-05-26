@@ -3,9 +3,14 @@ package controllers;
 import application.Navigator;
 import javafx.animation.*;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import model.Order;
 import model.dto.ProductDTO;
@@ -19,6 +24,7 @@ import services.OrderService;
 import services.ProductService;
 import model.Cart;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
@@ -284,7 +290,29 @@ public class ProductController {
     }
 
     @FXML
-    public void handleHelp(ActionEvent actionEvent) {
+    private void handleHelp() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/HelpPopUp.fxml"));
+            Parent root = loader.load();
+
+            HelpPopUpController controller = loader.getController();
+            controller.setHelpText("This is the Admin Products page.\n\n" +
+                    "You can perform the following actions:\n" +
+                    "- **Add a new product**: Fill in the product details and click 'Add'.\n" +
+                    "- **Edit a product**: Click the 'Edit' button next to the product you want to edit.\n" +
+                    "- **Delete a product**: Click the 'Delete' button next to the product you want to delete.\n" +
+                    "- **Search for products**: Use the search bar to filter products by name.\n" +
+                    "- **Navigate to other pages**: Use the navigation buttons on the left.\n" +
+                    "\nUse F1 to open this help dialog.");
+
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Help");
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
 

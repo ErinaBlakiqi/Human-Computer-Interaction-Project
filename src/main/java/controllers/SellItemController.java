@@ -96,6 +96,8 @@ public class SellItemController {
         setCurrentUserId(1); // Replace with a valid user ID from your database
 
         loadProducts();
+
+
     }
 
     @FXML
@@ -296,6 +298,28 @@ public class SellItemController {
     }
 
     @FXML
-    public void handleHelp(ActionEvent actionEvent) {
+    private void handleHelp() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/HelpPopUp.fxml"));
+            Parent root = loader.load();
+
+            HelpPopUpController controller = loader.getController();
+            controller.setHelpText("This is the Admin Products page.\n\n" +
+                    "You can perform the following actions:\n" +
+                    "- **Add a new product**: Fill in the product details and click 'Add'.\n" +
+                    "- **Edit a product**: Click the 'Edit' button next to the product you want to edit.\n" +
+                    "- **Delete a product**: Click the 'Delete' button next to the product you want to delete.\n" +
+                    "- **Search for products**: Use the search bar to filter products by name.\n" +
+                    "- **Navigate to other pages**: Use the navigation buttons on the left.\n" +
+                    "\nUse F1 to open this help dialog.");
+
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Help");
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

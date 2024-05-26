@@ -7,6 +7,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import model.dto.UserDto;
 import services.UserService;
 
@@ -62,7 +63,8 @@ public class SignUpController {
 
     @FXML
     private void handleCancel(ActionEvent event) {
-        // Add your cancel logic here if needed
+        Stage stage = (Stage) cancelButton.getScene().getWindow();
+        stage.close();
     }
 
     private void showAlert(Alert.AlertType alertType, String title, String message) {

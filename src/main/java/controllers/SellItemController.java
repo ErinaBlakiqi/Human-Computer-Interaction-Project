@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 import model.dto.SellItemDto;
 import services.SellItemService;
+import utils.SessionManager;
 
 import java.io.IOException;
 import java.util.List;
@@ -93,7 +94,7 @@ public class SellItemController {
         actionColumn.setCellFactory(createActionCellFactory());
 
         // Log in a user programmatically for testing
-        setCurrentUserId(1); // Replace with a valid user ID from your database
+        setCurrentUserId(SessionManager.getCurrentUserId()); // Replace with a valid user ID from your database
 
         loadProducts();
 

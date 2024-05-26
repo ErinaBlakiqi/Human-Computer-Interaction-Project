@@ -91,7 +91,7 @@
                         <HBox prefHeight="100.0" prefWidth="200.0" />
                     </VBox>
                     <Pane HBox.hgrow="ALWAYS" />
-                    <VBox layoutX="113.0" layoutY="9.0" prefHeight="104.0" prefWidth="125.0" spacing="10"> <!-- Add spacing attribute here -->
+                    <VBox layoutX="113.0" layoutY="9.0" prefHeight="104.0" prefWidth="125.0" spacing="10">
                         <children>
                             <Button fx:id="editAccountButton" alignment="BOTTOM_CENTER" contentDisplay="CENTER" onAction="#handleEditAccount" text="Edit Account" />
                             <Button fx:id="changePasswordButton" mnemonicParsing="false" onAction="#handleChangePassword" prefHeight="25.0" prefWidth="117.0" text="Change Password" />
@@ -100,6 +100,17 @@
                 </HBox>
                 <HBox spacing="20">
                     <VBox>
+                  <Label text="Last Items Bought" />
+                        <!-- Table for Last Items Bought -->
+                        <TableView fx:id="lastItemsBoughtTableProfile" prefHeight="200" prefWidth="300">
+                            <columns>
+                                <TableColumn fx:id="itemBoughtColumn" prefWidth="127.11107885837555" text="Item" />
+                                <TableColumn fx:id="priceBoughtColumn" prefWidth="82.888916015625" text="Price" />
+                                <TableColumn fx:id="dateBoughtColumn" prefWidth="82.88893127441406" text="Date Bought" />
+                            </columns>
+                        </TableView>
+                    </VBox>
+                    <VBox>
                         <Label text="Last Items Sold" />
                         <!-- Table for Last Items Sold -->
                         <TableView fx:id="lastItemsSoldTableProfile" prefHeight="200" prefWidth="300">
@@ -107,17 +118,6 @@
                                 <TableColumn fx:id="itemSoldColumn" prefWidth="133.33340454101562" text="Item" />
                                 <TableColumn fx:id="priceSoldColumn" prefWidth="77.33331298828125" text="Price" />
                                 <TableColumn fx:id="dateSoldColumn" prefWidth="80.66665649414062" text="Date Sold" />
-                            </columns>
-                        </TableView>
-                    </VBox>
-                    <VBox>
-                        <Label text="Last Items Bought" />
-                        <!-- Table for Last Items Bought -->
-                        <TableView fx:id="lastItemsBoughtTableProfile" prefHeight="200" prefWidth="300">
-                            <columns>
-                                <TableColumn fx:id="itemBoughtColumn" prefWidth="127.11107885837555" text="Item" />
-                                <TableColumn fx:id="priceBoughtColumn" prefWidth="82.888916015625" text="Price" />
-                                <TableColumn fx:id="dateBoughtColumn" prefWidth="82.88893127441406" text="Date Bought" />
                             </columns>
                         </TableView>
                     </VBox>

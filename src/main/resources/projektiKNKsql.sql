@@ -51,14 +51,11 @@ create table Cart(
 
 
 CREATE TABLE Profiles(
-    ProfileId INT AUTO_INCREMENT PRIMARY KEY,
-    UserId INT NOT NULL,
-    UserName VARCHAR(255),
+    ProfileId INT,
     Location VARCHAR(255),
     ContactNumber VARCHAR(15),
-    ContactEmail VARCHAR(255),
     Bio TEXT,
-    FOREIGN KEY (UserId) REFERENCES Users(UserId)
+    FOREIGN KEY (ProfileId) REFERENCES Users(UserId)
 );
 
     

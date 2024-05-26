@@ -20,6 +20,7 @@ import utils.SessionManager;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Locale;
 
 public class SellItemController {
     @FXML
@@ -102,8 +103,6 @@ public class SellItemController {
         userLabel.setText(fullName);
 
         loadProducts();
-
-
     }
 
     @FXML
@@ -137,19 +136,27 @@ public class SellItemController {
 
     @FXML
     void handleSell() {
-        Navigator.navigate("/views/sellitem.fxml");
+        Navigator.navigate(Navigator.SELL_PAGE);
     }
 
     @FXML
     void handleSignOut() {
-        Navigator.navigate("/views/SignIn.fxml");
+        Navigator.navigate(Navigator.SIGNIN_PAGE);
     }
 
     @FXML
     void handleUser() {
-        Navigator.navigate("/views/account2.fxml");
+        Navigator.navigate(Navigator.USER_PAGE);
     }
 
+    @FXML
+    private void handleChange(ActionEvent event) {
+        if (Locale.getDefault().getLanguage().equals("en")) {
+            Navigator.changeLanguage(new Locale("sq"), Navigator.SELL_PAGE);
+        } else {
+            Navigator.changeLanguage(new Locale("en"), Navigator.SELL_PAGE);
+        }
+    }
 
     public void setCurrentUserId(int userId) {
         this.currentUserId = userId;
@@ -202,7 +209,7 @@ public class SellItemController {
 
     private void handleEditProduct(SellItemDto product) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/SellItemEdit.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(Navigator.EDIT_PAGE));
             Parent root = loader.load();
 
             SellItemEditController controller = loader.getController();
@@ -231,7 +238,6 @@ public class SellItemController {
             showAlert("Error", "Unable to delete product: " + e.getMessage());
         }
     }
-
 
     private void onEdit() {
         if (productTableView.getSelectionModel().getSelectedItem() != null) {
@@ -297,10 +303,6 @@ public class SellItemController {
 
     public void handleProfile(ActionEvent actionEvent) {
         Navigator.navigate(Navigator.USER_PAGE);
-    }
-
-    @FXML
-    public void handleChange(ActionEvent actionEvent) {
     }
 
     @FXML

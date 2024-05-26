@@ -41,8 +41,8 @@ public class AdminOrderRepository {
     }
 
     public void addOrder(Order order) throws SQLException {
-        String query = "INSERT INTO Orders (ProductId, BuyerId, TotalPrice, OrderStatus, PaymentMethod, CreatedAt) " +
-                "VALUES (?, ?, ?, ?, ?, CURRENT_TIMESTAMP)";
+        String query = "INSERT INTO Orders (ProductId, BuyerId, TotalPrice, OrderStatus, PaymentMethod, Quantity, CreatedAt) " +
+                "VALUES (?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)";
         try (Connection conn = DatabaseUtil.getConnection();
              PreparedStatement statement = conn.prepareStatement(query)) {
             statement.setInt(1, order.getProductId());
@@ -50,9 +50,8 @@ public class AdminOrderRepository {
             statement.setInt(3, order.getTotalPrice());
             statement.setString(4, order.getOrderStatus());
             statement.setString(5, order.getPaymentMethod());
+            statement.setInt(6, order.getQuantity());
             statement.executeUpdate();
         }
     }
-
-
 }

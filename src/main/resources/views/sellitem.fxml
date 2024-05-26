@@ -9,7 +9,6 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
@@ -23,17 +22,20 @@
         <HBox>
             <VBox prefWidth="200" style="-fx-background-color: #2F3A47;">
                 <VBox alignment="CENTER" spacing="10" style="-fx-padding: 20;">
-                    <ImageView fx:id="profileImage" fitHeight="79.0" fitWidth="93.0" />
                     <Label style="-fx-text-fill: white; -fx-font-size: 14;" text="Welcome," />
-                    <Label style="-fx-text-fill: white; -fx-font-size: 18;" text="User" />
+                    <Label style="-fx-text-fill: white; -fx-font-size: 18;" text="Admin" />
                     <Rectangle height="2" style="-fx-fill: #A4A4A4;" width="160" />
                 </VBox>
-                <VBox alignment="CENTER" prefHeight="179.0" prefWidth="200.0" style="-fx-padding: 20;">
-               <Button mnemonicParsing="false" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16;" text="Products" />
-               <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="65.0" style="-fx-font-size: 16; -fx-text-fill: white; -fx-background-color: transparent;" text="Sell" />
-               <Button mnemonicParsing="false" style="-fx-font-size: 16; -fx-text-fill: white; -fx-background-color: transparent;" text="Profile" />
+                <VBox style="-fx-padding: 20;">
+                    <Button fx:id="homeButton" contentDisplay="CENTER" onMouseClicked="#handleProducts" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16;" text="Home" />
+                    <Button fx:id="productsButton" onMouseClicked="#handleProducts" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16;" text="Products" />
+                    <Button fx:id="sellButton" alignment="TOP_LEFT" minWidth="42.0" onMouseClicked="#handleSell" prefHeight="36.0" prefWidth="55.0" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16;" text="Sell" />
+                    <Button fx:id="userButton" onMouseClicked="#handleUser" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16;" text="Profile" />
+                    <Button fx:id="adminButton" onMouseClicked="#handleAdmin" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16;" text="Admin" />
                 </VBox>
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" style="-fx-font-size: 16; -fx-text-fill: white; -fx-background-color: transparent;" text="Sign out" />
+                <VBox style="-fx-padding: 20; -fx-alignment: bottom-left;">
+                    <Button fx:id="signoutButton" onMouseClicked="#handleSignOut" prefHeight="33.0" prefWidth="118.0" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16;" text="Sign Out" />
+                </VBox>
             </VBox>
             <Pane prefHeight="495.0" prefWidth="650.0" style="-fx-background-color: white;">
                 <children>
@@ -46,7 +48,7 @@
                                     <String fx:value="white-bg" />
                                 </styleClass>
                                 <children>
-                                    <Label layoutX="46.0" layoutY="42.0" prefHeight="22.0" prefWidth="85.0" text="Product name:">
+                                    <Label layoutX="44.0" layoutY="42.0" prefHeight="22.0" prefWidth="85.0" text="Product name:">
                                         <font>
                                             <Font size="14.0" />
                                         </font>
@@ -58,38 +60,28 @@
                                             <Font size="14.0" />
                                         </font>
                                     </Label>
-                                    <Label layoutX="374.0" layoutY="43.0" prefHeight="22.0" prefWidth="40.0" text="Type:">
+                                    <Label layoutX="351.0" layoutY="43.0" prefHeight="22.0" prefWidth="70.0" text="Category:">
                                         <font>
                                             <Font size="14.0" />
                                         </font>
                                     </Label>
-                                    <ComboBox fx:id="typeComboBox" layoutX="421.0" layoutY="41.0" prefHeight="26.0" prefWidth="158.0" promptText="Choose Type" />
+                                    <ComboBox fx:id="typeComboBox" layoutX="423.0" layoutY="41.0" prefHeight="26.0" prefWidth="158.0" promptText="Choose Category" />
                                     <Label layoutX="355.0" layoutY="86.0" prefHeight="22.0" prefWidth="85.0" text="Quantity:">
                                         <font>
                                             <Font size="14.0" />
                                         </font>
                                     </Label>
                                     <TextField fx:id="quantityField" layoutX="421.0" layoutY="84.0" prefHeight="26.0" prefWidth="158.0" promptText="0" />
-                                    <Button fx:id="btnAddItem" layoutX="198.0" layoutY="158.0" mnemonicParsing="false" onAction="#handleAddItem" prefHeight="35.0" prefWidth="80.0" style="-fx-background-color: #2F3A47;" text="Add item" textFill="WHITE">
-                                        <font>
-                                            <Font size="14.0" />
-                                        </font>
-                                    </Button>
-                                    <Button fx:id="btnUpdate" layoutX="284.0" layoutY="158.0" mnemonicParsing="false" onAction="#handleUpdate" prefHeight="35.0" prefWidth="80.0" style="-fx-background-color: #2F3A47;" text="Update" textFill="WHITE">
-                                        <font>
-                                            <Font size="14.0" />
-                                        </font>
-                                    </Button>
-                                    <Button fx:id="btnDelete" layoutX="370.0" layoutY="158.0" mnemonicParsing="false" onAction="#handleDelete" prefHeight="35.0" prefWidth="80.0" style="-fx-background-color: #2F3A47;" text="Delete" textFill="WHITE">
+                                    <Button fx:id="btnAddItem" layoutX="233.0" layoutY="153.0" mnemonicParsing="false" onAction="#handleAddItem" prefHeight="35.0" prefWidth="194.0" style="-fx-background-color: #2F3A47;" text="Add item" textFill="WHITE">
                                         <font>
                                             <Font size="14.0" />
                                         </font>
                                     </Button>
                                 </children>
-                        <stylesheets>
-                           <URL value="@../css/mainFormDesign.css" />
-                           <URL value="@../css/styles.css" />
-                        </stylesheets>
+                                <stylesheets>
+                                    <URL value="@../css/mainFormDesign.css" />
+                                    <URL value="@../css/styles.css" />
+                                </stylesheets>
                             </AnchorPane>
                             <Separator layoutX="21.0" layoutY="289.0" prefHeight="4.0" prefWidth="630.0" AnchorPane.leftAnchor="21.0" />
                             <AnchorPane layoutX="20.0" layoutY="299.0" prefHeight="200.0" prefWidth="631.0" style="-fx-background-color: #CDCDCD;" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="17.0" AnchorPane.topAnchor="299.0">
@@ -105,16 +97,17 @@
                                             <TableColumn fx:id="typeColumn" prefWidth="97.17813110351562" text="Type" />
                                             <TableColumn fx:id="quantityColumn" prefWidth="97.17813110351562" text="Quantity" />
                                             <TableColumn fx:id="priceColumn" prefWidth="101.0" text="Price" />
+                                            <TableColumn fx:id="actionColumn" prefWidth="100.0" text="Actions" />
                                         </columns>
                                         <columnResizePolicy>
                                             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                         </columnResizePolicy>
                                     </TableView>
                                 </children>
-                        <stylesheets>
-                           <URL value="@../css/mainFormDesign.css" />
-                           <URL value="@../css/styles.css" />
-                        </stylesheets>
+                                <stylesheets>
+                                    <URL value="@../css/mainFormDesign.css" />
+                                    <URL value="@../css/styles.css" />
+                                </stylesheets>
                             </AnchorPane>
                         </children>
                     </AnchorPane>

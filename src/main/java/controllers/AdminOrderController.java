@@ -23,7 +23,7 @@ public class AdminOrderController {
     @FXML
     private TableColumn<Order, Integer> quantityColumn;
     @FXML
-    private TableColumn<Order, Double> totalPriceColumn;
+    private TableColumn<Order, Integer> totalPriceColumn;
     @FXML
     private TableColumn<Order, String> orderStatusColumn;
     @FXML
@@ -49,7 +49,7 @@ public class AdminOrderController {
     }
 
     @FXML
-    private void handleHome(ActionEvent event) {
+    private void handleDashboard(ActionEvent event) {
         Navigator.navigate(Navigator.ADMIN_DASHBOARD_PAGE);
     }
 
@@ -60,7 +60,11 @@ public class AdminOrderController {
 
     @FXML
     private void handleOrders(ActionEvent event) {
-        // Already on Orders page, no navigation needed
+    }
+
+    @FXML
+    private void handleSell(ActionEvent event) {
+        Navigator.navigate(Navigator.SELL_PAGE);
     }
 
     @FXML

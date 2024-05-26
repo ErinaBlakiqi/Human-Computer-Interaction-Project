@@ -1,6 +1,11 @@
 package controllers;
 
 import application.Navigator;
+import javafx.scene.chart.XYChart;
+import javafx.scene.control.*;
+import model.User;
+import model.dto.DailyChartDto;
+import services.ProfileService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,28 +14,16 @@ import javafx.scene.Scene;
 import javafx.scene.chart.AreaChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.XYChart;
-import javafx.scene.control.*;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import model.User;
-import model.dto.DailyChartDto;
 import model.dto.ProfileDto;
 import model.dto.ProfileOrderDto;
-import model.dto.ProfileSellDto;
-import repository.ProfileRepository;
-import services.ProfileService;
 import utils.SessionManager;
 
 import java.io.IOException;
 import java.util.List;
 
 public class AccountController {
-
-    @FXML
-    private Button adminButton;
 
     @FXML
     private Label bioLabel;
@@ -45,65 +38,49 @@ public class AccountController {
     private NumberAxis boughtYAxis;
 
     @FXML
-    private Label contactNumberLabel;
+    private Button btnChangeGjuhen;
+
+    @FXML
+    private Button btnHelp;
+
+    @FXML
+    private Button btnProducts;
+
+    @FXML
+    private Button btnProfile;
+
+    @FXML
+    private Button btnSell;
+
+    @FXML
+    private Button btnSignOut;
+
+    @FXML
+    private Button changePasswordButton;
 
     @FXML
     private Label contactEmailLabel;
 
     @FXML
+    private Label contactNumberLabel;
+
+    @FXML
     private TableColumn<ProfileOrderDto, String> dateBoughtColumn;
 
     @FXML
-    private TableColumn<ProfileOrderDto, String> dateSoldColumn;
-
-    @FXML
     private Button editAccountButton;
-    @FXML
-    private Button changePasswordButton;
-    @FXML
-    private Button homeButton;
 
     @FXML
     private TableColumn<ProfileOrderDto, String> itemBoughtColumn;
 
     @FXML
-    private TableColumn<ProfileSellDto, String> itemSoldColumn;
-
-    @FXML
     private TableView<ProfileOrderDto> lastItemsBoughtTableProfile;
-
-    @FXML
-    private TableView<ProfileSellDto> lastItemsSoldTableProfile;
 
     @FXML
     private Label locationLabel;
 
     @FXML
     private TableColumn<ProfileOrderDto, Integer> priceBoughtColumn;
-
-    @FXML
-    private TableColumn<ProfileSellDto, Integer> priceSoldColumn;
-
-    @FXML
-    private Button productsButton;
-
-    @FXML
-    private Button sellButton;
-
-    @FXML
-    private Button signoutButton;
-
-    @FXML
-    private AreaChart<String, Number> soldProductsChartProfile;
-
-    @FXML
-    private CategoryAxis soldXAxis;
-
-    @FXML
-    private NumberAxis soldYAxis;
-
-    @FXML
-    private Button userButton;
 
     @FXML
     private Label usernameLabel;
@@ -120,8 +97,31 @@ public class AccountController {
         }
     }
     @FXML
-    void handleAdmin(MouseEvent event) {
-        Navigator.navigate("/views/AdminDashboard.fxml");
+    void handleChange(ActionEvent event) {
+
+    }
+
+    @FXML
+    void handleChangePassword(ActionEvent event) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/ChangePassword.fxml"));
+            Parent changePasswordRoot = fxmlLoader.load();
+
+            Stage changePasswordStage = new Stage();
+            changePasswordStage.setScene(new Scene(changePasswordRoot));
+
+            // Set the new window as a modal dialog
+            changePasswordStage.initModality(Modality.WINDOW_MODAL);
+
+            // Set the owner of the new window
+            Stage primaryStage = (Stage) changePasswordButton.getScene().getWindow();
+            changePasswordStage.initOwner(primaryStage);
+
+            // Show the new window and wait until it is closed
+            changePasswordStage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -164,53 +164,29 @@ public class AccountController {
     }
 
     @FXML
-    void handleProducts(MouseEvent event) {
+    void handleHelp(ActionEvent event) {
+
+    }
+
+    @FXML
+    void handleSignOut(ActionEvent event) {
+        Navigator.navigate("/views/SignIn.fxml");
+    }
+
+    @FXML
+    void navigateToProducts(ActionEvent event) {
         Navigator.navigate("/views/products.fxml");
     }
 
     @FXML
-    void handleSell(MouseEvent event) {
+    void navigateToSell(ActionEvent event) {
         Navigator.navigate("/views/sellitem.fxml");
-    }
-
-
-
-    @FXML
-    void handleUser(MouseEvent event) {
-        Navigator.navigate("/views/account2.fxml");
-    }
-
-    public void handleChangePassword(ActionEvent actionEvent) {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/ChangePassword.fxml"));
-            Parent changePasswordRoot = fxmlLoader.load();
-
-            Stage changePasswordStage = new Stage();
-            changePasswordStage.setScene(new Scene(changePasswordRoot));
-
-            // Set the new window as a modal dialog
-            changePasswordStage.initModality(Modality.WINDOW_MODAL);
-
-            // Set the owner of the new window
-            Stage primaryStage = (Stage) changePasswordButton.getScene().getWindow();
-            changePasswordStage.initOwner(primaryStage);
-
-            // Show the new window and wait until it is closed
-            changePasswordStage.showAndWait();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
     @FXML
     public void initialize() {
         dateBoughtColumn.setCellValueFactory(cellData -> cellData.getValue().dateProperty());
         itemBoughtColumn.setCellValueFactory(cellData -> cellData.getValue().itemProperty());
         priceBoughtColumn.setCellValueFactory(cellData -> cellData.getValue().priceProperty().asObject());
-
-        dateSoldColumn.setCellValueFactory(cellData -> cellData.getValue().dateProperty());
-        itemSoldColumn.setCellValueFactory(cellData -> cellData.getValue().itemProperty());
-        priceSoldColumn.setCellValueFactory(cellData -> cellData.getValue().priceProperty().asObject());
-
         try {
             int userId = getCurrentUserId();
             ProfileDto profile = profileService.fetchProfileData(userId);
@@ -221,14 +197,10 @@ public class AccountController {
             }
 
             List<DailyChartDto> boughtData = profileService.fetchBoughtProductsData(userId);
-            List<DailyChartDto> soldData = profileService.fetchSoldProductsData(userId);
             List<ProfileOrderDto> lastBoughtItems = profileService.fetchLastBoughtItems(userId);
-            List<ProfileSellDto> lastSoldItems = profileService.fetchSoldProducts(userId);
 
             populateChart(boughtProductsChartProfile, boughtData);
-            populateChart(soldProductsChartProfile, soldData);
             populateBoughtItemsTable(lastItemsBoughtTableProfile, lastBoughtItems);
-            populateSoldItemsTable(lastItemsSoldTableProfile, lastSoldItems);
 
         } catch (IllegalStateException e) {
             showAlert("User Not Logged In", "No user is currently logged in.");
@@ -253,6 +225,7 @@ public class AccountController {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
     private void populateChart(AreaChart<String, Number> chart, List<DailyChartDto> data) {
         XYChart.Series<String, Number> series = new XYChart.Series<>();
         for (DailyChartDto item : data) {
@@ -261,18 +234,11 @@ public class AccountController {
         }
         chart.getData().add(series);
     }
-
     private void populateBoughtItemsTable(TableView<ProfileOrderDto> table, List<ProfileOrderDto> data) {
         System.out.println("Populating table with data: "+data);
         table.getItems().clear();
         table.getItems().addAll(data);
     }
-    private void populateSoldItemsTable(TableView<ProfileSellDto> table, List<ProfileSellDto> data) {
-        System.out.println("Populating sold items table with data: " + data);
-        table.getItems().clear();
-        table.getItems().addAll(data);
-    }
-
     private void refreshProfileData() {
         try {
             int userId = getCurrentUserId();
@@ -284,10 +250,8 @@ public class AccountController {
             }
 
             List<DailyChartDto> boughtData = profileService.fetchBoughtProductsData(userId);
-            List<DailyChartDto> soldData = profileService.fetchSoldProductsData(userId);
 
             populateChart(boughtProductsChartProfile, boughtData);
-            populateChart(soldProductsChartProfile, soldData);
 
         } catch (IllegalStateException e) {
             showAlert("User Not Logged In", "No user is currently logged in.");
@@ -295,6 +259,7 @@ public class AccountController {
             showAlert("Error", "An unexpected error occurred: " + e.getMessage());
         }
     }
+<<<<<<< Updated upstream
 
     public void navigateToProducts(ActionEvent actionEvent) {Navigator.navigate(Navigator.PRODUCTS_PAGE);
     }
@@ -312,4 +277,6 @@ public class AccountController {
     private void handleSignOut(ActionEvent event) {
         Navigator.navigate(Navigator.SIGNIN_PAGE);
     }
+=======
+>>>>>>> Stashed changes
 }

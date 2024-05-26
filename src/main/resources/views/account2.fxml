@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 
-<AnchorPane maxHeight="-Infinity" prefHeight="490.0" prefWidth="827.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AccountController">
+<AnchorPane maxHeight="-Infinity" prefHeight="495.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AccountController">
     <BorderPane prefHeight="573.0" prefWidth="825.0">
         <left>
             <HBox>
@@ -29,7 +29,7 @@
                   <children>
                      <Button fx:id="btnProducts" mnemonicParsing="false" onAction="#navigateToProducts" prefHeight="26.0" prefWidth="160.0" style="-fx-background-color: #2F3A47;" text="Products" textFill="WHITE" />
                      <Button fx:id="btnSell" mnemonicParsing="false" onAction="#navigateToSell" prefHeight="26.0" prefWidth="160.0" style="-fx-background-color: #2F3A47;" text="Sell" textFill="WHITE" />
-                     <Button fx:id="btnProfile" layoutX="30.0" layoutY="87.0" mnemonicParsing="false"  prefHeight="26.0" prefWidth="160.0" style="-fx-background-color: #2F3A47;" text="Profile" textFill="WHITE" />
+                     <Button fx:id="btnProfile" layoutX="30.0" layoutY="87.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="160.0" style="-fx-background-color: #2F3A47;" text="Profile" textFill="WHITE" />
                      <Button fx:id="btnSignOut" mnemonicParsing="false" onAction="#handleSignOut" prefHeight="26.0" prefWidth="160.0" style="-fx-background-color: #2F3A47;" text="Sign Out" textFill="WHITE" />
                      <HBox alignment="BOTTOM_CENTER" prefHeight="58.0" prefWidth="160.0" />
                      <Button fx:id="btnChangeGjuhen" mnemonicParsing="false" onAction="#handleChange" prefHeight="23.0" prefWidth="160.0" style="-fx-background-color: #2F3A47;" text="EN | SQ" textFill="WHITE" />
@@ -70,7 +70,7 @@
                     <VBox>
                   <Label text="Last Items Bought" />
                         <!-- Table for Last Items Bought -->
-                        <TableView fx:id="lastItemsBoughtTableProfile" prefHeight="200" prefWidth="300">
+                        <TableView fx:id="lastItemsBoughtTableProfile" prefHeight="196.0" prefWidth="301.0">
                             <columns>
                                 <TableColumn fx:id="itemBoughtColumn" prefWidth="127.11107885837555" text="Item" />
                                 <TableColumn fx:id="priceBoughtColumn" prefWidth="82.888916015625" text="Price" />
@@ -79,22 +79,9 @@
                         </TableView>
                     </VBox>
                     <VBox>
-                        <Label text="Last Items Sold" />
-                        <!-- Table for Last Items Sold -->
-                        <TableView fx:id="lastItemsSoldTableProfile" prefHeight="200" prefWidth="300">
-                            <columns>
-                                <TableColumn fx:id="itemSoldColumn" prefWidth="133.33340454101562" text="Item" />
-                                <TableColumn fx:id="priceSoldColumn" prefWidth="77.33331298828125" text="Price" />
-                                <TableColumn fx:id="dateSoldColumn" prefWidth="80.66665649414062" text="Date Sold" />
-                            </columns>
-                        </TableView>
-                    </VBox>
-                </HBox>
-                <HBox spacing="20">
-                    <VBox>
                         <Label text="Products Bought" />
                         <!-- Area Chart for Bought Products -->
-                        <AreaChart fx:id="boughtProductsChartProfile" prefHeight="200" prefWidth="300">
+                        <AreaChart fx:id="boughtProductsChartProfile" prefHeight="215.0" prefWidth="300">
                             <xAxis>
                                 <CategoryAxis fx:id="boughtXAxis" />
                             </xAxis>
@@ -103,18 +90,10 @@
                             </yAxis>
                         </AreaChart>
                     </VBox>
-                    <VBox>
-                        <Label text="Products Sold" />
-                        <!-- Area Chart for Sold Products -->
-                        <AreaChart fx:id="soldProductsChartProfile" prefHeight="200" prefWidth="300">
-                            <xAxis>
-                                <CategoryAxis fx:id="soldXAxis" />
-                            </xAxis>
-                            <yAxis>
-                                <NumberAxis fx:id="soldYAxis" />
-                            </yAxis>
-                        </AreaChart>
-                    </VBox>
+                </HBox>
+                <HBox spacing="20">
+                    <VBox />
+                    <VBox />
                 </HBox>
             </VBox>
         </center>

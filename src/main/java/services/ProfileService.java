@@ -21,15 +21,7 @@ public class ProfileService {
         return profileRepository.fetchBoughtProductsData(userId);
     }
 
-    public List<DailyChartDto> fetchSoldProductsData(int userId) {
-        return profileRepository.fetchSoldProductsData(userId);
-    }
-
     public List<ProfileOrderDto> fetchLastBoughtItems(int userId) {
         return profileRepository.fetchLastBoughtItems(userId);
-    }
-
-    public List<ProfileSellDto> fetchSoldProducts(int userId) {
-        return profileRepository.fetchSoldProducts(userId);
     }
 }

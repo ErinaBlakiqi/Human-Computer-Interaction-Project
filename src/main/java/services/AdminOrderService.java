@@ -12,14 +12,4 @@ public class AdminOrderService {
     public List<Order> getAllOrders() {
         return adminOrderRepository.getAllOrders();
     }
-
-    public void addOrder(Order order) {
-        try {
-            adminOrderRepository.addOrder(order);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    // Add other admin-specific methods if needed
 }

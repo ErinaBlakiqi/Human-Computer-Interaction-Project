@@ -1,5 +1,6 @@
 package controllers;
 
+import application.Navigator;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -9,30 +10,47 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.Order;
 import services.AdminOrderService;
-import application.Navigator;
+
+import java.util.List;
 
 public class AdminOrderController {
+
     @FXML
     private TableView<Order> ordersTable;
+
     @FXML
     private TableColumn<Order, Integer> orderIdColumn;
+
     @FXML
     private TableColumn<Order, Integer> buyerIdColumn;
+
     @FXML
     private TableColumn<Order, Integer> productIdColumn;
+
     @FXML
     private TableColumn<Order, Integer> quantityColumn;
+
     @FXML
     private TableColumn<Order, Integer> totalPriceColumn;
+
     @FXML
     private TableColumn<Order, String> orderStatusColumn;
+
     @FXML
     private TableColumn<Order, String> createdAtColumn;
 
-    private AdminOrderService adminOrderService = new AdminOrderService();
+    private AdminOrderService adminOrderService;
 
     @FXML
     public void initialize() {
+        adminOrderService = new AdminOrderService();
+        loadOrders();
+    }
+
+    private void loadOrders() {
+        List<Order> orders = adminOrderService.getAllOrders();
+        ObservableList<Order> orderObservableList = FXCollections.observableArrayList(orders);
+
         orderIdColumn.setCellValueFactory(new PropertyValueFactory<>("orderId"));
         buyerIdColumn.setCellValueFactory(new PropertyValueFactory<>("buyerId"));
         productIdColumn.setCellValueFactory(new PropertyValueFactory<>("productId"));
@@ -41,11 +59,7 @@ public class AdminOrderController {
         orderStatusColumn.setCellValueFactory(new PropertyValueFactory<>("orderStatus"));
         createdAtColumn.setCellValueFactory(new PropertyValueFactory<>("createdAt"));
 
-        ordersTable.setItems(getOrders());
-    }
-
-    private ObservableList<Order> getOrders() {
-        return FXCollections.observableArrayList(adminOrderService.getAllOrders());
+        ordersTable.setItems(orderObservableList);
     }
 
     @FXML
@@ -60,11 +74,7 @@ public class AdminOrderController {
 
     @FXML
     private void handleOrders(ActionEvent event) {
-    }
-
-    @FXML
-    private void handleSell(ActionEvent event) {
-        Navigator.navigate(Navigator.SELL_PAGE);
+        Navigator.navigate(Navigator.ADMIN_ORDERS_PAGE);
     }
 
     @FXML

@@ -248,6 +248,15 @@ public class ProductController {
     private void navigateToProfile(ActionEvent actionEvent) {
         Navigator.navigate(Navigator.USER_PAGE);
     }
+
+    public void handleSignOut(ActionEvent actionEvent) {
+    }
+
+    public void handleChange(ActionEvent actionEvent) {
+    }
+
+    public void handleHelp(ActionEvent actionEvent) {
+    }
 }
 
 

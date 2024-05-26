@@ -85,6 +85,9 @@ public class AccountController {
     @FXML
     private Label usernameLabel;
 
+    @FXML
+    private Label userLabel;
+
     private ProfileService profileService = new ProfileService();
 
     public void setProfileData(ProfileDto profile) {
@@ -228,6 +231,9 @@ public class AccountController {
         } catch (Exception e) {
             showAlert("Error", "An unexpected error occurred: " + e.getMessage());
         }
+
+        String fullName = SessionManager.getLoggedInUser().getUsername();
+        userLabel.setText(fullName);
     }
 
     private int getCurrentUserId() {

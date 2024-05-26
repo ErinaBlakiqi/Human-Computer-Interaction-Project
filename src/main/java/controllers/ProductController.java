@@ -80,6 +80,9 @@ public class ProductController {
     @FXML
     private Label statusLabel;
 
+    @FXML
+    private Label userLabel;
+
     private int timeRemaining = 900;
     private Timeline timeline;
 
@@ -99,6 +102,8 @@ public class ProductController {
     @FXML
     public void initialize() {
         startCountdown();
+        String fullName = SessionManager.getLoggedInUser().getUsername();
+        userLabel.setText(fullName);
         colProductName_products.setCellValueFactory(new PropertyValueFactory<>("productName"));
         colSeller_products.setCellValueFactory(new PropertyValueFactory<>("sellerName"));
         colPrice_products.setCellValueFactory(new PropertyValueFactory<>("price"));
@@ -138,7 +143,7 @@ public class ProductController {
     private void startCountdown() {
         timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
             timeRemaining--;
-            statusLabel.setText("Aktiv edhe " + timeRemaining + " sekonda" );
+            statusLabel.setText("Active for " + timeRemaining + " seconds" );
 
             if (timeRemaining <= 0) {
                 Navigator.navigate(Navigator.SIGNIN_PAGE);

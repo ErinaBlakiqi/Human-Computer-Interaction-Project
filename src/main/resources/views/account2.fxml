@@ -23,7 +23,7 @@
                   <VBox alignment="CENTER" spacing="10" style="-fx-padding: 80 20 20 20;">
                      <children>
                         <Label style="-fx-text-fill: white; -fx-font-size: 14;" text="Welcome," />
-                        <Label style="-fx-text-fill: white; -fx-font-size: 18;" text="Admin" />
+                        <Label fx:id="userLabel" style="-fx-text-fill: white; -fx-font-size: 18;" text="Admin" />
                         <Rectangle height="2" style="-fx-fill: #A4A4A4;" width="160" />
                      </children>
                   </VBox>

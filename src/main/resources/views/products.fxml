@@ -19,7 +19,7 @@
             <VBox prefWidth="200" style="-fx-background-color: #2F3A47;">
                 <VBox alignment="CENTER" spacing="10" style="-fx-padding: 80 20 20 20;">
                     <Label style="-fx-text-fill: white; -fx-font-size: 14;" text="Welcome," />
-                    <Label style="-fx-text-fill: white; -fx-font-size: 18;" text="Admin" />
+                    <Label fx:id="userLabel" style="-fx-text-fill: white; -fx-font-size: 18;" text="Admin" />
                     <Rectangle height="2" style="-fx-fill: #A4A4A4;" width="160" />
                 </VBox>
             <VBox prefHeight="325.0" prefWidth="200.0" spacing="10" style="-fx-padding: 40 20 20 20;">
@@ -65,7 +65,7 @@
                            <TableColumn fx:id="colAction_products" prefWidth="69.33333333333331" text="Action" />
                        </columns>
                      </TableView>
-                     <TextField fx:id="fieldProductSearch" layoutX="11.0" layoutY="10.0" promptText="Search products..." onKeyPressed="#handleKeyPress"/>
+                     <TextField fx:id="fieldProductSearch" layoutX="11.0" layoutY="10.0" onKeyPressed="#handleKeyPress" promptText="Search products..." />
                      <Button fx:id="btnSearch" layoutX="165.0" layoutY="10.0" mnemonicParsing="false" onAction="#onActionSearch" text="Search" />
                   </children>
                </AnchorPane>

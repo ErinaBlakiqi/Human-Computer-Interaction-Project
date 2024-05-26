@@ -55,6 +55,9 @@ public class SellItemController {
     @FXML
     private Button signoutButton;
 
+    @FXML
+    private Label userLabel;
+
     private final ObservableList<SellItemDto> productList = FXCollections.observableArrayList();
     private final SellItemService sellItemService = new SellItemService();
     private int currentUserId; // Store the current user ID
@@ -94,7 +97,9 @@ public class SellItemController {
         actionColumn.setCellFactory(createActionCellFactory());
 
         // Log in a user programmatically for testing
-        setCurrentUserId(SessionManager.getCurrentUserId()); // Replace with a valid user ID from your database
+        setCurrentUserId(SessionManager.getCurrentUserId());
+        String fullName = SessionManager.getLoggedInUser().getUsername();
+        userLabel.setText(fullName);
 
         loadProducts();
 

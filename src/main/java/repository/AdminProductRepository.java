@@ -95,10 +95,21 @@ public class AdminProductRepository {
     }
 
     public void deleteProduct(int productId) throws SQLException {
+        deleteOrdersByProductId(productId); // Delete related orders first
         String query = "DELETE FROM Products WHERE ProductId = ?";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setInt(1, productId);
             statement.executeUpdate();
         }
     }
+
+
+    public void deleteOrdersByProductId(int productId) throws SQLException {
+        String query = "DELETE FROM orders WHERE ProductId = ?";
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, productId);
+            statement.executeUpdate();
+        }
+    }
+
 }

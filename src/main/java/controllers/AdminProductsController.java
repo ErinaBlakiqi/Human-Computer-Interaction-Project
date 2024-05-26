@@ -126,7 +126,10 @@ public class AdminProductsController {
     private void handleDeleteProduct(AdminProductDTO product) {
         try {
             adminProductService.deleteProduct(product.getProductId());
+            // Remove the product from the TableView
             tableProductsPage.getItems().remove(product);
+            // Optionally, reload the products from the database
+            // loadProducts();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -164,4 +167,6 @@ public class AdminProductsController {
     private void navigateToProfile(ActionEvent actionEvent) {
         Navigator.navigate(Navigator.USER_PAGE);
     }
+
+
 }

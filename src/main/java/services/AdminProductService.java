@@ -80,6 +80,8 @@ public class AdminProductService {
     }
 
     public void deleteProduct(int productId) throws SQLException {
-        adminProductRepository.deleteProduct(productId);
+        adminProductRepository.deleteProduct(productId); // This now deletes related orders first
     }
+
+
 }

@@ -3,6 +3,7 @@ package controllers;
 import application.Navigator;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -123,7 +124,7 @@ public class SellItemController {
 
     @FXML
     void handleProducts() {
-        Navigator.navigate("/views/products.fxml");
+        Navigator.navigate(Navigator.ADMIN_DASHBOARD_PAGE);
     }
 
     @FXML
@@ -288,5 +289,9 @@ public class SellItemController {
         priceField.setText("");
         quantityField.setText("");
         typeComboBox.getSelectionModel().clearSelection();
+    }
+
+    public void handleProfile(ActionEvent actionEvent) {
+        Navigator.navigate(Navigator.USER_PAGE);
     }
 }

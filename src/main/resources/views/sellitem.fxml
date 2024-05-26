@@ -91,7 +91,7 @@
                                     <String fx:value="white-bg" />
                                 </styleClass>
                                 <children>
-                                    <TableView fx:id="productTableView" layoutX="123.0" layoutY="11.0" prefHeight="173.0" prefWidth="407.0" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="123.0" AnchorPane.rightAnchor="101.0" AnchorPane.topAnchor="11.0">
+                                    <TableView fx:id="productTableView" layoutX="52.0" layoutY="11.0" prefHeight="173.0" prefWidth="529.0" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="52.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="11.0">
                                         <columns>
                                             <TableColumn fx:id="productNameColumn" prefWidth="102.86819458007812" text="Product name" />
                                             <TableColumn fx:id="typeColumn" prefWidth="97.17813110351562" text="Type" />

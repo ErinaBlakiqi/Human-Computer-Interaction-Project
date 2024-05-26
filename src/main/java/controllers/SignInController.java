@@ -82,4 +82,7 @@ public class SignInController {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
+    public void handleChange(ActionEvent actionEvent) {
+    }
 }

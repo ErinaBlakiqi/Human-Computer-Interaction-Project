@@ -6,6 +6,8 @@ import javafx.animation.PauseTransition;
 import javafx.animation.SequentialTransition;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.util.Duration;
 import model.Order;
 import model.dto.ProductDTO;
@@ -141,6 +143,10 @@ public class ProductController {
             e.printStackTrace();
         }
     }
+    @FXML
+    public void handleKeyPress(KeyEvent event) {
+        onActionSearch();
+    }
 
     @FXML
     private void onActionSearch() {
@@ -247,6 +253,15 @@ public class ProductController {
     @FXML
     private void navigateToProfile(ActionEvent actionEvent) {
         Navigator.navigate(Navigator.USER_PAGE);
+    }
+
+    public void handleSignOut(ActionEvent actionEvent) {
+    }
+
+    public void handleChange(ActionEvent actionEvent) {
+    }
+
+    public void handleHelp(ActionEvent actionEvent) {
     }
 }
 

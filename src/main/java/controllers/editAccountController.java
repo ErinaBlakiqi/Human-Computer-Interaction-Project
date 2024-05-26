@@ -6,7 +6,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import model.dto.EditProfileDto;
 import model.dto.ProfileDto;
@@ -41,6 +40,7 @@ public class editAccountController {
 
     public void setUserId(int userId) {
         this.currentUserId = userId;
+        System.out.println("Setting currentUserId: " + userId);
     }
 
     public void setProfileId(int profileId) {
@@ -76,6 +76,7 @@ public class editAccountController {
             }
             // Create DTO for editing profile
             EditProfileDto editProfileDto = new EditProfileDto(currentUserId, username, address, contactNumber, contactEmail, bio);
+            System.out.println("Updating profile for userId: " + currentUserId);
             // Call the service to update the profile
             boolean isUpdated = profileService.updateProfile(editProfileDto);
 
@@ -104,5 +105,4 @@ public class editAccountController {
         alert.setContentText(message);
         alert.showAndWait();
     }
-
 }

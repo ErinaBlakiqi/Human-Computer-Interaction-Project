@@ -3,6 +3,7 @@ package repository;
 import model.dto.DailyChartDto;
 import model.dto.EditProfileDto;
 import model.dto.ProfileDto;
+import model.dto.ProfileOrderDto;
 import services.DBConnector;
 
 import java.sql.Connection;
@@ -14,8 +15,11 @@ import java.util.List;
 
 public class ProfileRepository {
 
-    public static ProfileDto fetchProfileData(int userId) {
-        String sql = "SELECT UserId, UserName, Location, ContactNumber, ContactEmail, Bio FROM Profiles WHERE UserId = ?";
+    public ProfileDto fetchProfileData(int userId) {
+        String sql = "SELECT u.UserId, u.UserName, u.Email, p.Location, p.ContactNumber, p.Bio " +
+                "FROM Users u " +
+                "LEFT JOIN Profiles p ON u.UserId = p.ProfileId " +
+                "WHERE u.UserId = ?";
         try (Connection conn = DBConnector.getConnection();
              PreparedStatement pst = conn.prepareStatement(sql)) {
             pst.setInt(1, userId);
@@ -25,9 +29,9 @@ public class ProfileRepository {
                 return new ProfileDto(
                         rs.getInt("UserId"),
                         rs.getString("UserName"),
+                        rs.getString("Email"),
                         rs.getString("Location"),
                         rs.getString("ContactNumber"),
-                        rs.getString("ContactEmail"),
                         rs.getString("Bio")
                 );
             } else {
@@ -39,29 +43,35 @@ public class ProfileRepository {
         }
     }
     public static boolean updateProfile(EditProfileDto editProfileDto) throws SQLException {
-        Connection conn = DBConnector.getConnection();
-        String sql = "UPDATE Profiles SET UserName = ?, Location = ?, ContactNumber = ?, ContactEmail = ?, Bio = ? WHERE UserId = ?";
-        try{
-            PreparedStatement pst = conn.prepareStatement(sql);
-
-            pst.setString(1, editProfileDto.getUserName());
-            pst.setString(2, editProfileDto.getLocation());
-            pst.setString(3, editProfileDto.getContactNumber());
-            pst.setString(4, editProfileDto.getContactEmail());
-            pst.setString(5, editProfileDto.getBio());
-            pst.setInt(6, editProfileDto.getUserId());
-
-            int affectedRows = pst.executeUpdate();
-            if (affectedRows > 0) {
-                return true;
+        String selectSql = "SELECT COUNT(*) AS count FROM Profiles WHERE ProfileId = ?";
+        String insertSql = "INSERT INTO Profiles (ProfileId, Location, ContactNumber, Bio) VALUES (?, ?, ?, ?)";
+        String updateSql = "UPDATE Profiles SET Location = ?, ContactNumber = ?, Bio = ? WHERE ProfileId = ?";
+        try (Connection conn = DBConnector.getConnection();
+             PreparedStatement selectPst = conn.prepareStatement(selectSql)) {
+            selectPst.setInt(1, editProfileDto.getUserId());
+            ResultSet rs = selectPst.executeQuery();
+            if (rs.next() && rs.getInt("count") == 0) {
+                try (PreparedStatement insertPst = conn.prepareStatement(insertSql)) {
+                    insertPst.setInt(1, editProfileDto.getUserId());
+                    insertPst.setString(2, editProfileDto.getLocation());
+                    insertPst.setString(3, editProfileDto.getContactNumber());
+                    insertPst.setString(4, editProfileDto.getBio());
+                    insertPst.executeUpdate();
+                    return true;
+                }
             } else {
-                System.err.println("No rows affected during profile update for user ID: " + editProfileDto.getUserId());
-                return false;
+                try (PreparedStatement updatePst = conn.prepareStatement(updateSql)) {
+                    updatePst.setString(1, editProfileDto.getLocation());
+                    updatePst.setString(2, editProfileDto.getContactNumber());
+                    updatePst.setString(3, editProfileDto.getBio());
+                    updatePst.setInt(4, editProfileDto.getUserId());
+                    int affectedRows = updatePst.executeUpdate();
+                    return affectedRows > 0;
+                }
             }
         } catch (SQLException e) {
-            System.err.println("SQL error during profile update: " + e.getMessage());
             e.printStackTrace();
-            return false;
+            throw e;
         }
     }
       public static boolean updatePassword(int userId, String newPasswordHash, String newSalt) {
@@ -116,5 +126,29 @@ public class ProfileRepository {
             e.printStackTrace();
         }
         return data;
+    }
+    public List<ProfileOrderDto> fetchLastBoughtItems(int userId) {
+        List<ProfileOrderDto> items = new ArrayList<>();
+        String query = "SELECT o.CreatedAt, p.ProductName, o.TotalPrice " +
+                "FROM Orders o " +
+                "JOIN Products p ON o.ProductId = p.ProductId " +
+                "WHERE o.BuyerId = ? " +
+                "ORDER BY o.CreatedAt DESC " +
+                "LIMIT 10";
+        try (Connection conn = DBConnector.getConnection();
+             PreparedStatement pst = conn.prepareStatement(query)) {
+            pst.setInt(1, userId);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                items.add(new ProfileOrderDto(
+                        rs.getString("CreatedAt"),
+                        rs.getString("ProductName"),
+                        rs.getInt("TotalPrice")
+                ));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return items;
     }
 }

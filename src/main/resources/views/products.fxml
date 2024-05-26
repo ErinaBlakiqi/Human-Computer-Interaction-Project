@@ -64,7 +64,7 @@
                            <TableColumn fx:id="colAction_products" prefWidth="69.33333333333331" text="Action" />
                        </columns>
                      </TableView>
-                     <TextField fx:id="fieldProductSearch" layoutX="11.0" layoutY="10.0" promptText="Search products..." />
+                     <TextField fx:id="fieldProductSearch" layoutX="11.0" layoutY="10.0" promptText="Search products..." onKeyPressed="#handleKeyPress"/>
                      <Button fx:id="btnSearch" layoutX="165.0" layoutY="10.0" mnemonicParsing="false" onAction="#onActionSearch" text="Search" />
                   </children>
                </AnchorPane>

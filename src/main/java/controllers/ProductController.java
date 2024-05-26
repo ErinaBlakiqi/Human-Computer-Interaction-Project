@@ -6,6 +6,8 @@ import javafx.animation.PauseTransition;
 import javafx.animation.SequentialTransition;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.util.Duration;
 import model.Order;
 import model.dto.ProductDTO;
@@ -140,6 +142,10 @@ public class ProductController {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    @FXML
+    public void handleKeyPress(KeyEvent event) {
+        onActionSearch();
     }
 
     @FXML

@@ -38,11 +38,13 @@ public class SellItemRepository {
     }
 
     public void deleteItem(int itemId) throws SQLException {
+        System.out.println("Deleting item with ID: " + itemId);
         String query = "DELETE FROM Products WHERE ProductId = ?";
         try (Connection conn = DBConnector.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(query)) {
             pstmt.setInt(1, itemId);
             int affectedRows = pstmt.executeUpdate();
+            System.out.println("Rows affected: " + affectedRows);
             if (affectedRows == 0) {
                 throw new SQLException("Deleting product failed, no rows affected.");
             }

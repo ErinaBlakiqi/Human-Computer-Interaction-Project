@@ -19,7 +19,9 @@ import model.User;
 import model.dto.DailyChartDto;
 import model.dto.ProfileDto;
 import model.dto.ProfileOrderDto;
+import model.dto.ProfileSellDto;
 import repository.ProfileRepository;
+import services.ProfileService;
 import utils.SessionManager;
 
 import java.io.IOException;
@@ -65,13 +67,13 @@ public class AccountController {
     private TableColumn<ProfileOrderDto, String> itemBoughtColumn;
 
     @FXML
-    private TableColumn<?, ?> itemSoldColumn;
+    private TableColumn<ProfileSellDto, String> itemSoldColumn;
 
     @FXML
     private TableView<ProfileOrderDto> lastItemsBoughtTableProfile;
 
     @FXML
-    private TableView<?> lastItemsSoldTableProfile;
+    private TableView<ProfileSellDto> lastItemsSoldTableProfile;
 
     @FXML
     private Label locationLabel;
@@ -80,7 +82,7 @@ public class AccountController {
     private TableColumn<ProfileOrderDto, Integer> priceBoughtColumn;
 
     @FXML
-    private TableColumn<?, ?> priceSoldColumn;
+    private TableColumn<ProfileSellDto, Integer> priceSoldColumn;
 
     @FXML
     private Button productsButton;
@@ -106,7 +108,7 @@ public class AccountController {
     @FXML
     private Label usernameLabel;
 
-    private ProfileRepository profileRepository = new ProfileRepository();
+    private ProfileService profileService = new ProfileService();
 
     public void setProfileData(ProfileDto profile) {
         if (profile != null) {
@@ -132,11 +134,11 @@ public class AccountController {
             int userId = getCurrentUserId();
             System.out.println("Passing userId to editAccountController: " + userId);  // Debug print
 
-            ProfileDto profile = profileRepository.fetchProfileData(userId);
+            ProfileDto profile = profileService.fetchProfileData(userId);
             if (profile != null) {
                 controller.setUserId(userId);
                 controller.setProfileData(profile);
-            }else {
+            } else {
                 System.err.println("Profile data not found for user ID: " + userId);
             }
 
@@ -205,22 +207,28 @@ public class AccountController {
         itemBoughtColumn.setCellValueFactory(cellData -> cellData.getValue().itemProperty());
         priceBoughtColumn.setCellValueFactory(cellData -> cellData.getValue().priceProperty().asObject());
 
+        dateSoldColumn.setCellValueFactory(cellData -> cellData.getValue().dateProperty());
+        itemSoldColumn.setCellValueFactory(cellData -> cellData.getValue().itemProperty());
+        priceSoldColumn.setCellValueFactory(cellData -> cellData.getValue().priceProperty().asObject());
+
         try {
             int userId = getCurrentUserId();
-            ProfileDto profile = profileRepository.fetchProfileData(userId);
+            ProfileDto profile = profileService.fetchProfileData(userId);
             if (profile != null) {
                 setProfileData(profile);
             } else {
                 showAlert("Profile Data Not Found", "No profile data found for the current user.");
             }
 
-            List<DailyChartDto> boughtData = profileRepository.fetchBoughtProductsData(userId);
-            List<DailyChartDto> soldData = profileRepository.fetchSoldProductsData(userId);
-            List<ProfileOrderDto> lastBoughtItems = profileRepository.fetchLastBoughtItems(userId);
+            List<DailyChartDto> boughtData = profileService.fetchBoughtProductsData(userId);
+            List<DailyChartDto> soldData = profileService.fetchSoldProductsData(userId);
+            List<ProfileOrderDto> lastBoughtItems = profileService.fetchLastBoughtItems(userId);
+            List<ProfileSellDto> lastSoldItems = profileService.fetchSoldProducts(userId);
 
             populateChart(boughtProductsChartProfile, boughtData);
             populateChart(soldProductsChartProfile, soldData);
             populateBoughtItemsTable(lastItemsBoughtTableProfile, lastBoughtItems);
+            populateSoldItemsTable(lastItemsSoldTableProfile, lastSoldItems);
 
         } catch (IllegalStateException e) {
             showAlert("User Not Logged In", "No user is currently logged in.");
@@ -248,6 +256,7 @@ public class AccountController {
     private void populateChart(AreaChart<String, Number> chart, List<DailyChartDto> data) {
         XYChart.Series<String, Number> series = new XYChart.Series<>();
         for (DailyChartDto item : data) {
+            System.out.println("Adding data to chart: " + item.getDay() + " -> " + item.getCount());
             series.getData().add(new XYChart.Data<>(item.getDay(), item.getCount()));
         }
         chart.getData().add(series);
@@ -258,19 +267,24 @@ public class AccountController {
         table.getItems().clear();
         table.getItems().addAll(data);
     }
+    private void populateSoldItemsTable(TableView<ProfileSellDto> table, List<ProfileSellDto> data) {
+        System.out.println("Populating sold items table with data: " + data);
+        table.getItems().clear();
+        table.getItems().addAll(data);
+    }
 
     private void refreshProfileData() {
         try {
             int userId = getCurrentUserId();
-            ProfileDto profile = profileRepository.fetchProfileData(userId);
+            ProfileDto profile = profileService.fetchProfileData(userId);
             if (profile != null) {
                 setProfileData(profile);
             } else {
                 showAlert("Profile Data Not Found", "No profile data found for the current user.");
             }
 
-            List<DailyChartDto> boughtData = profileRepository.fetchBoughtProductsData(userId);
-            List<DailyChartDto> soldData = profileRepository.fetchSoldProductsData(userId);
+            List<DailyChartDto> boughtData = profileService.fetchBoughtProductsData(userId);
+            List<DailyChartDto> soldData = profileService.fetchSoldProductsData(userId);
 
             populateChart(boughtProductsChartProfile, boughtData);
             populateChart(soldProductsChartProfile, soldData);

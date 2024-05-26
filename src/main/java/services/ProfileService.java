@@ -1,10 +1,10 @@
 package services;
 
-import model.dto.EditProfileDto;
-import model.dto.ProfileDto;
+import model.dto.*;
 import repository.ProfileRepository;
 
 import java.sql.SQLException;
+import java.util.List;
 
 public class ProfileService {
     private ProfileRepository profileRepository = new ProfileRepository();
@@ -15,5 +15,21 @@ public class ProfileService {
 
     public boolean updateProfile(EditProfileDto editProfileDto) throws SQLException {
         return profileRepository.updateProfile(editProfileDto);
+    }
+
+    public List<DailyChartDto> fetchBoughtProductsData(int userId) {
+        return profileRepository.fetchBoughtProductsData(userId);
+    }
+
+    public List<DailyChartDto> fetchSoldProductsData(int userId) {
+        return profileRepository.fetchSoldProductsData(userId);
+    }
+
+    public List<ProfileOrderDto> fetchLastBoughtItems(int userId) {
+        return profileRepository.fetchLastBoughtItems(userId);
+    }
+
+    public List<ProfileSellDto> fetchSoldProducts(int userId) {
+        return profileRepository.fetchSoldProducts(userId);
     }
 }

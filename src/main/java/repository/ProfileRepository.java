@@ -1,9 +1,6 @@
 package repository;
 
-import model.dto.DailyChartDto;
-import model.dto.EditProfileDto;
-import model.dto.ProfileDto;
-import model.dto.ProfileOrderDto;
+import model.dto.*;
 import services.DBConnector;
 
 import java.sql.Connection;
@@ -122,6 +119,7 @@ public class ProfileRepository {
             while (rs.next()) {
                 data.add(new DailyChartDto(rs.getString("day"), rs.getInt("count")));
             }
+            System.out.println("Fetched sold products data: " + data); // Debug print
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -144,6 +142,52 @@ public class ProfileRepository {
                         rs.getString("CreatedAt"),
                         rs.getString("ProductName"),
                         rs.getInt("TotalPrice")
+                ));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return items;
+    }
+    public List<ProfileSellDto> fetchSoldProducts(int userId) {
+        List<ProfileSellDto> items = new ArrayList<>();
+        String query = "SELECT o.CreatedAt, p.ProductName, o.TotalPrice " +
+                "FROM Orders o " +
+                "JOIN Products p ON o.ProductId = p.ProductId " +
+                "WHERE p.SellerId = ? " +
+                "ORDER BY o.CreatedAt DESC " +
+                "LIMIT 10";
+        try (Connection conn = DBConnector.getConnection();
+             PreparedStatement pst = conn.prepareStatement(query)) {
+            pst.setInt(1, userId);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                items.add(new ProfileSellDto(
+                        rs.getString("CreatedAt"),
+                        rs.getString("ProductName"),
+                        rs.getInt("TotalPrice")
+                ));
+            }
+            System.out.println("Fetched sold products: " + items); // Debug print
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return items;
+    }
+    public List<ProfileSellDto> fetchProductsForSale(int userId) {
+        List<ProfileSellDto> items = new ArrayList<>();
+        String query = "SELECT 'In Stock' AS CreatedAt, ProductName, Price " +
+                "FROM Products " +
+                "WHERE SellerId = ? AND Status = 'In Stock'";
+        try (Connection conn = DBConnector.getConnection();
+             PreparedStatement pst = conn.prepareStatement(query)) {
+            pst.setInt(1, userId);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                items.add(new ProfileSellDto(
+                        rs.getString("CreatedAt"),
+                        rs.getString("ProductName"),
+                        rs.getInt("Price")
                 ));
             }
         } catch (SQLException e) {

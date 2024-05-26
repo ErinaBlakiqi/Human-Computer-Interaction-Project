@@ -54,28 +54,16 @@ public class SignInController {
     @FXML
     public void onPressLogIn(KeyEvent event) {
         if (event.getCode() == KeyCode.ENTER) {
-
-            String username = txtUsername.getText();
-            String password = pwdPassword.getText();
-
-            LoginUserDto loginUserDto = new LoginUserDto(username, password);
-            boolean success = UserService.login(loginUserDto);
-
-            if (success) {
-                if (SessionManager.isAdmin()) {
-                    Navigator.navigate(Navigator.ADMIN_DASHBOARD_PAGE);
-                } else {
-                    Navigator.navigate(Navigator.PRODUCTS_PAGE);
-                }
-                showAlert(Alert.AlertType.INFORMATION, "Login Successful!", "Welcome " + username);
-            } else {
-                loginMessageLabel.setText("Invalid username or password.");
-            }
+            handleLogin();
         }
     }
 
     @FXML
     private void handleLogin(ActionEvent event) {
+        handleLogin();
+    }
+
+    private void handleLogin() {
         String username = txtUsername.getText();
         String password = pwdPassword.getText();
 
@@ -83,12 +71,14 @@ public class SignInController {
         boolean success = UserService.login(loginUserDto);
 
         if (success) {
+            int userId = SessionManager.getCurrentUserId();
             if (SessionManager.isAdmin()) {
                 Navigator.navigate(Navigator.ADMIN_DASHBOARD_PAGE);
             } else {
+                System.out.println(SessionManager.getCurrentUserId());
                 Navigator.navigate(Navigator.PRODUCTS_PAGE);
             }
-            showAlert(Alert.AlertType.INFORMATION, "Login Successful!", "Welcome " + username);
+            showAlert(Alert.AlertType.INFORMATION, "Login Successful!", "Welcome " + username + ".");
         } else {
             loginMessageLabel.setText("Invalid username or password.");
         }

@@ -18,6 +18,7 @@ import services.DBConnector;
 import services.OrderService;
 import services.ProductService;
 import model.Cart;
+import utils.SessionManager;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -80,7 +81,7 @@ public class ProductController {
     private CartService cartService;
     private OrderService orderService;
 
-    private int currentUserId = 1; // This should be dynamically set based on the logged-in user
+    private int currentUserId = SessionManager.getCurrentUserId(); // This should be dynamically set based on the logged-in user
 
     public ProductController() throws SQLException {
         Connection connection = DBConnector.getConnection();

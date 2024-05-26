@@ -112,4 +112,18 @@ public class AdminProductRepository {
         }
     }
 
+    public int getCategoryIdByName(String categoryName) throws SQLException {
+        String query = "SELECT CategoryID FROM Categories WHERE CName = ?";
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, categoryName);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    return resultSet.getInt("CategoryID");
+                } else {
+                    throw new SQLException("Category not found");
+                }
+            }
+        }
+    }
+
 }

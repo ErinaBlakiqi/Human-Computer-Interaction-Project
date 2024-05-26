@@ -83,5 +83,10 @@ public class AdminProductService {
         adminProductRepository.deleteProduct(productId); // This now deletes related orders first
     }
 
+    public int getCategoryIdByName(String categoryName) throws SQLException {
+        return adminProductRepository.getCategoryIdByName(categoryName);
+    }
+
+
 
 }

@@ -32,8 +32,8 @@
                   <Button fx:id="btnChangeGjuhen" mnemonicParsing="false" onAction="#handleChange" prefHeight="23.0" prefWidth="160.0" style="-fx-background-color: #2F3A47;" text="EN | SQ" textFill="WHITE" />
                   <Button fx:id="btnHelp" mnemonicParsing="false" onAction="#handleHelp" prefHeight="26.0" prefWidth="160.0" style="-fx-background-color: #2F3A47;" text="Help" textFill="WHITE" />
                </children>
-            </VBox>
                 <Label fx:id="statusLabel" style="-fx-text-fill: white; -fx-font-size: 14; -fx-background-color: #2F3A47; -fx-padding: 5;" text="Session time remaining: 300 seconds" />
+            </VBox>
             </VBox>
             <Pane fx:id="pane_Products" prefHeight="495.0" prefWidth="650.0" style="-fx-background-color: white;">
             <children>

@@ -131,7 +131,7 @@ public class ProductController {
     private void startCountdown() {
         timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
             timeRemaining--;
-            statusLabel.setText("Sesioni perfundon per: " + timeRemaining + '"' );
+            statusLabel.setText("Aktiv edhe " + timeRemaining + " sekonda" );
 
             if (timeRemaining <= 0) {
                 Navigator.navigate(Navigator.SIGNIN_PAGE);

@@ -1,8 +1,10 @@
 package controllers;
 
+import application.Navigator;
 import javafx.animation.FadeTransition;
 import javafx.animation.PauseTransition;
 import javafx.animation.SequentialTransition;
+import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.util.Duration;
 import model.Order;
@@ -235,5 +237,15 @@ public class ProductController {
         } else {
             showFeedback("No item selected.");
         }
+    }
+
+    @FXML
+    private void navigateToSell(ActionEvent actionEvent) {
+        Navigator.navigate(Navigator.SELL_PAGE);
+    }
+
+    @FXML
+    private void navigateToProfile(ActionEvent actionEvent) {
+        Navigator.navigate(Navigator.USER_PAGE);
     }
 }

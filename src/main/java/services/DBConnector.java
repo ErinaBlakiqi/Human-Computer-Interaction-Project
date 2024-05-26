@@ -10,14 +10,24 @@ public class DBConnector {
     private static String PASSWORD = "";
     private static Connection connection = null;
 
-    public static Connection getConnection() {
-        if (connection == null) {
+    public static Connection getConnection() throws SQLException {
+        if (connection == null|| connection.isClosed()) {
             try {
                 connection = DriverManager.getConnection(URL, USER, PASSWORD);
             } catch (SQLException e) {
-                throw new RuntimeException(e);
+                e.printStackTrace();
+                return null;
             }
         }
         return connection;
+    }
+    public static void closeConnection() {
+        if (connection != null) {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

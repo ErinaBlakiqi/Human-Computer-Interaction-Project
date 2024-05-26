@@ -84,10 +84,10 @@
                         <Label fx:id="usernameLabel" style="-fx-font-weight: bold;" text="Username" />
                         <Label fx:id="locationLabel" text="London, UK" />
                         <HBox>
-                            <Label fx:id="contactLabel" text="Contact number" />
+                            <Label fx:id="contactNumberLabel" text="Contact number" />
                         </HBox>
-                        <Label fx:id="bioLabel" text="Contact email" />
-                        <Label text="Bio" />
+                        <Label fx:id="contactEmailLabel" text="Contact email" />
+                        <Label fx:id="bioLabel" text="Bio" />
                         <HBox prefHeight="100.0" prefWidth="200.0" />
                     </VBox>
                     <Pane HBox.hgrow="ALWAYS" />

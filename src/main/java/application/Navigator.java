@@ -9,7 +9,7 @@ import java.io.IOException;
 
 public class Navigator {
 
-    private static Stage stage;
+    public static Stage stage;
 
     public static void setStage(Stage primaryStage) {
         stage = primaryStage;

@@ -23,16 +23,12 @@
                     <Rectangle height="2" style="-fx-fill: #A4A4A4;" width="160" />
                 </VBox>
                 <VBox style="-fx-padding: 20;">
-                    <Button contentDisplay="CENTER" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16;" text="Home">
-
-                    </Button>
                     <Button style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16;" text="Products" />
                     <Button alignment="TOP_LEFT" minWidth="42.0" prefHeight="36.0" prefWidth="55.0" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16;" text="Sell" />
-                    <Button style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16;" text="User" />
-                    <Button style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16;" text="Admin" />
+                    <Button style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16;" text="Profile" />
                 </VBox>
                 <VBox style="-fx-padding: 20; -fx-alignment: bottom-left;">
-                    <Button prefHeight="33.0" prefWidth="118.0" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16;" text="Sign Out">
+                    <Button prefHeight="36.0" prefWidth="161.0" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16;" text="Sign Out">
 
                     </Button>
                 </VBox>

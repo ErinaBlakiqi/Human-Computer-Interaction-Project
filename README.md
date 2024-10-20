@@ -1,6 +1,6 @@
 # Buy-Sell Online System
 
-This repository contains the code for an interactive online sales and purchases system, developed as part of a project to provide a user-friendly platform for buying and selling products.
+The Buy-Sell Online System is an interactive and user-friendly platform designed to facilitate buying and selling products online. Developed as part of a team project, this system allows users to list items for sale, browse available products, and make purchases securely and efficiently.
 
 ### Contributors
 Erina Blakiqi  
